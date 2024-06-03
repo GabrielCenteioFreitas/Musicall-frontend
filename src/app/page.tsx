@@ -1,5 +1,7 @@
+import { DefaultLayout } from "@/components/DefaultLayout/DefaultLayout";
+
 export default function Home() {
   return (
-    <h1>Hello World!</h1>
+    <DefaultLayout />
   );
 }
