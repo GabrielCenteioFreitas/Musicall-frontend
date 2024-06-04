@@ -39,7 +39,7 @@ export const Aside = () => {
 
       <Divider />
 
-      <ul className="mb-16 text-xs flex flex-col font-medium overflow-y-scroll no-scrollbar">
+      <ul className="-ml-2 -mt-2 mb-16 text-xs flex flex-col font-medium overflow-y-scroll no-scrollbar">
         {Array.from({ length: 12 }).map((_, i) => 
           <PlaylistItem
             key={i}
