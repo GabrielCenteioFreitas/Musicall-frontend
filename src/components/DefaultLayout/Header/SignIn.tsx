@@ -4,7 +4,7 @@ export const SignIn = () => {
   const redirectURI =
     process.env.NODE_ENV === 'development'
     ? 'http://localhost:3000/api/auth/callback'
-    : 'https://musical-project.vercel.app/api/auth/callback'
+    : 'https://musicall-project.vercel.app/api/auth/callback'
 
   const loginURL = 
     'https://accounts.google.com/o/oauth2/v2/auth'
