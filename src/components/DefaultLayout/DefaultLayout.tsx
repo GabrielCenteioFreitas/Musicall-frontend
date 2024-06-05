@@ -18,8 +18,8 @@ export const DefaultLayout = ({ className, children }: DefaultLayoutProps) => {
 
         <main
           className={cn(`
-            flex-1 border border-b-0 border-neutral-800 rounded-t-xl
-            p-5 pb-20 overflow-y-scroll no-scrollbar`,
+            flex-1 overflow-y-scroll no-scrollbar 
+            border border-b-0 border-neutral-800 rounded-t-xl`,
             className
           )}
         >

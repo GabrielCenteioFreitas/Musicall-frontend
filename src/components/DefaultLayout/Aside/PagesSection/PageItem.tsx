@@ -1,15 +1,17 @@
 import { cn } from "@/lib/utils";
 import { ReactNode } from "react";
-import { Button } from "../../ui/button";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
-interface AsideItemProps {
+interface PageItemProps {
   name: string;
+  href: string;
   active?: boolean;
   className?: string;
   children: ReactNode;
 }
 
-export const AsideItem = ({ name, active=false, className, children }: AsideItemProps) => {
+export const PageItem = ({ name, href, active=false, className, children }: PageItemProps) => {
   return (
     <li className="w-full">
       <Button
@@ -19,9 +21,12 @@ export const AsideItem = ({ name, active=false, className, children }: AsideItem
           active ? '!bg-zinc-800 hover:!bg-zinc-800' : 'bg-zinc-950 hover:!bg-zinc-900',
           className
         )}
+        asChild
       >
-        {children}
-        {name}
+        <Link href={href}>
+          {children}
+          {name}
+        </Link>
       </Button>
     </li>
   );
