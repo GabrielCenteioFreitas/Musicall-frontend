@@ -19,14 +19,15 @@ export const SignIn = () => {
       className="flex items-center gap-2"
     >
       <span className="max-w-32 text-sm text-right hover:text-gray-300">
-        Clique aqui para <span className="underline">criar sua conta!</span>
+        Clique aqui para<br/>
+        <span className="underline">se conectar!</span>
       </span>
 
-      <div className="size-10 bg-zinc-900 rounded-full p-0.5 overflow-hidden cursor-pointer">
-        <div className="size-full flex items-center justify-center rounded-full bg-zinc-700">
+      {/* <div className="size-10 bg-zinc-900 rounded-full p-px overflow-hidden cursor-pointer"> */}
+        <div className="size-10 flex items-center justify-center rounded-full bg-zinc-700">
           <IoPerson size={24} className="text-zinc-400" />
         </div>
-      </div>
+      {/* </div> */}
     </a>
   );
 }
