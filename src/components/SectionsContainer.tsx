@@ -8,8 +8,8 @@ interface SectionsContainerProps {
 
 export const SectionsContainer = ({ children, className, ...rest }: SectionsContainerProps) => {
   return (
-    <div className={cn("mb-2", className)} {...rest}>
+    <section className={cn("mb-2", className)} {...rest}>
       {children}
-    </div>
+    </section>
   );
 }

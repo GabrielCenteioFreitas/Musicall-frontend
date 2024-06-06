@@ -1,7 +1,7 @@
+import { SectionsContainer } from "../../SectionsContainer";
+import { SectionsTitle } from "../../SectionsTitle";
 import { PlaylistCard } from "../Cards/PlaylistCard";
-import { SectionsContainer } from "../SectionsContainer";
 import { SectionsItemsContainer } from "../SectionsItemsContainer";
-import { SectionsTitle } from "../SectionsTitle";
 
 interface YourPlaylistsSectionProps {
   className?: string;

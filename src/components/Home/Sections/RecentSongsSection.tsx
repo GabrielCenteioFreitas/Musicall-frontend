@@ -1,7 +1,7 @@
+import { SectionsContainer } from "../../SectionsContainer";
+import { SectionsTitle } from "../../SectionsTitle";
 import { SongCard } from "../Cards/SongCard";
-import { SectionsContainer } from "../SectionsContainer";
 import { SectionsItemsContainer } from "../SectionsItemsContainer";
-import { SectionsTitle } from "../SectionsTitle";
 
 interface RecentSongsSectionProps {
   className?: string;
