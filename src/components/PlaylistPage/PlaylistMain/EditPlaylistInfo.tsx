@@ -24,6 +24,7 @@ interface EditPlaylistInfoProps {
   playlist: {
     id: string;
     name: string;
+    description: string | null;
     isPublic: boolean;
   }
 }
@@ -41,6 +42,7 @@ export const EditPlaylistInfo = ({ playlist }: EditPlaylistInfoProps) => {
     
     const formData = new FormData(event.currentTarget)
     const name = formData.get('name')
+    const description = formData.get('description')
     const privacy = formData.get('privacy')
 
     if (name?.toString().trim().length === 0) {
@@ -50,6 +52,7 @@ export const EditPlaylistInfo = ({ playlist }: EditPlaylistInfoProps) => {
 
     const requestBody = {
       name: name?.toString().trim(),
+      description: description?.toString().trim(),
       isPublic: privacy === 'public',
     }
 
@@ -76,7 +79,11 @@ export const EditPlaylistInfo = ({ playlist }: EditPlaylistInfoProps) => {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger>
-        <LuPencil size={20} title="Editar informações" />
+        <LuPencil
+          size={22}
+          title="Editar informações"
+          className="text-zinc-400 hover:text-zinc-50 transition-colors"
+        />
       </DialogTrigger>
 
       <DialogContent>
@@ -103,7 +110,7 @@ export const EditPlaylistInfo = ({ playlist }: EditPlaylistInfoProps) => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 className="
-                  w-full max-w-[360px] flex items-center gap-2 py-2 px-3 text-zinc-200
+                  w-full max-w-[360px] text-zinc-200 py-2 px-3
                   bg-zinc-950 rounded-xl placeholder:text-zinc-600
                   outline outline-1 outline-zinc-800 hover:outline-zinc-600
                   focus:outline-2 focus:outline-zinc-600
@@ -115,6 +122,25 @@ export const EditPlaylistInfo = ({ playlist }: EditPlaylistInfoProps) => {
                   </span>
                 : null
               }
+            </div>
+
+            <div className="flex flex-col items-start gap-1.5 mb-4">
+              <Label htmlFor="description" className="text-lg">
+                Descrição
+              </Label>
+              <textarea
+                id="description"
+                name="description"
+                maxLength={150}
+                placeholder="Descrição da playlist"
+                defaultValue={playlist.description || ''}
+                className="
+                  w-full !h-32 text-zinc-200 py-2 px-3 text-start resize-none
+                  bg-zinc-950 rounded-xl placeholder:text-zinc-600
+                  outline outline-1 outline-zinc-800 hover:outline-zinc-600
+                  focus:outline-2 focus:outline-zinc-600
+                "
+              />
             </div>
 
             <div className="flex flex-col items-start gap-1.5">

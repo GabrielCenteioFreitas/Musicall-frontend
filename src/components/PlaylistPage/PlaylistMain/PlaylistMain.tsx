@@ -7,6 +7,7 @@ import { EditPlaylistInfo } from "./EditPlaylistInfo";
 import { PlayButton } from "./PlayButton";
 import { SearchInput } from "./SearchInput";
 import { SongsTable } from "./SongsTable";
+import { DeletePlaylistButton } from "./DeletePlaylistButton";
 
 interface PlaylistMainProps {
   playlist: Playlist;
@@ -48,7 +49,11 @@ export const PlaylistMain = ({ playlist, previewPlaylists, isUserTheCreator }: P
           <PlayButton playlist={playlist} />
 
           {isUserTheCreator && (
-            <EditPlaylistInfo playlist={playlist} />
+            <div className="flex gap-2">
+              <EditPlaylistInfo playlist={playlist} />
+
+              <DeletePlaylistButton playlist={playlist} />
+            </div>
           )}
         </div>
 

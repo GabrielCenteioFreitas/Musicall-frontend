@@ -29,7 +29,7 @@ export const ArtistsAsideSection = ({ playlist }: ArtistsAsideSectionProps) => {
       <Divider className="my-3" />
 
       <div className="w-full flex flex-col -ml-2 gap-1">
-        <h3 className="text-xl font-medium">
+        <h3 className="text-xl font-medium ml-2">
           Artistas
         </h3>
 

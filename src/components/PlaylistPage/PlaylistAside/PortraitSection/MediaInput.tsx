@@ -11,12 +11,9 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { IoCameraOutline } from "react-icons/io5";
 
 interface MediaInputProps {
-  playlist: Pick<Playlist,
-    'id' |
-    'name' |
-    'isPublic' |
-    'userId'
-  >;
+  playlist: {
+    id: string;
+  };
   isUserTheCreator: boolean;
 }
 
@@ -24,14 +21,6 @@ export const MediaInput = ({ playlist, isUserTheCreator }: MediaInputProps) => {
   const router = useRouter()
   const token = Cookies.get('token')
   const [isLoading, setIsLoading] = useState(false)
-
-  // const user = getUserFromClient()
-  // const [isClient, setIsClient] = useState(false)
-  // const isUserTheCreator = !!user && user.sub ===  playlist.userId && isClient
-
-  // useEffect(() => {
-  //   setIsClient(true)
-  // }, [])
 
   const onFileSelected = async (event: ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target
@@ -45,9 +34,7 @@ export const MediaInput = ({ playlist, isUserTheCreator }: MediaInputProps) => {
     const portraitURL = await uploadImage(files[0])
 
     const requestBody = {
-      name: playlist.name,
       portrait: portraitURL,
-      isPublic: playlist.isPublic,
     }
 
     await fetch(
