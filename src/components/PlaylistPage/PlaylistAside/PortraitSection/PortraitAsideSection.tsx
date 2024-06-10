@@ -4,9 +4,10 @@ import { MediaInput } from "./MediaInput";
 
 interface PortraitAsideSectionProps {
   playlist: Playlist;
+  isUserTheCreator: boolean;
 }
 
-export const PortraitAsideSection = ({ playlist }: PortraitAsideSectionProps) => {
+export const PortraitAsideSection = ({ playlist, isUserTheCreator }: PortraitAsideSectionProps) => {
   return (
     <div className="relative w-full aspect-square border-2 border-neutral-800 rounded-xl overflow-hidden group">
       <PlaylistPortrait
@@ -16,7 +17,7 @@ export const PortraitAsideSection = ({ playlist }: PortraitAsideSectionProps) =>
         size={320}
       />
 
-      <MediaInput playlist={playlist} />
+      <MediaInput playlist={playlist} isUserTheCreator={isUserTheCreator} />
     </div>
   );
 }

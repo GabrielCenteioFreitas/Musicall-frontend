@@ -3,6 +3,7 @@ import { PlaylistAside } from "@/components/PlaylistPage/PlaylistAside/PlaylistA
 import { PlaylistInfo } from "@/components/PlaylistPage/PlaylistInfo/PlaylistInfo";
 import { PlaylistMain } from "@/components/PlaylistPage/PlaylistMain/PlaylistMain";
 import { getPlaylist, getPreviewPlaylists } from "@/lib/getPlaylistsData";
+import { getUserFromServer } from "@/lib/getUserFromServer";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -19,6 +20,8 @@ const PlaylistPage = async ({ params }: { params: { id: string } }) => {
   }
 
   const previewPlaylists = await getPreviewPlaylists(token || null)
+  const user = await getUserFromServer()
+  const isUserTheCreator = !!user && user.sub ===  playlist.userId
 
   return (
     <div className="flex gap-5 p-5 pb-20">
@@ -26,11 +29,11 @@ const PlaylistPage = async ({ params }: { params: { id: string } }) => {
         <div className="flex flex-col gap-4">
           <PlaylistInfo playlist={playlist} />
 
-          <PlaylistMain playlist={playlist} previewPlaylists={previewPlaylists} />
+          <PlaylistMain playlist={playlist} previewPlaylists={previewPlaylists} isUserTheCreator={isUserTheCreator} />
         </div>
       </div>
 
-      <PlaylistAside playlist={playlist} />
+      <PlaylistAside isUserTheCreator={isUserTheCreator} playlist={playlist} />
     </div>
   );
 }

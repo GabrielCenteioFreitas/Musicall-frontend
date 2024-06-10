@@ -17,20 +17,21 @@ interface MediaInputProps {
     'isPublic' |
     'userId'
   >;
+  isUserTheCreator: boolean;
 }
 
-export const MediaInput = ({ playlist }: MediaInputProps) => {
+export const MediaInput = ({ playlist, isUserTheCreator }: MediaInputProps) => {
   const router = useRouter()
   const token = Cookies.get('token')
   const [isLoading, setIsLoading] = useState(false)
 
-  const user = getUserFromClient()
-  const [isClient, setIsClient] = useState(false)
-  const isUserTheCreator = !!user && user.sub ===  playlist.userId && isClient
+  // const user = getUserFromClient()
+  // const [isClient, setIsClient] = useState(false)
+  // const isUserTheCreator = !!user && user.sub ===  playlist.userId && isClient
 
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
+  // useEffect(() => {
+  //   setIsClient(true)
+  // }, [])
 
   const onFileSelected = async (event: ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target

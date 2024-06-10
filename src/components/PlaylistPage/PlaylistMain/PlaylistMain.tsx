@@ -3,27 +3,20 @@
 import { Playlist } from "@/types/playlist";
 import { PreviewPlaylist } from "@/types/previewPlaylist";
 import { ChangeEvent, useEffect, useState } from "react";
+import { EditPlaylistInfo } from "./EditPlaylistInfo";
 import { PlayButton } from "./PlayButton";
 import { SearchInput } from "./SearchInput";
 import { SongsTable } from "./SongsTable";
-import { EditPlaylistInfo } from "./EditPlaylistInfo";
-import { getUserFromClient } from "@/lib/getUserFromClient";
 
 interface PlaylistMainProps {
   playlist: Playlist;
   previewPlaylists: PreviewPlaylist[] | null;
+  isUserTheCreator: boolean;
 }
 
-export const PlaylistMain = ({ playlist, previewPlaylists }: PlaylistMainProps) => {
+export const PlaylistMain = ({ playlist, previewPlaylists, isUserTheCreator }: PlaylistMainProps) => {
   const [search, setSearch] = useState('')
-  const user = getUserFromClient()
-  const [isClient, setIsClient] = useState(false)
-  const isUserTheCreator = !!user && user.sub ===  playlist.userId && isClient
-
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
-
+  
   useEffect(() => {
     const url = new URL(window.location.toString());
     const searchParam = url.searchParams.get('search') ?? '';
