@@ -13,22 +13,32 @@ interface getDataFromSearchParams {
   entity: string;
   limit: number;
 }
-export const getDataFromSearch = cache(async ({ term, entity, limit }: getDataFromSearchParams) => {
+export const getDataFromSearch = cache(async ({
+  term, entity, limit
+}: getDataFromSearchParams): Promise<any | null> => {
   const params = new URLSearchParams({
     term,
     entity,
     limit: limit.toString()
   })
   
-  const response = await fetch(
-    url(`/search?${params}`),
-    {
-      method: 'GET',
-    }
-  )
-  const data = await response.json()
-
-  return data
+  try {
+    const response = await fetch(
+      url(`/search?${params}`),
+      {
+        method: 'GET',
+        headers: {
+          'Access-Control-Allow-Origin': '*'
+        }
+      }
+    )
+    const data = await response.json()
+  
+    return data
+  } catch (error) {
+    console.error(error)
+    return null
+  }
 })
 
 
@@ -47,7 +57,7 @@ export const getDataFromLookup = cache(async ({
   amgTrackId,
   entity,
   limit 
-}: getDataFromLookupParams): Promise<any> => {
+}: getDataFromLookupParams): Promise<any | null> => {
   const params = new URLSearchParams({
     id: id ? id.toString() : '',
     amgArtistId: amgArtistId ? amgArtistId.toString() : '',
@@ -57,13 +67,21 @@ export const getDataFromLookup = cache(async ({
     limit: limit ? limit.toString() : '',
   })
     
-  const response = await fetch(
-    url(`/lookup?${params}`),
-    {
-      method: 'GET',
-    }
-  )
-  const data = await response.json()
-
-  return data
+  try {
+    const response = await fetch(
+      url(`/lookup?${params}`),
+      {
+        method: 'GET',
+        headers: {
+          'Access-Control-Allow-Origin': '*'
+        }
+      }
+      )
+    const data = await response.json()
+  
+    return data
+  } catch (error) {
+    console.error(error)
+    return null
+  }
 })
