@@ -1,16 +1,17 @@
-import { DefaultLayout } from "@/components/DefaultLayout/DefaultLayout";
-import { RecentPlaylistsSection } from "@/components/Home/Sections/RecentPlaylistsSection";
 import { RecentSongsSection } from "@/components/Home/Sections/RecentSongsSection";
 import { YourPlaylistsSection } from "@/components/Home/Sections/YourPlaylistsSection";
+import { cookies } from "next/headers";
 
 export default function Home() {
+  const token = cookies().get('token')?.value
+
   return (
     <div className="flex flex-col gap-5 p-5 pb-20">
       <YourPlaylistsSection />
 
-      <RecentSongsSection />
-
-      <RecentPlaylistsSection />
+      {token && (
+        <RecentSongsSection />
+      )}
     </div>
   );
 }

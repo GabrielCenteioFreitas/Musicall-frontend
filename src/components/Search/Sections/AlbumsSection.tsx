@@ -1,8 +1,7 @@
 import { LoadingIcon } from "@/components/LoadingIcon";
 import { SectionsContainer } from "@/components/SectionsContainer";
 import { SectionsTitle } from "@/components/SectionsTitle";
-import { getData } from "@/lib/getData";
-import { useEffect, useState } from "react";
+import { getDataFromSearch } from "@/lib/getITunesData";
 
 import { Album } from "@/types/album";
 import { AlbumCard } from "../Cards/AlbumCard";
@@ -12,33 +11,15 @@ interface AlbumsSectionProps {
   entity: string | null;
 }
 
-export const AlbumsSection = ({ term, entity }: AlbumsSectionProps) => {
-  const [albums, setAlbums] = useState<Album[] | null>(null)
-  const [isLoading, setIsLoading] = useState(true);
+export const AlbumsSection = async ({ term, entity }: AlbumsSectionProps) => {
   const limit = entity ? 32 : 8
-
-  useEffect(() => {
-    if (term) {
-      const handleGetData = async () => {
-        try {
-          const { results } = await getData(term, 'album', limit);
-          setAlbums(results)
-        } catch (error) {
-          console.error('Error fetching data:', error)
-        } finally {
-          setIsLoading(false)
-        }
-      };
-
-      handleGetData();
-    }
-  }, [term, entity, limit]);
+  const { results: albums } = await getDataFromSearch({term, entity: 'album', limit})
 
   return (
     <SectionsContainer>
       <SectionsTitle title="Álbuns" dividerMargins="my-2" />
 
-      {isLoading ? (
+      {!albums ? (
         <div className="mt-3">
           <LoadingIcon size={50} />
         </div>
@@ -46,7 +27,7 @@ export const AlbumsSection = ({ term, entity }: AlbumsSectionProps) => {
         <>
           {(albums && albums.length > 0) ? (
             <div className="grid grid-cols-8 -ml-3">
-              {albums?.map(album => 
+              {albums?.map((album: Album) => 
                 <AlbumCard key={album.collectionId} album={album} />
               )}
             </div>

@@ -1,10 +1,11 @@
 import { LoadingIcon } from "@/components/LoadingIcon";
 import { SectionsContainer } from "@/components/SectionsContainer";
 import { SectionsTitle } from "@/components/SectionsTitle";
-import { getData } from "@/lib/getData";
+import { getDataFromSearch } from "@/lib/getITunesData";
 import { Song } from "@/types/song";
-import { useEffect, useState } from "react";
 
+import { getPreviewPlaylists } from "@/lib/getPlaylistsData";
+import { cookies } from "next/headers";
 import { SongCard } from "../Cards/SongCard";
 
 interface SongsSectionProps {
@@ -12,33 +13,18 @@ interface SongsSectionProps {
   entity: string | null;
 }
 
-export const SongsSection = ({ term, entity }: SongsSectionProps) => {
-  const [songs, setSongs] = useState<Song[] | null>(null)
-  const [isLoading, setIsLoading] = useState(true);
+export const SongsSection = async ({ term, entity }: SongsSectionProps) => {
   const limit = entity ? 50 : 10
+  const { results: songs } = await getDataFromSearch({term, entity: 'song', limit})
 
-  useEffect(() => {
-    if (term) {
-      const handleGetData = async () => {
-        try {
-          const { results } = await getData(term, 'song', limit);
-          setSongs(results)
-        } catch (error) {
-          console.error('Error fetching data:', error)
-        } finally {
-          setIsLoading(false)
-        }
-      };
-
-      handleGetData();
-    }
-  }, [term, entity, limit]);
+  const token = cookies().get('token')?.value
+  const previewPlaylists = await getPreviewPlaylists(token || null)
 
   return (
     <SectionsContainer>
       <SectionsTitle title="Músicas" dividerMargins="my-2" />
 
-      {isLoading ? (
+      {(!songs) ? (
         <div className="mt-3">
           <LoadingIcon size={50} />
         </div>
@@ -47,14 +33,22 @@ export const SongsSection = ({ term, entity }: SongsSectionProps) => {
           {(songs && songs.length > 0) ? (
             <div className="flex gap-64 -ml-2">
               <div className="w-fit">
-                {songs?.slice(0, limit/2).map(song => 
-                  <SongCard key={song.trackId} song={song} />
+                {songs?.slice(0, limit/2).map((song: Song) => 
+                  <SongCard
+                    previewPlaylists={previewPlaylists}
+                    key={song.trackId}
+                    song={song}
+                  />
                 )}
               </div>
 
               <div className="w-fit">
-                {songs?.slice(limit/2, limit).map(song => 
-                  <SongCard key={song.trackId} song={song} />
+                {songs?.slice(limit/2, limit).map((song: Song) => 
+                  <SongCard
+                    previewPlaylists={previewPlaylists}
+                    key={song.trackId}
+                    song={song}
+                  />
                 )}
               </div>
             </div>

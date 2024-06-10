@@ -1,4 +1,4 @@
-import { api } from "@/lib/api";
+import { url } from "@/lib/api";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
@@ -7,11 +7,21 @@ export async function GET(request: NextRequest) {
 
   const redirectTo = request.cookies.get('redirectTo')?.value
 
-  const registerResponse = await api.post('/register', {
-    code,
-  })
-
-  const { token } = registerResponse.data
+  const registerResponse = await fetch(
+    url('/register'),
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        code,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    }
+  )
+  const data = await registerResponse.json()
+  
+  const { token } = data
 
   const redirectURL = redirectTo ?? new URL('/', request.url)
 

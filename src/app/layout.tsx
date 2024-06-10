@@ -1,7 +1,8 @@
+import { DefaultLayout } from "@/components/DefaultLayout/DefaultLayout";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { ToastContainer } from "react-toastify";
 import "./globals.css";
-import { DefaultLayout } from "@/components/DefaultLayout/DefaultLayout";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,6 +22,11 @@ export default function RootLayout({
         <DefaultLayout>
           {children}
         </DefaultLayout>
+
+        <ToastContainer
+          theme="dark" 
+          position= "bottom-right"
+        />
       </body>
     </html>
   );

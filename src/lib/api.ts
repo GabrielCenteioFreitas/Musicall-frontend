@@ -1,12 +1,10 @@
-import axios from 'axios'
+export const baseURL = 
+  process.env.NODE_ENV === 'production'
+  ? 'https://musicall-backend.vercel.app'
+  : 'http://localhost:3333'
 
-let baseURL = ''
-if (process.env.NODE_ENV === 'development') {
-  baseURL = 'http://localhost:3333'
-} else if (process.env.NODE_ENV === 'production') {
-  baseURL = 'https://musicall-backend.vercel.app'
+export const url = (path: string) => {
+  return path.startsWith('/')
+    ? baseURL.concat(path)
+    : baseURL.concat('/', path)
 }
-
-export const api = axios.create({
-  baseURL
-})

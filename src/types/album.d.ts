@@ -1,11 +1,12 @@
 export type Album = {
-  artistId: number;
   collectionId: number;
-  artistName: string;
+  amgCollectionId: number;
   collectionName: string;
-  artistViewUrl: string;
   collectionViewUrl: string;
   artworkUrl100: string;
+  artistId: number;
+  artistName: string;
+  artistViewUrl: string;
   trackCount: number;
   releaseDate: Date;
   primaryGenreName: string;

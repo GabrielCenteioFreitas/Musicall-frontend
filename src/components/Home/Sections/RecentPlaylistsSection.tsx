@@ -1,20 +1,20 @@
+import { LoadingIcon } from "@/components/LoadingIcon";
+import { url } from "@/lib/api";
+import { cookies } from "next/headers";
 import { SectionsContainer } from "../../SectionsContainer";
 import { SectionsTitle } from "../../SectionsTitle";
 import { PlaylistCard } from "../Cards/PlaylistCard";
 import { SectionsItemsContainer } from "../SectionsItemsContainer";
+import { PreviewPlaylist } from "@/types/previewPlaylist";
+import { getPreviewPlaylists } from "@/lib/getPlaylistsData";
 
 interface RecentPlaylistsSectionProps {
   className?: string;
 }
 
-export const RecentPlaylistsSection = ({ className, ...rest }: RecentPlaylistsSectionProps) => {
-  const recentPlaylists = Array.from({ length: 15 }).map((_, i) => {
-    return {
-      id: i,
-      name: `Playlist ${i+1}`,
-      creator: 'Gabriel Centeio Freitas'
-    }
-  }) // temporário
+export const RecentPlaylistsSection = async ({ className, ...rest }: RecentPlaylistsSectionProps) => {
+  const token = cookies().get('token')?.value
+  const previewPlaylists = await getPreviewPlaylists(token || null)
   
   return (
     <SectionsContainer className={className} {...rest}>
@@ -23,14 +23,18 @@ export const RecentPlaylistsSection = ({ className, ...rest }: RecentPlaylistsSe
         dividerMargins="my-2"
       />
 
-      <SectionsItemsContainer>
-        {recentPlaylists.map(playlist => 
-          <PlaylistCard
-            key={playlist.id}
-            playlist={playlist}
-          />
-        )}
-      </SectionsItemsContainer>
+      {previewPlaylists ? (
+        <SectionsItemsContainer>
+          {previewPlaylists?.map((playlist: PreviewPlaylist) => 
+            <PlaylistCard
+              key={playlist.id}
+              playlist={playlist}
+            />
+          )}
+        </SectionsItemsContainer>
+      ) : (
+        <LoadingIcon />
+      )}
     </SectionsContainer>
   );
 }

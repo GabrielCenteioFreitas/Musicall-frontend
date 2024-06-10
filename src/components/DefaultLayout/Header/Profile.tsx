@@ -6,14 +6,18 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { getUser } from "@/lib/auth";
+import { getUserFromServer } from "@/lib/getUserFromServer";
 import Image from "next/image";
 import { GoPerson } from "react-icons/go";
 import { LuLogOut } from "react-icons/lu";
 import { VscSymbolColor } from "react-icons/vsc";
 
 export const Profile = () => {
-  const { name, avatarUrl } = getUser()
+  const user = getUserFromServer()
+  if (!user) {
+    return null
+  }
+  const { name, avatarUrl } = user
 
   return (
     <DropdownMenu>

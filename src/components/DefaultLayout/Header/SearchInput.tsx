@@ -9,7 +9,7 @@ export const SearchInput = () => {
   const router = useRouter()
   const pathname = usePathname()
   const urlParams = useSearchParams()
-  const term = urlParams.get('term')
+  const term = urlParams?.get('term')
   const [search, setSearch] = useState(term || '')
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -46,10 +46,11 @@ export const SearchInput = () => {
         variant="ghost"
         size="icon"
         type="submit"
-        className="shrink-0 !size-5 hover:!bg-transparent"
+        className="!p-0 shrink-0 !size-5 hover:!bg-transparent"
       >
         <IoSearch size={20} className="hover:scale-105 transition-all" />
       </Button>
+
       <input
         name="term"
         type="text"

@@ -1,18 +1,18 @@
 import { IoPerson } from "react-icons/io5";
 
+const redirectURI =
+  process.env.NODE_ENV === 'development'
+  ? 'http://localhost:3000/api/auth/callback'
+  : 'https://musicall-project.vercel.app/api/auth/callback'
+
+export const loginURL = 
+  'https://accounts.google.com/o/oauth2/v2/auth'
+  + `?client_id=${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}`
+  + `&redirect_uri=${redirectURI}`
+  + '&scope=profile'
+  + '&response_type=code'
+
 export const SignIn = () => {
-  const redirectURI =
-    process.env.NODE_ENV === 'development'
-    ? 'http://localhost:3000/api/auth/callback'
-    : 'https://musicall-project.vercel.app/api/auth/callback'
-
-  const loginURL = 
-    'https://accounts.google.com/o/oauth2/v2/auth'
-    + `?client_id=${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}`
-    + `&redirect_uri=${redirectURI}`
-    + '&scope=profile'
-    + '&response_type=code'
-
   return (
     <a
       href={loginURL}
@@ -23,11 +23,9 @@ export const SignIn = () => {
         <span className="underline">se conectar!</span>
       </span>
 
-      {/* <div className="size-10 bg-zinc-900 rounded-full p-px overflow-hidden cursor-pointer"> */}
-        <div className="size-10 flex items-center justify-center rounded-full bg-zinc-700">
-          <IoPerson size={24} className="text-zinc-400" />
-        </div>
-      {/* </div> */}
+      <div className="size-10 flex items-center justify-center rounded-full bg-zinc-700">
+        <IoPerson size={24} className="text-zinc-400" />
+      </div>
     </a>
   );
 }
