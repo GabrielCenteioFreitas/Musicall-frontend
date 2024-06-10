@@ -1,7 +1,16 @@
 import { url } from "./api"
 import { getUserFromClient } from "./getUserFromClient"
 
-export const handleCreatePlaylistClick = async (token: string) => {
+interface HandleCreatePlaylistClickProps {
+  token: string;
+  playlist: {
+    name: string,
+    description: string | null,
+    isPublic: boolean,
+  }
+}
+
+export const handleCreatePlaylistClick = async ({ token, playlist }: HandleCreatePlaylistClickProps) => {
   const user = getUserFromClient()
   
   const response = await fetch(
@@ -10,8 +19,9 @@ export const handleCreatePlaylistClick = async (token: string) => {
       method: 'POST',
       body: JSON.stringify({
         userId: user?.sub,
-        name: "Sem título",
-        isPublic: true,
+        name: playlist.name,
+        description: playlist.description,
+        isPublic: playlist.isPublic,
       }),
       headers: {
         "Content-Type": "application/json",

@@ -43,11 +43,7 @@ export const DeletePlaylistButton = ({ playlist }: DeletePlaylistButtonProps) =>
         }
       ).then(() => {
         toast.success(
-          (
-            <div className="max-w-full relative">
-              Playlist deletada!
-            </div>
-          ),
+          "Playlist deletada com sucesso!",
           {
             autoClose: 2500,
           }
