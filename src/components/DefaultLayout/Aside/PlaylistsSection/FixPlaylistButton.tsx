@@ -54,6 +54,7 @@ export const FixPlaylistButton = ({ playlist, className }: FixPlaylistButtonProp
         className
       )}
       onClick={handleFixPlaylistClick}
+      title="Fixar playlist"
     >
       {playlist.isFixed ? (
         <BsPinAngleFill size={16} className="drop-shadow-border" />

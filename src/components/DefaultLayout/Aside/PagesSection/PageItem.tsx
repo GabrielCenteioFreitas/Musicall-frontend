@@ -25,6 +25,7 @@ const PageItemComponent = ({ name, href, active=false, className, children }: Pa
           active ? '!bg-zinc-800 hover:!bg-zinc-800' : 'bg-zinc-950 hover:!bg-zinc-900',
           className
         )}
+        title={name}
         asChild
       >
         <Link href={token ? href : loginURL}>

@@ -30,10 +30,10 @@ const AlbumCardComponent = ({ album }: AlbumCardProps) => {
         />
 
         <div className="flex flex-col gap-2.5 self-start text-left max-w-full">
-          <span className="text-lg font-medium leading-none truncate ...">
+          <span className="text-lg font-medium leading-none truncate ..." title={album.collectionName}>
             {album.collectionName}
           </span>
-          <span className="text-xs text-zinc-400 leading-none truncate ...">
+          <span className="text-xs text-zinc-400 leading-none truncate ..." title={album.artistName}>
             De {album.artistName}
           </span>
         </div>

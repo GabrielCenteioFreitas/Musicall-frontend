@@ -15,7 +15,7 @@ export const Logo = ({ className, ...rest }: LogoProps) => {
       >
         <ImHeadphones size={28} />
         
-        <h1 className="text-4xl font-semibold">
+        <h1 className="text-4xl font-semibold" title="Musicall">
           Musicall
         </h1>
       </Link>

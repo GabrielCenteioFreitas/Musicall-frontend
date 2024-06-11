@@ -13,6 +13,7 @@ export const CreatePlaylistCard = ({ className }: CreatePlaylistCardProps) => {
       <Button
         variant="ghost"
         className={cn("h-fit p-3 flex gap-3 items-center shrink-0 rounded-md transition-colors", className)}
+        title="Crie sua primeira playlist!"
       >
         <div
           className={cn("shrink-0 size-44 aspect-square bg-zinc-600 grid place-content-center rounded-2xl", className)}

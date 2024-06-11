@@ -26,8 +26,12 @@ const PlaylistItemComponent = ({ playlist }: PlaylistItemProps) => {
           </div>
 
           <div className="flex-1 flex flex-col gap-1 text-left max-w-[155px]">
-            <span className="text-sm truncate ...">{playlist.name}</span>
-            <p className="text-zinc-400 truncate ...">Playlist • {playlist.user.name}</p>
+            <span className="text-sm truncate ..." title={playlist.name}>
+              {playlist.name}
+            </span>
+            <p className="text-zinc-400 truncate ..." title={playlist.user.name}>
+              Playlist • {playlist.user.name}
+            </p>
           </div>
         </Link>
       </Button>

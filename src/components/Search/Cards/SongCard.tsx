@@ -58,7 +58,7 @@ const SongCardComponent = ({ previewPlaylists, song }: SongCardProps) => {
           <span className="text-lg font-medium leading-tight truncate" title={song.trackName}>
             {song.trackName}
           </span>
-          <span className="text-sm text-zinc-400 leading-tight line-clamp-2 text-wrap truncate">
+          <span className="text-sm text-zinc-400 leading-tight line-clamp-2 text-wrap truncate" title={song.artistName}>
             {song.artistName}
           </span>
         </div>

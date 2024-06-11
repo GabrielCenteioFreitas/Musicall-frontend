@@ -17,6 +17,7 @@ export const CreatePlaylistItem = ({ className }: CreatePlaylistItemProps) => {
             h-fit flex justify-start items-center rounded-lg gap-2 p-2 w-full
             bg-transparent hover:!bg-zinc-900
           `}
+          title="Criar nova playlist"
         >
           <div className="shrink-0 size-12 rounded-lg overflow-hidden">
             <div

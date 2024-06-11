@@ -13,6 +13,7 @@ export const PlayButton = ({ playlist }: PlayButtonProps) => {
       variant="secondary"
       size="icon"
       className="rounded-full !p-4 transition-colors"
+      title="Ouvir playlist"
     >
       <Image
         src={Play}

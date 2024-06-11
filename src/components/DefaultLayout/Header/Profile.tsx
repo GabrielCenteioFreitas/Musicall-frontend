@@ -22,7 +22,7 @@ export const Profile = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <div className="flex items-center gap-2 cursor-pointer">
+        <div className="flex items-center gap-2 cursor-pointer" title={name}>
           <span className="max-w-44 text-sm text-right line-clamp-1">
             {name}
           </span>

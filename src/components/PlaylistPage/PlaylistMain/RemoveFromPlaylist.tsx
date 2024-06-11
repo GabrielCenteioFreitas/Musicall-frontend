@@ -61,6 +61,7 @@ export const RemoveFromPlaylist = ({ playlist, songId }: RemoveFromPlaylistProps
   return (
     <button
       onClick={handleRemoveFromPlaylistClick}
+      title="Remover música da playlist"
     >
       <IoTrashOutline
         size={20}

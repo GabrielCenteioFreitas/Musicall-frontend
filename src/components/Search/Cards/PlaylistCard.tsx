@@ -26,10 +26,10 @@ const PlaylistCardComponent = ({ playlist }: PlaylistCardProps) => {
         />
 
         <div className="flex flex-col gap-2.5 self-start text-left w-full">
-          <span className="text-lg font-medium leading-none truncate ...">
+          <span className="text-lg font-medium leading-none truncate ..." title={playlist.name}>
             {playlist.name}
           </span>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1" title={playlist.user.name}>
             <Image
               src={playlist.user?.avatarUrl}
               alt={playlist.user?.name}
@@ -38,7 +38,7 @@ const PlaylistCardComponent = ({ playlist }: PlaylistCardProps) => {
               className="rounded-full"
             />
             <span className="text-xs text-zinc-400 leading-none truncate ...">
-              {playlist.user?.name}
+              {playlist.user.name}
             </span>
           </div>
 

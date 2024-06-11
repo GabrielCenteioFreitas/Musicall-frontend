@@ -52,17 +52,17 @@ const SongsTableRowComponent = ({
           />
 
           <div className="flex flex-col justify-center text-left max-w-[360px]">
-            <span className="text-md font-medium truncate ...">
+            <span className="text-md font-medium truncate ..." title={currentSong.song.name}>
               {currentSong.song.name}
             </span>
-            <span className="text-xs text-zinc-400 line-clamp-2 text-wrap truncate ...">
+            <span className="text-xs text-zinc-400 line-clamp-2 text-wrap truncate ..." title={currentSong.song.artist.name}>
               {currentSong.song.artist.name}
             </span>
           </div>
         </Link>
       </TableCell>
 
-      <TableCell className="text-sm text-zinc-400 truncate ...">
+      <TableCell className="text-sm text-zinc-400 truncate ..." title={currentSong.song.album.name}>
         {currentSong.song.album.name}
       </TableCell>
 
@@ -88,6 +88,7 @@ const SongsTableRowComponent = ({
           <VscHeart
             size={20}
             className="text-zinc-400 hover:scale-110 transition-all cursor-pointer"
+            title="Adicionar aos favoritos"
           />
           {isUserTheCreator && (
             <RemoveFromPlaylist

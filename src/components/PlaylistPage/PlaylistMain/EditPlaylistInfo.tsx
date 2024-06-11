@@ -81,7 +81,7 @@ export const EditPlaylistInfo = ({ playlist }: EditPlaylistInfoProps) => {
       <DialogTrigger>
         <LuPencil
           size={22}
-          title="Editar informações"
+          title="Editar informações da playlist"
           className="text-zinc-400 hover:text-zinc-50 transition-colors"
         />
       </DialogTrigger>

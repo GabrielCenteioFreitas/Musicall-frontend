@@ -29,7 +29,7 @@ const ArtistCardComponent = ({ artist }: ArtistCardProps) => {
         </div>
 
         <div className="flex flex-col gap-2.5 self-start text-left max-w-full">
-          <span className="text-lg font-medium leading-none truncate ...">
+          <span className="text-lg font-medium leading-none truncate ..." title={artist.artistName}>
             {artist.artistName}
           </span>
           <span className="text-xs text-zinc-400 leading-none truncate ...">

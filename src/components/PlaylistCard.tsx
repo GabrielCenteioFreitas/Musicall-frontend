@@ -27,10 +27,10 @@ const PlaylistCardComponent = ({ playlist, className }: PlaylistCardProps) => {
         />
 
         <div className="flex flex-col gap-2.5 self-start text-left max-w-full">
-          <span className="text-lg font-medium leading-none truncate ...">
+          <span className="text-lg font-medium leading-none truncate ..." title={playlist.name}>
             {playlist.name}
           </span>
-          <span className="text-xs text-zinc-400 leading-none truncate ...">
+          <span className="text-xs text-zinc-400 leading-none truncate ..." title={playlist.songs.length.toString()}>
             {playlist.songs.length === 1
               ? "1 item"
               : playlist.songs.length > 1

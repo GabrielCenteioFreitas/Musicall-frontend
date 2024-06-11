@@ -26,7 +26,7 @@ const ArtistItemComponent = ({ artist }: ArtistItemProps) => {
         </div>
 
         <div className="flex flex-col gap-0 justify-center text-left max-w-60">
-          <span className="text-lg font-medium truncate ...">
+          <span className="text-lg font-medium truncate ..." title={artist.name}>
             {artist.name}
           </span>
           <span className="text-xs text-zinc-400 truncate ...">
