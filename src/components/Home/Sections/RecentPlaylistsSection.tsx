@@ -1,12 +1,11 @@
 import { LoadingIcon } from "@/components/LoadingIcon";
-import { url } from "@/lib/api";
+import { PlaylistCard } from "@/components/PlaylistCard";
+import { getPreviewPlaylists } from "@/lib/getPlaylistsData";
+import { PreviewPlaylist } from "@/types/previewPlaylist";
 import { cookies } from "next/headers";
 import { SectionsContainer } from "../../SectionsContainer";
 import { SectionsTitle } from "../../SectionsTitle";
-import { PlaylistCard } from "../Cards/PlaylistCard";
 import { SectionsItemsContainer } from "../SectionsItemsContainer";
-import { PreviewPlaylist } from "@/types/previewPlaylist";
-import { getPreviewPlaylists } from "@/lib/getPlaylistsData";
 
 interface RecentPlaylistsSectionProps {
   className?: string;
