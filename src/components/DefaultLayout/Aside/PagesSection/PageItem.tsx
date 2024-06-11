@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Cookies from "js-cookie";
 import Link from "next/link";
-import { ReactNode } from "react";
+import { ReactNode, memo } from "react";
 import { loginURL } from "../../Header/SignIn";
 
 interface PageItemProps {
@@ -13,7 +13,7 @@ interface PageItemProps {
   children: ReactNode;
 }
 
-export const PageItem = ({ name, href, active=false, className, children }: PageItemProps) => {
+const PageItemComponent = ({ name, href, active=false, className, children }: PageItemProps) => {
   const token = Cookies.get('token')
 
   return (
@@ -35,3 +35,7 @@ export const PageItem = ({ name, href, active=false, className, children }: Page
     </li>
   );
 }
+
+export const PageItem = memo(PageItemComponent, (prevProps, nextProps) => {
+  return prevProps.active === nextProps.active
+})

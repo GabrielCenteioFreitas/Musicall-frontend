@@ -31,7 +31,7 @@ export const SongsSection = async ({ term, entity }: SongsSectionProps) => {
       ) : (
         <>
           {(songs && songs.length > 0) ? (
-            <div className="flex gap-64 -ml-2">
+            <div className="flex gap-60 -ml-2">
               <div className="w-fit">
                 {songs?.slice(0, limit/2).map((song: Song) => 
                   <SongCard

@@ -1,16 +1,17 @@
 import { PlaylistPortrait } from "@/components//PlaylistPortrait";
 import { PreviewPlaylist } from "@/types/previewPlaylist";
-import { Button } from "../../ui/button";
+import { Button } from "./ui/button";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { FixPlaylistButton } from "@/components/DefaultLayout/Aside/PlaylistsSection/FixPlaylistButton";
+import { memo } from "react";
 
 interface PlaylistCardProps {
   playlist: PreviewPlaylist;
   className?: string;
 }
 
-export const PlaylistCard = ({ playlist, className }: PlaylistCardProps) => {
+const PlaylistCardComponent = ({ playlist, className }: PlaylistCardProps) => {
   return (
     <Button
       variant="ghost"
@@ -44,3 +45,7 @@ export const PlaylistCard = ({ playlist, className }: PlaylistCardProps) => {
     </Button>
   );
 }
+
+export const PlaylistCard = memo(PlaylistCardComponent, (prevProps, nextProps) => {
+  return Object.is(prevProps.playlist, nextProps.playlist)
+})

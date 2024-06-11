@@ -1,4 +1,4 @@
-import { PlaylistCard } from "@/components/Home/Cards/PlaylistCard";
+import { PlaylistCard } from "@/components/PlaylistCard";
 import { SectionsTitle } from "@/components/SectionsTitle";
 import { getPreviewPlaylists } from "@/lib/getPlaylistsData";
 import { cookies } from "next/headers";

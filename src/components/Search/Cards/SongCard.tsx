@@ -34,11 +34,11 @@ const SongCardComponent = ({ previewPlaylists, song }: SongCardProps) => {
   return (
     <Button
       variant="ghost"
-      className="w-full !pl-2 !pr-4 !h-auto flex items-center justify-start max-w-[572px] group/song"
+      className="!pl-2 !pr-4 !h-auto grid grid-cols-[4rem_20rem_3.33rem_3rem] gap-3 items-center justify-start group/song"
       asChild
     >
       <Link href={`/songs/${song.trackId}`}>
-        <div className="shrink-0 size-fit relative">
+        <div className="shrink-0 size-16 relative">
           <Image
             src={song.artworkUrl100}
             alt={song.trackName}
@@ -54,7 +54,7 @@ const SongCardComponent = ({ previewPlaylists, song }: SongCardProps) => {
           </div>
         </div>
 
-        <div className="ml-3 flex flex-col gap-1 text-left w-[340px]">
+        <div className="flex-1 flex flex-col gap-1 text-left w-[20rem]">
           <span className="text-lg font-medium leading-tight truncate" title={song.trackName}>
             {song.trackName}
           </span>
@@ -63,7 +63,7 @@ const SongCardComponent = ({ previewPlaylists, song }: SongCardProps) => {
           </span>
         </div>
 
-        <div className="ml-3 flex gap-3 items-center">
+        <div className="flex gap-3 items-center">
           <AddToPlaylist previewPlaylists={previewPlaylists} song={song} />
           
           <TooltipProvider delayDuration={100}>
@@ -81,7 +81,7 @@ const SongCardComponent = ({ previewPlaylists, song }: SongCardProps) => {
           </TooltipProvider>
         </div>
 
-        <time className="font-medium text-sm text-zinc-600 ml-6">
+        <time className="font-medium text-sm text-zinc-600 ml-3">
           {durationInMinutes}:{durationInSeconds.toString().padStart(2, '0')}
         </time>
       </Link>

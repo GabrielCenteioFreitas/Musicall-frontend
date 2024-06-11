@@ -3,11 +3,11 @@
 import { Playlist } from "@/types/playlist";
 import { PreviewPlaylist } from "@/types/previewPlaylist";
 import { ChangeEvent, useEffect, useState } from "react";
+import { DeletePlaylistButton } from "./DeletePlaylistButton";
 import { EditPlaylistInfo } from "./EditPlaylistInfo";
 import { PlayButton } from "./PlayButton";
 import { SearchInput } from "./SearchInput";
-import { SongsTable } from "./SongsTable";
-import { DeletePlaylistButton } from "./DeletePlaylistButton";
+import { SongsTable } from "./SongsTable/SongsTable";
 
 interface PlaylistMainProps {
   playlist: Playlist;

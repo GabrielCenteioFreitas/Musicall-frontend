@@ -4,7 +4,7 @@ import { PreviewPlaylist } from "@/types/previewPlaylist";
 import { cookies } from "next/headers";
 import { SectionsContainer } from "../../SectionsContainer";
 import { SectionsTitle } from "../../SectionsTitle";
-import { PlaylistCard } from "../Cards/PlaylistCard";
+import { PlaylistCard } from "@/components/PlaylistCard";
 import { CreatePlaylistCard } from "../Cards/CreatePlaylistCard";
 import { SectionsItemsContainer } from "../SectionsItemsContainer";
 

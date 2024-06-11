@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { getInitialLetters } from "@/utils/getInitalLetters";
+import { memo } from "react";
 
 interface ArtistItemProps {
   artist: {
@@ -8,7 +9,7 @@ interface ArtistItemProps {
   }
 }
 
-export const ArtistItem = ({ artist }: ArtistItemProps) => {
+const ArtistItemComponent = ({ artist }: ArtistItemProps) => {
   return (
     <li className="w-full">
       <Button
@@ -36,3 +37,7 @@ export const ArtistItem = ({ artist }: ArtistItemProps) => {
     </li>
   );
 }
+
+export const ArtistItem = memo(ArtistItemComponent, (prevProps, nextProps) => {
+  return Object.is(prevProps.artist, nextProps.artist)
+})

@@ -1,6 +1,7 @@
 import { Artist } from "@/types/artist";
 import { Button } from "../../ui/button";
 import { getInitialLetters } from "@/utils/getInitalLetters";
+import { memo } from "react";
 
 interface ArtistCardProps {
   artist: Pick<Artist,
@@ -10,7 +11,7 @@ interface ArtistCardProps {
   >
 }
 
-export const ArtistCard = ({ artist }: ArtistCardProps) => {
+const ArtistCardComponent = ({ artist }: ArtistCardProps) => {
   return (
     <Button
       variant="ghost"
@@ -39,3 +40,7 @@ export const ArtistCard = ({ artist }: ArtistCardProps) => {
     </Button>
   );
 }
+
+export const ArtistCard = memo(ArtistCardComponent, (prevProps, nextProps) => {
+  return Object.is(prevProps.artist, nextProps.artist)
+})
