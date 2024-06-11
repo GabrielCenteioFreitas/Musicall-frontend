@@ -1,7 +1,9 @@
-import { cn } from "@/lib/utils";
-import { ReactNode } from "react";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import Cookies from "js-cookie";
 import Link from "next/link";
+import { ReactNode } from "react";
+import { loginURL } from "../../Header/SignIn";
 
 interface PageItemProps {
   name: string;
@@ -12,6 +14,8 @@ interface PageItemProps {
 }
 
 export const PageItem = ({ name, href, active=false, className, children }: PageItemProps) => {
+  const token = Cookies.get('token')
+
   return (
     <li className="w-full">
       <Button
@@ -23,7 +27,7 @@ export const PageItem = ({ name, href, active=false, className, children }: Page
         )}
         asChild
       >
-        <Link href={href}>
+        <Link href={token ? href : loginURL}>
           {children}
           {name}
         </Link>

@@ -32,7 +32,7 @@ const PlaylistItemComponent = ({ playlist }: PlaylistItemProps) => {
         </Link>
       </Button>
       
-      <FixPlaylistButton playlist={playlist} />
+      <FixPlaylistButton playlist={playlist} className="absolute top-3 right-2" />
     </li>
   );
 }

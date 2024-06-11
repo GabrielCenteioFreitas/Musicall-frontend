@@ -21,7 +21,7 @@ export const PlaylistPortrait = ({ playlist, size=50, className, iconClassName }
   const ImageComponent = ({ className, i }: { className?: string, i?: number }) => {
     return (
       <Image
-        className={cn("w-full aspect-square object-cover", className)}
+        className={cn("w-full aspect-square object-cover bg-zinc-600", className)}
         src={i !== undefined ? differentPortraits[i] : playlist.portrait}
         alt={playlist.name}
         width={size}

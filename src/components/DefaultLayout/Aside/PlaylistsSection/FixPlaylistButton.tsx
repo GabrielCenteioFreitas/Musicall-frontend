@@ -12,9 +12,10 @@ interface FixPlaylistButtonProps {
     id: string;
     isFixed: boolean;
   };
+  className: string;
 }
 
-export const FixPlaylistButton = ({ playlist }: FixPlaylistButtonProps) => {
+export const FixPlaylistButton = ({ playlist, className }: FixPlaylistButtonProps) => {
   const router = useRouter();
   const token = Cookies.get('token')
 
@@ -48,16 +49,16 @@ export const FixPlaylistButton = ({ playlist }: FixPlaylistButtonProps) => {
   return (
     <button
       className={cn(`
-        absolute top-3 right-2 hover:scale-110
-        group-hover:opacity-100 transition-all`,
-        playlist.isFixed ? "opacity-100" : "opacity-0"
+        hover:scale-110 group-hover:opacity-100 transition-all`,
+        playlist.isFixed ? "opacity-100" : "opacity-0",
+        className
       )}
       onClick={handleFixPlaylistClick}
     >
       {playlist.isFixed ? (
-        <BsPinAngleFill size={16} />
+        <BsPinAngleFill size={16} className="drop-shadow-border" />
       ) : (
-        <BsPinAngle size={16} />
+        <BsPinAngle size={16} className="drop-shadow-border" />
       )}
     </button>
   );

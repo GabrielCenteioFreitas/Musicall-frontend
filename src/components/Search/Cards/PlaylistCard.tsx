@@ -4,6 +4,7 @@ import { PreviewPlaylist } from "@/types/previewPlaylist";
 import Link from "next/link";
 import { memo } from "react";
 import Image from "next/image";
+import { FixPlaylistButton } from "@/components/DefaultLayout/Aside/PlaylistsSection/FixPlaylistButton";
 
 interface PlaylistCardProps {
   playlist: PreviewPlaylist;
@@ -13,7 +14,7 @@ const PlaylistCardComponent = ({ playlist }: PlaylistCardProps) => {
   return (
     <Button
       variant="ghost"
-      className="h-fit p-3 flex flex-col gap-3 shrink-0 rounded-md transition-colors"
+      className="h-fit p-3 flex flex-col gap-3 shrink-0 rounded-md transition-colors group relative"
       asChild
     >
       <Link href={`/playlists/${playlist.id}`}>
@@ -24,7 +25,7 @@ const PlaylistCardComponent = ({ playlist }: PlaylistCardProps) => {
           size={180}
         />
 
-        <div className="flex flex-col gap-2.5 self-start text-left max-w-full">
+        <div className="flex flex-col gap-2.5 self-start text-left w-full">
           <span className="text-lg font-medium leading-none truncate ...">
             {playlist.name}
           </span>
@@ -40,6 +41,8 @@ const PlaylistCardComponent = ({ playlist }: PlaylistCardProps) => {
               {playlist.user?.name}
             </span>
           </div>
+
+          <FixPlaylistButton className="absolute top-5 right-5" playlist={playlist} />
         </div>
       </Link>
     </Button>
