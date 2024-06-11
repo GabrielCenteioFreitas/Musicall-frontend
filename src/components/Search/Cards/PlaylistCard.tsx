@@ -1,10 +1,9 @@
 import { PlaylistPortrait } from "@/components/PlaylistPortrait";
 import { Button } from "@/components/ui/button";
 import { PreviewPlaylist } from "@/types/previewPlaylist";
+import Image from "next/image";
 import Link from "next/link";
 import { memo } from "react";
-import Image from "next/image";
-import { FixPlaylistButton } from "@/components/DefaultLayout/Aside/PlaylistsSection/FixPlaylistButton";
 
 interface PlaylistCardProps {
   playlist: PreviewPlaylist;
@@ -41,8 +40,6 @@ const PlaylistCardComponent = ({ playlist }: PlaylistCardProps) => {
               {playlist.user.name}
             </span>
           </div>
-
-          <FixPlaylistButton className="absolute top-5 right-5" playlist={playlist} />
         </div>
       </Link>
     </Button>
