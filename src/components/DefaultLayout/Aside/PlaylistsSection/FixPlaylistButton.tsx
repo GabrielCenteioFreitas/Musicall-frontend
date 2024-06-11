@@ -37,8 +37,13 @@ export const FixPlaylistButton = ({ playlist, className }: FixPlaylistButtonProp
       }
     ).then(() => {
       router.refresh()
+
+      const toastText = playlist.isFixed
+        ? "Playlist desfixada com sucesso!"
+        : "Playlist fixada com sucesso!"
+
       toast.success(
-        "Playlist fixada com sucesso!",
+        toastText,
         {
           autoClose: 2500,
         }

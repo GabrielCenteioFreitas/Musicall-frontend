@@ -33,7 +33,7 @@ export const PlaylistsSection = async ({ term }: PlaylistsSectionProps) => {
             </div>
           ) : (
             <span>
-              Não foram encontrados playlists públicas relacionados a sua pesquisa.
+              Não foram encontradas playlists públicas relacionadas a sua pesquisa.
             </span>
           )}
         </>
