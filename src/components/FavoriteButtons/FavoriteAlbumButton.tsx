@@ -1,82 +1,85 @@
 'use client'
 
-import { VscHeart, VscHeartFilled } from "react-icons/vsc";
-import { Button } from "./ui/button";
-import { cn } from "@/lib/utils";
-import Cookies from "js-cookie";
-import { useState } from "react";
-import { LoadingIcon } from "./LoadingIcon";
-import { useRouter } from "next/navigation";
-import { loginURL } from "./DefaultLayout/Header/SignIn";
-import { getDataFromLookup } from "@/lib/getITunesData";
-import { ITunesSong } from "@/types/song";
-import { Artist } from "@/types/artist";
-import { Album } from "@/types/album";
 import { url } from "@/lib/api";
+import { getDataFromLookup } from "@/lib/getITunesData";
+import { cn } from "@/lib/utils";
+import { ITunesAlbum } from "@/types/album";
+import { ITunesSong } from "@/types/song";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { VscHeart, VscHeartFilled } from "react-icons/vsc";
 import { toast } from "react-toastify";
+import { loginURL } from "../DefaultLayout/Header/SignIn";
+import { LoadingIcon } from "../LoadingIcon";
+import { Button } from "../ui/button";
 
-interface FavoriteSongButtonProps {
-  song: {
-    trackId: number;
+interface FavoriteAlbumButtonProps {
+  album: {
     collectionId: number;
-    artistId: number;
   }
   isFavorited: boolean;
   className?: string;
   size?: number;
 }
 
-export const FavoriteSongButton = ({ song, isFavorited, className, size=20 }: FavoriteSongButtonProps) => {
+export const FavoriteAlbumButton = ({ album, isFavorited, className, size=20 }: FavoriteAlbumButtonProps) => {
   const router = useRouter()
   const token = Cookies.get('token')
   const [isLoading, setIsLoading] = useState(false)
 
-  const handleFavoriteSongClick = async () => {
+  const handleFavoriteAlbumClick = async () => {
     if (!token) {
       router.push(loginURL)
       return
     }
     setIsLoading(true)
 
-    const { trackId, collectionId, artistId } = song
+    const { collectionId } = album
     
-    const { results: songResults } = await getDataFromLookup({ id: trackId })
-    const songData: ITunesSong = songResults[0]
-    const { results: artistResults } = await getDataFromLookup({ id: artistId })
-    const artistData: Artist = artistResults[0]
-    const { results: albumResults } = await getDataFromLookup({ id: collectionId })
-    const albumData: Album = albumResults[0]
+    const { results: albumResults } = await getDataFromLookup({
+      id: collectionId
+    })
+    const { results: songResults, resultCount } = await getDataFromLookup({
+      id: collectionId,
+      entity: 'song',
+      limit: 500,
+      })
+    const albumData: ITunesAlbum = albumResults[0]
+    const songData: ITunesSong[] = songResults.slice(1, resultCount)
 
     const requestBody = {
-      songToBeFavorited: {
-        name: songData.trackName,
-        portrait: songData.artworkUrl100,
-        iTunesId: songData.trackId,
-        iTunesViewUrl: songData.trackViewUrl,
-        previewUrl: songData.previewUrl,
-        releaseDate: songData.releaseDate,
-        durationInSeconds: songData.trackTimeMillis / 1000,
-        genre: songData.primaryGenreName,
+      albumToBeFavorited: {
+        name: albumData.collectionName,
+        portrait: albumData.artworkUrl100,
+        iTunesId: albumData.collectionId,
+        iTunesViewUrl: albumData.collectionViewUrl,
+        releaseDate: albumData.releaseDate,
+        genre: albumData.primaryGenreName,
         artist: {
-          name: artistData.artistName,
-          iTunesId: artistData.artistId,
-          iTunesViewUrl: artistData.artistLinkUrl,
-          genre: artistData.primaryGenreName,
-        },
-        album: {
-          name: albumData.collectionName,
-          portrait: albumData.artworkUrl100,
-          iTunesId: albumData.collectionId,
-          iTunesViewUrl: albumData.collectionViewUrl,
-          releaseDate: albumData.releaseDate,
+          name: albumData.artistName,
+          iTunesId: albumData.artistId,
+          iTunesViewUrl: albumData.artistViewUrl,
           genre: albumData.primaryGenreName,
         },
+        songs: songData.map((song) => {
+          return {
+            name: song.trackName,
+            portrait: song.artworkUrl100,
+            iTunesId: song.trackId,
+            iTunesViewUrl: song.trackViewUrl,
+            previewUrl: song.previewUrl,
+            releaseDate: song.releaseDate,
+            durationInSeconds: song.trackTimeMillis / 1000,
+            genre: song.primaryGenreName,
+          }
+        })
       }
     };
 
     try {
       await fetch(
-        url(`/favorites/song`),
+        url(`/favorites/album`),
         {
           method: 'POST',
           body: JSON.stringify(requestBody),
@@ -89,7 +92,7 @@ export const FavoriteSongButton = ({ song, isFavorited, className, size=20 }: Fa
         toast.success(
           (
             <span>
-              Música adicionada aos favoritos<br/>com sucesso!
+              Álbum adicionado aos favoritos<br/>com sucesso!
             </span>
           ),
           {
@@ -107,7 +110,7 @@ export const FavoriteSongButton = ({ song, isFavorited, className, size=20 }: Fa
     }
   }
 
-  const handleUnfavoriteSongClick = async () => {
+  const handleUnfavoriteAlbumClick = async () => {
     if (!token) {
       router.push(loginURL)
       return
@@ -115,14 +118,14 @@ export const FavoriteSongButton = ({ song, isFavorited, className, size=20 }: Fa
     setIsLoading(true)
 
     const requestBody = {
-      songToBeUnfavorited: {
-        iTunesId: song.trackId,
+      albumToBeUnfavorited: {
+        iTunesId: album.collectionId,
       }
     }
 
     try {
       await fetch(
-        url(`/favorites/song`),
+        url(`/favorites/album`),
         {
           method: 'DELETE',
           body: JSON.stringify(requestBody),
@@ -135,7 +138,7 @@ export const FavoriteSongButton = ({ song, isFavorited, className, size=20 }: Fa
         toast.success(
           (
             <span>
-              Música removida dos favoritos<br/>com sucesso!
+              Álbum removido dos favoritos<br/>com sucesso!
             </span>
           ),
           {
@@ -155,16 +158,19 @@ export const FavoriteSongButton = ({ song, isFavorited, className, size=20 }: Fa
 
   const handleClick = async () => {
     if (isFavorited) {
-      await handleUnfavoriteSongClick()
+      await handleUnfavoriteAlbumClick()
     } else {
-      await handleFavoriteSongClick()
+      await handleFavoriteAlbumClick()
     }
   }
 
   return (
     <Button
       variant="none"
-      className={cn("size-fit p-0 text-gray-400", className)}
+      size="icon"
+      className={cn(`
+        text-gray-400 p-1.5 rounded-full hover:scale-110 hover:text-gray-50 transition-all
+      `, className, isLoading && "!top-5 !opacity-100")}
       disabled={isLoading}
       onClick={handleClick}
     >
@@ -174,19 +180,16 @@ export const FavoriteSongButton = ({ song, isFavorited, className, size=20 }: Fa
             <VscHeartFilled 
               size={size}
               title="Remover dos favoritos"
-              className="hover:scale-110 group-hover/tooltip:text-gray-50 transition-all"
             />
           ) : (
             <VscHeart 
               size={size}
               title="Adicionar aos favoritos"
-              className="hover:scale-110 group-hover/tooltip:text-gray-50 transition-all"
             />
           )}
         </>
       ) : (
         <LoadingIcon
-          className=""
           size={size-2}
         />
       )}

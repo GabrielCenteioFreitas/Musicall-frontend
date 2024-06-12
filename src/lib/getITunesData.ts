@@ -45,24 +45,18 @@ export const getDataFromSearch = cache(async ({
 interface getDataFromLookupParams {
   id?: number;
   amgArtistId?: number;
-  amgCollectionId?: number;
-  amgTrackId?: number;
   entity?: string;
   limit?: number;
 }
 export const getDataFromLookup = cache(async ({
   id,
   amgArtistId,
-  amgCollectionId,
-  amgTrackId,
   entity,
   limit 
 }: getDataFromLookupParams): Promise<any | null> => {
   const params = new URLSearchParams({
     id: id ? id.toString() : '',
     amgArtistId: amgArtistId ? amgArtistId.toString() : '',
-    amgCollectionId: amgCollectionId ? amgCollectionId.toString() : '',
-    amgTrackId: amgTrackId ? amgTrackId.toString() : '',
     entity: entity ? entity : '',
     limit: limit ? limit.toString() : '',
   })

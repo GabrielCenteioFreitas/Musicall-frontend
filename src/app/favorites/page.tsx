@@ -1,4 +1,5 @@
 import { loginURL } from "@/components/DefaultLayout/Header/SignIn";
+import { Divider } from "@/components/Divider";
 import { getFavorites } from "@/lib/getFavoritesData";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -20,6 +21,17 @@ const FavoritesPage = async () => {
           {favoritedSong.song.artist.name} - {favoritedSong.song.name}
         </span>
       )}
+
+      <Divider className="my-4" />
+
+      <h1 className="text-2xl font-semibold">Álbuns</h1>
+      {favorites?.favoriteAlbums.map((favoritedAlbum) =>
+        <span key={favoritedAlbum.album.iTunesId}>
+          {favoritedAlbum.album.artist.name} - {favoritedAlbum.album.name}
+        </span>
+      )}
+
+      <Divider className="my-4" />
     </div>
   );
 }

@@ -11,7 +11,7 @@ import {
 import { url } from "@/lib/api";
 import { getDataFromLookup } from "@/lib/getITunesData";
 import { cn } from "@/lib/utils";
-import { Album } from "@/types/album";
+import { ITunesAlbum } from "@/types/album";
 import { Artist } from "@/types/artist";
 import { PreviewPlaylist } from "@/types/previewPlaylist";
 import { ITunesSong } from "@/types/song";
@@ -62,7 +62,7 @@ export const AddToPlaylist = ({ previewPlaylists, song, className, size=20 }: Ad
     const { results: artistResults } = await getDataFromLookup({ id: artistId })
     const artistData: Artist = artistResults[0]
     const { results: albumResults } = await getDataFromLookup({ id: collectionId })
-    const albumData: Album = albumResults[0]
+    const albumData: ITunesAlbum = albumResults[0]
 
     const requestBody = {
       newSong: {

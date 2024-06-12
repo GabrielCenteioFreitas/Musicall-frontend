@@ -1,6 +1,7 @@
-export type Album = {
+import { DBSong } from "./song";
+
+export type ITunesAlbum = {
   collectionId: number;
-  amgCollectionId: number;
   collectionName: string;
   collectionViewUrl: string;
   artworkUrl100: string;
@@ -10,4 +11,19 @@ export type Album = {
   trackCount: number;
   releaseDate: Date;
   primaryGenreName: string;
+}
+
+export type DBAlbum = {
+  name: string;
+  portrait: string;
+  iTunesId: number;
+  iTunesViewUrl: string;
+  releaseDate: Date;
+  genre: string;
+  artist: {
+    id: string;
+    iTunesId: number;
+    name: string;
+  };
+  songs: DBSong[];
 }

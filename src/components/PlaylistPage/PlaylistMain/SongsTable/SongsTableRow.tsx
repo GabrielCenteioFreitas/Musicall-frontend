@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { AddToPlaylist } from "@/components/AddToPlaylist";
-import { FavoriteSongButton } from "@/components/FavoriteSongButton";
+import { FavoriteSongButton } from "@/components/FavoriteButtons/FavoriteSongButton";
 import { PreviewPlaylist } from "@/types/previewPlaylist";
 import dayjs from 'dayjs';
 import ptBr from 'dayjs/locale/pt-br';

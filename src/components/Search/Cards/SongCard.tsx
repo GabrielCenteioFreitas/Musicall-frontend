@@ -1,5 +1,5 @@
 import { AddToPlaylist } from "@/components/AddToPlaylist";
-import { FavoriteSongButton } from "@/components/FavoriteSongButton";
+import { FavoriteSongButton } from "@/components/FavoriteButtons/FavoriteSongButton";
 import { Button } from "@/components/ui/button";
 import { PreviewPlaylist } from "@/types/previewPlaylist";
 import { ITunesSong } from "@/types/song";

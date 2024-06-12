@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { url } from "@/lib/api";
 import { getDataFromLookup } from "@/lib/getITunesData";
 import { cn } from "@/lib/utils";
-import { Album } from "@/types/album";
+import { ITunesAlbum } from "@/types/album";
 import { Artist } from "@/types/artist";
 import { ITunesSong } from "@/types/song";
 import Cookies from "js-cookie";
@@ -39,7 +39,7 @@ export const AddToPlaylist = ({ song, className, size=20 }: AddToPlaylistProps) 
     const { results: artistResults } = await getDataFromLookup({ id: artistId })
     const artistData: Artist = artistResults[0]
     const { results: albumResults } = await getDataFromLookup({ id: collectionId })
-    const albumData: Album = albumResults[0]
+    const albumData: ITunesAlbum = albumResults[0]
 
     const requestBody = {
       newSong: {
