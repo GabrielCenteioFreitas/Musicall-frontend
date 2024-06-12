@@ -1,8 +1,10 @@
 'use client'
 
+import { LoadingIcon } from "@/components/LoadingIcon";
 import { url } from "@/lib/api";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { IoTrashOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
 
@@ -15,10 +17,12 @@ interface RemoveFromPlaylistProps {
 }
 
 export const RemoveFromPlaylist = ({ playlist, songId }: RemoveFromPlaylistProps) => {
-  const token = Cookies.get('token')
   const router = useRouter()
+  const token = Cookies.get('token')
+  const [isLoading, setIsLoading] = useState(false)
   
   const handleRemoveFromPlaylistClick = async () => {
+    setIsLoading(true)
     const requestBody = {
       songToRemove: {
         id: songId
@@ -55,6 +59,8 @@ export const RemoveFromPlaylist = ({ playlist, songId }: RemoveFromPlaylistProps
     } catch(error) {
       console.error(error)
       toast.error("Ocorreu um erro!")
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -63,10 +69,17 @@ export const RemoveFromPlaylist = ({ playlist, songId }: RemoveFromPlaylistProps
       onClick={handleRemoveFromPlaylistClick}
       title="Remover música da playlist"
     >
-      <IoTrashOutline
-        size={20}
-        className="text-zinc-400 hover:scale-110 transition-all cursor-pointer"
-      />
+      {!isLoading ? (
+        <IoTrashOutline
+          size={20}
+          className="text-zinc-400 hover:scale-110 transition-all cursor-pointer"
+        />
+      ) : (
+        <LoadingIcon
+          size={18}
+          className="text-zinc-400"
+        />
+      )}
     </button>
   );
 }

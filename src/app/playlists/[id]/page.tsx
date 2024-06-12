@@ -1,4 +1,5 @@
 import { loginURL } from "@/components/DefaultLayout/Header/SignIn";
+import { MoreSongs } from "@/components/PlaylistPage/MoreSongs/MoreSongs";
 import { PlaylistAside } from "@/components/PlaylistPage/PlaylistAside/PlaylistAside";
 import { PlaylistInfo } from "@/components/PlaylistPage/PlaylistInfo/PlaylistInfo";
 import { PlaylistMain } from "@/components/PlaylistPage/PlaylistMain/PlaylistMain";
@@ -30,6 +31,10 @@ const PlaylistPage = async ({ params }: { params: { id: string } }) => {
           <PlaylistInfo playlist={playlist} />
 
           <PlaylistMain playlist={playlist} previewPlaylists={previewPlaylists} isUserTheCreator={isUserTheCreator} />
+
+          {isUserTheCreator && (
+            <MoreSongs />
+          )}
         </div>
       </div>
 

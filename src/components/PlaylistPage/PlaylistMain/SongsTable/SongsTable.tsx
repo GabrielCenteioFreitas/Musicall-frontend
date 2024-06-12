@@ -27,7 +27,14 @@ interface SongsTableProps {
 
 export const SongsTable = ({ playlist, songs, previewPlaylists, isUserTheCreator }: SongsTableProps) => {
   if (!songs?.length) {
-    return <span>Sua playlist não possui nenhuma música.</span>
+    const url = new URL(window.location.toString());
+    const searchParam = url.searchParams.get('search');
+  
+    if (searchParam) {
+      return <span>Sua playlist não possui nenhuma música relacionada a sua pesquisa.</span>
+    } else {
+      return <span>Sua playlist não possui nenhuma música.</span>
+    }
   }
 
   return (

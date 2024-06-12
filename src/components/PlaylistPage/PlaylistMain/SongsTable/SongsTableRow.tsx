@@ -51,7 +51,7 @@ const SongsTableRowComponent = ({
             className="rounded-lg h-full aspect-square"
           />
 
-          <div className="flex flex-col justify-center text-left max-w-[360px]">
+          <div className="flex flex-col justify-center text-left max-w-[360px] overflow-hidden">
             <span className="text-md font-medium truncate ..." title={currentSong.song.name}>
               {currentSong.song.name}
             </span>
@@ -62,7 +62,7 @@ const SongsTableRowComponent = ({
         </Link>
       </TableCell>
 
-      <TableCell className="text-sm text-zinc-400 truncate ..." title={currentSong.song.album.name}>
+      <TableCell className="text-sm text-zinc-400 truncate ... overflow-hidden" title={currentSong.song.album.name}>
         {currentSong.song.album.name}
       </TableCell>
 
