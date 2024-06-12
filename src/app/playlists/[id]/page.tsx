@@ -3,6 +3,7 @@ import { MoreSongs } from "@/components/PlaylistPage/MoreSongs/MoreSongs";
 import { PlaylistAside } from "@/components/PlaylistPage/PlaylistAside/PlaylistAside";
 import { PlaylistInfo } from "@/components/PlaylistPage/PlaylistInfo/PlaylistInfo";
 import { PlaylistMain } from "@/components/PlaylistPage/PlaylistMain/PlaylistMain";
+import { getFavorites } from "@/lib/getFavoritesData";
 import { getPlaylist, getPreviewPlaylists } from "@/lib/getPlaylistsData";
 import { getUserFromServer } from "@/lib/getUserFromServer";
 import { cookies } from "next/headers";
@@ -21,6 +22,7 @@ const PlaylistPage = async ({ params }: { params: { id: string } }) => {
   }
 
   const previewPlaylists = await getPreviewPlaylists(token || null)
+  const favorites = await getFavorites(token || null)
   const user = await getUserFromServer()
   const isUserTheCreator = !!user && user.sub ===  playlist.userId
 
@@ -30,7 +32,12 @@ const PlaylistPage = async ({ params }: { params: { id: string } }) => {
         <div className="flex flex-col gap-4">
           <PlaylistInfo playlist={playlist} />
 
-          <PlaylistMain playlist={playlist} previewPlaylists={previewPlaylists} isUserTheCreator={isUserTheCreator} />
+          <PlaylistMain
+            playlist={playlist}
+            previewPlaylists={previewPlaylists}
+            favoriteSongs={favorites?.favoriteSongs || null}
+            isUserTheCreator={isUserTheCreator}
+          />
 
           {isUserTheCreator && (
             <MoreSongs />

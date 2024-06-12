@@ -1,16 +1,16 @@
 import { TableCell, TableRow } from "@/components/ui/table";
-import { Song } from "@/types/song";
+import { ITunesSong } from "@/types/song";
 import Link from "next/link";
 import Image from "next/image";
 import { AddToPlaylist } from "./AddToPlaylist";
 
 interface MoreSongsTableRowProps {
-  song: Song;
+  song: ITunesSong;
   i: number;
 }
 
 export const MoreSongsTableRow = ({ song, i }: MoreSongsTableRowProps) => {
-  const durationInSeconds = Math.floor(song.trackTimeMillis / 10000)
+  const durationInSeconds = Math.floor(song.trackTimeMillis / 1000)
   const minutes = Math.floor(durationInSeconds / 60)
   const seconds = Math.ceil(durationInSeconds - (minutes * 60))
 

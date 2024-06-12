@@ -1,22 +1,15 @@
 import { AddToPlaylist } from "@/components/AddToPlaylist";
+import { FavoriteSongButton } from "@/components/FavoriteSongButton";
 import { Button } from "@/components/ui/button";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { PreviewPlaylist } from "@/types/previewPlaylist";
-import { Song } from "@/types/song";
+import { ITunesSong } from "@/types/song";
 import Image from 'next/image';
-import Link from "next/link";
 import { memo } from "react";
 import { FaPlay } from "react-icons/fa";
-import { VscHeart } from "react-icons/vsc";
 
 interface SongCardProps {
   previewPlaylists: PreviewPlaylist[] | null;
-  song: Pick<Song,
+  song: Pick<ITunesSong,
     'trackId' |
     'trackName' |
     'artistId' |
@@ -24,12 +17,13 @@ interface SongCardProps {
     'collectionId' |
     'artworkUrl100' |
     'trackTimeMillis'
-  >
+  >;
+  isFavorited: boolean;
 }
 
-const SongCardComponent = ({ previewPlaylists, song }: SongCardProps) => {
-  const durationInMinutes = Math.floor(song.trackTimeMillis / 10000 / 60)
-  const durationInSeconds = Math.ceil((song.trackTimeMillis / 10000) - (durationInMinutes * 60))
+const SongCardComponent = ({ previewPlaylists, song, isFavorited }: SongCardProps) => {
+  const durationInMinutes = Math.floor(song.trackTimeMillis / 1000 / 60)
+  const durationInSeconds = Math.ceil((song.trackTimeMillis / 1000) - (durationInMinutes * 60))
 
   return (
     <Button
@@ -37,7 +31,7 @@ const SongCardComponent = ({ previewPlaylists, song }: SongCardProps) => {
       className="!pl-2 !pr-4 !h-auto grid grid-cols-[4rem_20rem_3.33rem_3rem] gap-3 items-center justify-start group/song"
       asChild
     >
-      <Link href={`/songs/${song.trackId}`}>
+      <div>
         <div className="shrink-0 size-16 relative">
           <Image
             src={song.artworkUrl100}
@@ -63,28 +57,16 @@ const SongCardComponent = ({ previewPlaylists, song }: SongCardProps) => {
           </span>
         </div>
 
-        <div className="flex gap-3 items-center">
+        <div className="flex gap-2.5 items-center">
           <AddToPlaylist previewPlaylists={previewPlaylists} song={song} />
           
-          <TooltipProvider delayDuration={100}>
-            <Tooltip>
-              <TooltipTrigger>
-                <VscHeart
-                  size={20}
-                  className="text-gray-300 hover:scale-110 group-hover/tooltip:text-gray-50 transition-all"
-                />
-              </TooltipTrigger>
-              <TooltipContent className="!bg-zinc-900 !border-zinc-600 !py-1 !px-2">
-                <p>Adicionar aos favoritos</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+          <FavoriteSongButton song={song} isFavorited={isFavorited} className="text-gray-300" />
         </div>
 
         <time className="font-medium text-sm text-zinc-600 ml-3">
           {durationInMinutes}:{durationInSeconds.toString().padStart(2, '0')}
         </time>
-      </Link>
+      </div>
     </Button>
   );
 }

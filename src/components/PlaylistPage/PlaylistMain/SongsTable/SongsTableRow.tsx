@@ -1,20 +1,20 @@
 import { TableCell, TableRow } from "@/components/ui/table";
-import { Song } from "@/types/song";
-import Link from "next/link";
-import Image from "next/image";
 import { PlaylistSong } from "@/types/playlistSong";
+import Image from "next/image";
+import Link from "next/link";
 
+import { AddToPlaylist } from "@/components/AddToPlaylist";
+import { FavoriteSongButton } from "@/components/FavoriteSongButton";
+import { PreviewPlaylist } from "@/types/previewPlaylist";
 import dayjs from 'dayjs';
 import ptBr from 'dayjs/locale/pt-br';
-import { AddToPlaylist } from "@/components/AddToPlaylist";
-import { VscHeart } from "react-icons/vsc";
-import { RemoveFromPlaylist } from "../RemoveFromPlaylist";
-import { PreviewPlaylist } from "@/types/previewPlaylist";
 import { memo } from "react";
+import { RemoveFromPlaylist } from "../RemoveFromPlaylist";
 dayjs.locale(ptBr)
 
 interface SongsTableRowProps {
   currentSong: PlaylistSong;
+  isFavorited: boolean;
   i: number;
   isUserTheCreator: boolean;
   playlist: {
@@ -27,6 +27,7 @@ interface SongsTableRowProps {
 
 const SongsTableRowComponent = ({
   currentSong,
+  isFavorited,
   i,
   isUserTheCreator,
   playlist,
@@ -85,11 +86,16 @@ const SongsTableRowComponent = ({
             }}
             className="text-zinc-400"
           />
-          <VscHeart
-            size={20}
-            className="text-zinc-400 hover:scale-110 transition-all cursor-pointer"
-            title="Adicionar aos favoritos"
+
+          <FavoriteSongButton
+            isFavorited={isFavorited}
+            song={{
+              trackId: currentSong.song.iTunesId,
+              collectionId: currentSong.song.album.iTunesId,
+              artistId: currentSong.song.artist.iTunesId,
+            }}
           />
+
           {isUserTheCreator && (
             <RemoveFromPlaylist
               playlist={playlist}

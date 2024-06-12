@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils";
 import { Album } from "@/types/album";
 import { Artist } from "@/types/artist";
 import { PreviewPlaylist } from "@/types/previewPlaylist";
-import { Song } from "@/types/song";
+import { ITunesSong } from "@/types/song";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { MouseEvent, useState } from "react";
@@ -58,7 +58,7 @@ export const AddToPlaylist = ({ previewPlaylists, song, className, size=20 }: Ad
     const { trackId, collectionId, artistId } = song
 
     const { results: songResults } = await getDataFromLookup({ id: trackId })
-    const songData: Song = songResults[0]
+    const songData: ITunesSong = songResults[0]
     const { results: artistResults } = await getDataFromLookup({ id: artistId })
     const artistData: Artist = artistResults[0]
     const { results: albumResults } = await getDataFromLookup({ id: collectionId })
@@ -86,7 +86,7 @@ export const AddToPlaylist = ({ previewPlaylists, song, className, size=20 }: Ad
         },
         previewUrl: songData.previewUrl,
         releaseDate: songData.releaseDate,
-        durationInSeconds: songData.trackTimeMillis / 10000,
+        durationInSeconds: songData.trackTimeMillis / 1000,
         genre: songData.primaryGenreName
       }
     };

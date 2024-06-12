@@ -2,11 +2,12 @@ import { LoadingIcon } from "@/components/LoadingIcon";
 import { SectionsContainer } from "@/components/SectionsContainer";
 import { SectionsTitle } from "@/components/SectionsTitle";
 import { getDataFromSearch } from "@/lib/getITunesData";
-import { Song } from "@/types/song";
+import { ITunesSong } from "@/types/song";
 
 import { getPreviewPlaylists } from "@/lib/getPlaylistsData";
 import { cookies } from "next/headers";
 import { SongCard } from "../Cards/SongCard";
+import { getFavorites } from "@/lib/getFavoritesData";
 
 interface SongsSectionProps {
   term: string;
@@ -16,9 +17,10 @@ interface SongsSectionProps {
 export const SongsSection = async ({ term, entity }: SongsSectionProps) => {
   const limit = entity ? 50 : 10
   const { results: songs } = await getDataFromSearch({term, entity: 'song', limit})
-
+  
   const token = cookies().get('token')?.value
   const previewPlaylists = await getPreviewPlaylists(token || null)
+  const favorites = await getFavorites(token || null)
 
   return (
     <SectionsContainer>
@@ -33,21 +35,27 @@ export const SongsSection = async ({ term, entity }: SongsSectionProps) => {
           {(songs && songs.length > 0) ? (
             <div className="flex gap-60 -ml-2">
               <div className="w-fit">
-                {songs?.slice(0, limit/2).map((song: Song) => 
+                {songs?.slice(0, limit/2).map((song: ITunesSong) => 
                   <SongCard
                     previewPlaylists={previewPlaylists}
                     key={song.trackId}
                     song={song}
+                    isFavorited={favorites?.favoriteSongs?.some(
+                      (favoritedSong) => favoritedSong.song.iTunesId === song.trackId
+                    ) || false}
                   />
                 )}
               </div>
 
               <div className="w-fit">
-                {songs?.slice(limit/2, limit).map((song: Song) => 
+                {songs?.slice(limit/2, limit).map((song: ITunesSong) => 
                   <SongCard
                     previewPlaylists={previewPlaylists}
                     key={song.trackId}
                     song={song}
+                    isFavorited={favorites?.favoriteSongs?.some(
+                      (favoritedSong) => favoritedSong.song.iTunesId === song.trackId
+                    ) || false}
                   />
                 )}
               </div>

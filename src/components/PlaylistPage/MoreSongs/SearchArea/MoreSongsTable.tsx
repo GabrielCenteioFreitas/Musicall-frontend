@@ -5,12 +5,12 @@ import {
   TableHeader,
   TableRow
 } from "@/components/ui/table";
-import { Song } from "@/types/song";
+import { ITunesSong } from "@/types/song";
 import { LuClock } from "react-icons/lu";
 import { MoreSongsTableRow } from "./MoreSongsTableRow";
 
 interface MoreSongsTableProps {
-  songs: Song[];
+  songs: ITunesSong[];
   page: number;
 }
 

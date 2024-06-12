@@ -1,16 +1,15 @@
 'use client'
 
 import { getDataFromSearch } from "@/lib/getITunesData"
-import { Song } from "@/types/song"
+import { ITunesSong } from "@/types/song"
 import { ChangeEvent, useEffect, useState } from "react"
-import { IoClose } from "react-icons/io5"
-import { SearchInput } from "./SearchInput";
-import { MoreSongsTable } from "./MoreSongsTable";
 import { useDebouncedCallback } from "use-debounce"
-import { Pagination } from "./Pagination";
+import { MoreSongsTable } from "./MoreSongsTable"
+import { Pagination } from "./Pagination"
+import { SearchInput } from "./SearchInput"
 
 export const SearchArea = () => {
-  const [songs, setSongs] = useState<Song[] | null>(null)
+  const [songs, setSongs] = useState<ITunesSong[] | null>(null)
   const [page, setPage] = useState(1)
   const [term, setTerm] = useState('')
 
@@ -33,6 +32,11 @@ export const SearchArea = () => {
   }, 300)
 
   useEffect(() => {
+    if (!term) {
+      setSongs(null)
+      return
+    }
+
     async function fetchData() {
       const { results } = await getDataFromSearch({
         term,

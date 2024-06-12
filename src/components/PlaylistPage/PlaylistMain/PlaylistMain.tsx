@@ -1,5 +1,6 @@
 'use client'
 
+import { FavoriteSong } from "@/types/favorites";
 import { Playlist } from "@/types/playlist";
 import { PreviewPlaylist } from "@/types/previewPlaylist";
 import { ChangeEvent, useEffect, useState } from "react";
@@ -12,10 +13,11 @@ import { SongsTable } from "./SongsTable/SongsTable";
 interface PlaylistMainProps {
   playlist: Playlist;
   previewPlaylists: PreviewPlaylist[] | null;
+  favoriteSongs: FavoriteSong[] | null;
   isUserTheCreator: boolean;
 }
 
-export const PlaylistMain = ({ playlist, previewPlaylists, isUserTheCreator }: PlaylistMainProps) => {
+export const PlaylistMain = ({ playlist, previewPlaylists, favoriteSongs, isUserTheCreator }: PlaylistMainProps) => {
   const [search, setSearch] = useState('')
   
   useEffect(() => {
@@ -63,6 +65,7 @@ export const PlaylistMain = ({ playlist, previewPlaylists, isUserTheCreator }: P
       <SongsTable
         playlist={playlist}
         songs={filteredSongs}
+        favoriteSongs={favoriteSongs}
         previewPlaylists={previewPlaylists}
         isUserTheCreator={isUserTheCreator}
       />

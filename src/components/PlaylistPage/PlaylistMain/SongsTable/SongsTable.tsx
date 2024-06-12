@@ -3,15 +3,15 @@
 import {
   Table,
   TableBody,
-  TableHead,
   TableHeader,
   TableRow
 } from "@/components/ui/table";
+import { FavoriteSong } from "@/types/favorites";
 import { PlaylistSong } from "@/types/playlistSong";
 import { PreviewPlaylist } from "@/types/previewPlaylist";
 import { LuClock } from "react-icons/lu";
-import { SongsTableRow } from "./SongsTableRow";
 import { SongsTableHead } from "./SongsTableHead";
+import { SongsTableRow } from "./SongsTableRow";
 
 
 interface SongsTableProps {
@@ -21,11 +21,12 @@ interface SongsTableProps {
     userId: string;
   }
   songs: PlaylistSong[];
+  favoriteSongs: FavoriteSong[] | null;
   previewPlaylists: PreviewPlaylist[] | null;
   isUserTheCreator: boolean;
 }
 
-export const SongsTable = ({ playlist, songs, previewPlaylists, isUserTheCreator }: SongsTableProps) => {
+export const SongsTable = ({ playlist, songs, favoriteSongs, previewPlaylists, isUserTheCreator }: SongsTableProps) => {
   if (!songs?.length) {
     const url = new URL(window.location.toString());
     const searchParam = url.searchParams.get('search');
@@ -56,6 +57,9 @@ export const SongsTable = ({ playlist, songs, previewPlaylists, isUserTheCreator
             key={currentSong.id}
             i={i}
             currentSong={currentSong}
+            isFavorited={favoriteSongs?.some(
+              favoritedSong => favoritedSong.song.iTunesId === currentSong.song.iTunesId
+            ) || false}
             playlist={playlist}
             previewPlaylists={previewPlaylists}
             isUserTheCreator={isUserTheCreator}

@@ -1,4 +1,4 @@
-export type Song = {
+export type ITunesSong = {
   artistId: number;
   collectionId: number;
   trackId: number;
@@ -13,4 +13,23 @@ export type Song = {
   releaseDate: Date;
   trackTimeMillis: number;
   primaryGenreName: string;
+}
+
+export type DBSong = {
+  id: string;
+  iTunesId: number;
+  name: string;
+  portrait: string;
+  previewUrl: string;
+  durationInSeconds: number;
+  artist: {
+    id: string;
+    iTunesId: number;
+    name: string;
+  };
+  album: {
+    id: string;
+    iTunesId: number;
+    name: string;
+  }
 }
