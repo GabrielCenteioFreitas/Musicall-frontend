@@ -30,7 +30,7 @@ export const RemoveFromPlaylist = ({ playlist, songId }: RemoveFromPlaylistProps
     }
 
     try {
-      await fetch(
+      const response = await fetch(
         url(`/playlists/${playlist.id}/songs`),
         {
           method: 'DELETE',
@@ -40,7 +40,12 @@ export const RemoveFromPlaylist = ({ playlist, songId }: RemoveFromPlaylistProps
             Authorization: `Bearer ${token}`
           }
         }
-      ).then(() => {
+      )
+      const data = await response.json()
+
+      if (!data.removedSong) {
+        throw new Error()
+      } else {
         toast.success(
           (
             <div className="max-w-full relative">
@@ -55,7 +60,7 @@ export const RemoveFromPlaylist = ({ playlist, songId }: RemoveFromPlaylistProps
           }
         ) 
         router.refresh()
-      })
+      }
     } catch(error) {
       console.error(error)
       toast.error("Ocorreu um erro!")

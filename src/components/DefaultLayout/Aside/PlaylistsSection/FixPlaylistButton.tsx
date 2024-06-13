@@ -25,30 +25,40 @@ export const FixPlaylistButton = ({ playlist, className }: FixPlaylistButtonProp
       fixedAt: !playlist.isFixed ? new Date() : null,
     }
 
-    await fetch(
-      url(`/playlists/${playlist.id}`),
-      {
-        method: 'PUT',
-        body: JSON.stringify(requestBody),
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        }
-      }
-    ).then(() => {
-      router.refresh()
-
-      const toastText = playlist.isFixed
-        ? "Playlist desfixada com sucesso!"
-        : "Playlist fixada com sucesso!"
-
-      toast.success(
-        toastText,
+    try {
+      const response = await fetch(
+        url(`/playlists/${playlist.id}`),
         {
-          autoClose: 2500,
+          method: 'PUT',
+          body: JSON.stringify(requestBody),
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          }
         }
-      ) 
-    })
+      )
+      const data = await response.json()
+
+      if (!data.addedSong) {
+        throw new Error()
+      } else {
+        router.refresh()
+
+        const toastText = playlist.isFixed
+          ? "Playlist desfixada com sucesso!"
+          : "Playlist fixada com sucesso!"
+
+        toast.success(
+          toastText,
+          {
+            autoClose: 2500,
+          }
+        ) 
+      }
+    } catch (error) {
+      console.error(error)
+      toast.error('Ocorreu um erro!')
+    }
   }
 
   return (

@@ -69,7 +69,7 @@ export const AddToPlaylist = ({ song, className, size=20 }: AddToPlaylistProps) 
     };
 
     try {
-      await fetch(
+      const response = await fetch(
         url(`/playlists/${id}/songs`),
         {
           method: 'POST',
@@ -79,7 +79,12 @@ export const AddToPlaylist = ({ song, className, size=20 }: AddToPlaylistProps) 
             Authorization: `Bearer ${token}`
           }
         }
-      ).then(() => {
+      )
+      const data = await response.json()
+
+      if (!data.addedSong) {
+        throw new Error()
+      } else {
         toast.success(
           (
             <span>Música adicionada à playlist<br/>com sucesso!</span>
@@ -90,7 +95,7 @@ export const AddToPlaylist = ({ song, className, size=20 }: AddToPlaylistProps) 
         ) 
 
         router.refresh()
-      })
+      }
     } catch(error) {
       console.error(error)
       toast.error("Ocorreu um erro!")

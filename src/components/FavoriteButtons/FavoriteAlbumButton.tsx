@@ -78,7 +78,7 @@ export const FavoriteAlbumButton = ({ album, isFavorited, className, size=20 }: 
     };
 
     try {
-      await fetch(
+      const response = await fetch(
         url(`/favorites/album`),
         {
           method: 'POST',
@@ -88,7 +88,12 @@ export const FavoriteAlbumButton = ({ album, isFavorited, className, size=20 }: 
             Authorization: `Bearer ${token}`
           }
         }
-      ).then(() => {
+      )
+      const data = await response.json()
+
+      if (!data.favoritedAlbum) {
+        throw new Error()
+      } else {
         toast.success(
           (
             <span>
@@ -101,7 +106,7 @@ export const FavoriteAlbumButton = ({ album, isFavorited, className, size=20 }: 
         ) 
 
         router.refresh()
-      })
+      }
     } catch(error) {
       console.error(error)
       toast.error("Ocorreu um erro!")
@@ -124,7 +129,7 @@ export const FavoriteAlbumButton = ({ album, isFavorited, className, size=20 }: 
     }
 
     try {
-      await fetch(
+      const response = await fetch(
         url(`/favorites/album`),
         {
           method: 'DELETE',
@@ -134,7 +139,12 @@ export const FavoriteAlbumButton = ({ album, isFavorited, className, size=20 }: 
             Authorization: `Bearer ${token}`
           }
         }
-      ).then(() => {
+      )
+      const data = await response.json()
+
+      if (!data.unfavoritedAlbum) {
+        throw new Error()
+      } else {
         toast.success(
           (
             <span>
@@ -147,7 +157,7 @@ export const FavoriteAlbumButton = ({ album, isFavorited, className, size=20 }: 
         ) 
 
         router.refresh()
-      })
+      }
     } catch(error) {
       console.error(error)
       toast.error("Ocorreu um erro!")

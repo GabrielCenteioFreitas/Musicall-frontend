@@ -33,7 +33,7 @@ export const DeletePlaylistButton = ({ playlist }: DeletePlaylistButtonProps) =>
   const handleDeletePlaylistClick = async () => {
     setIsLoading(true)
     try {
-      await fetch(
+      const response = await fetch(
         url(`/playlists/${playlist.id}`),
         {
           method: 'DELETE',
@@ -41,7 +41,12 @@ export const DeletePlaylistButton = ({ playlist }: DeletePlaylistButtonProps) =>
             Authorization: `Bearer ${token}`
           }
         }
-      ).then(() => {
+      )
+      const data = await response.json()
+
+      if (!data.deletedPlaylist) {
+        throw new Error()
+      } else {
         toast.success(
           "Playlist deletada com sucesso!",
           {
@@ -51,7 +56,7 @@ export const DeletePlaylistButton = ({ playlist }: DeletePlaylistButtonProps) =>
 
         router.push('/')
         router.refresh()
-      })
+      }
     } catch(error) {
       console.error(error)
       toast.error("Ocorreu um erro!")

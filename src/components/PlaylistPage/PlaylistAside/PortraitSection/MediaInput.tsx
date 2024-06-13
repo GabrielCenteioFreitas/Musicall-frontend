@@ -9,6 +9,7 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
 import { IoCameraOutline } from "react-icons/io5";
+import { toast } from "react-toastify";
 
 interface MediaInputProps {
   playlist: {
@@ -37,23 +38,35 @@ export const MediaInput = ({ playlist, isUserTheCreator }: MediaInputProps) => {
       portrait: portraitURL,
     }
 
-    await fetch(
-      url(`/playlists/${playlist.id}`),
-      {
-        method: 'PUT',
-        body: JSON.stringify(requestBody),
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
+    try {
+      const response = await fetch(
+        url(`/playlists/${playlist.id}`),
+        {
+          method: 'PUT',
+          body: JSON.stringify(requestBody),
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          }
         }
-      }
-    ).then(() => {
-      router.refresh()
+      )
+      const data = await response.json()
 
-      setTimeout(() => {
-        setIsLoading(false)
-      }, 2500)
-    })
+      if (!data.playlist) {
+        throw new Error()
+      } else {
+        router.refresh()
+  
+        setTimeout(() => {
+          setIsLoading(false)
+        }, 2500)
+      }
+    } catch (error) {
+      console.error(error)
+      toast.error('Ocorreu um erro!')
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   if (!isUserTheCreator) {

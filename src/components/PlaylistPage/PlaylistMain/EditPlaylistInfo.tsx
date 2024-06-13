@@ -19,6 +19,7 @@ import { useRouter } from "next/navigation";
 import { url } from "@/lib/api";
 import Cookies from "js-cookie";
 import { LoadingIcon } from "@/components/LoadingIcon";
+import { toast } from "react-toastify";
 
 interface EditPlaylistInfoProps {
   playlist: {
@@ -57,23 +58,34 @@ export const EditPlaylistInfo = ({ playlist }: EditPlaylistInfoProps) => {
     }
 
     setIsLoading(true)
-    await fetch(
-      url(`/playlists/${playlist.id}`),
-      {
-        method: 'PUT',
-        body: JSON.stringify(requestBody),
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
+    try {
+      const response = await fetch(
+        url(`/playlists/${playlist.id}`),
+        {
+          method: 'PUT',
+          body: JSON.stringify(requestBody),
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          }
         }
+      )
+      const data = await response.json()
+
+      if (!data.playlist) {
+        throw new Error()
+      } else {
+        router.refresh()
       }
-    ).then(() => {
+    } catch (error) {
+      console.error(error)
+      toast.error('Ocorreu um erro!')
+    } finally {
       setIsLoading(false)
       setIsOpen(false)
       setError(false)
       setName(name?.toString().trim() || '')
-      router.refresh()
-    })
+    }
   }
 
   return (

@@ -92,7 +92,7 @@ export const AddToPlaylist = ({ previewPlaylists, song, className, size=20 }: Ad
     };
 
     try {
-      await fetch(
+      const response = await fetch(
         url(`/playlists/${previewPlaylist?.id}/songs`),
         {
           method: 'POST',
@@ -102,7 +102,12 @@ export const AddToPlaylist = ({ previewPlaylists, song, className, size=20 }: Ad
             Authorization: `Bearer ${token}`
           }
         }
-      ).then(() => {
+      )
+      const data = await response.json()
+
+      if (!data.addedSong) {
+        throw new Error()
+      } else {
         toast.success(
           (
             <div className="max-w-full relative">
@@ -118,7 +123,7 @@ export const AddToPlaylist = ({ previewPlaylists, song, className, size=20 }: Ad
         ) 
 
         router.refresh()
-      })
+      }
     } catch(error) {
       console.error(error)
       toast.error("Ocorreu um erro!")
