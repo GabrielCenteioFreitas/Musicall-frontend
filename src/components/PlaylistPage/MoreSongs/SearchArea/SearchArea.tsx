@@ -29,7 +29,7 @@ export const SearchArea = () => {
       limit: 50,
     })
     setSongs(results)
-  }, 300)
+  }, 500)
 
   useEffect(() => {
     if (!term) {
