@@ -34,7 +34,7 @@ export const getDataFromSearch = cache(async ({
       {
         method: 'GET',
         headers: {
-          'Access-Control-Allow-Origin': originUrl
+          'Origin': originUrl
         }
       }
     )
@@ -74,7 +74,7 @@ export const getDataFromLookup = cache(async ({
       {
         method: 'GET',
         headers: {
-          'Access-Control-Allow-Origin': originUrl
+          'Origin': originUrl
         }
       }
       )
