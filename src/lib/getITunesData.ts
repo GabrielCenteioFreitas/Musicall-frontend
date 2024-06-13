@@ -1,17 +1,15 @@
 import { cache } from "react";
 
 const url = (path: string) => {
-  const baseURL = 'https://itunes.apple.com'
+  const baseURL =
+    process.env.NODE_ENV === 'production'
+      ? 'https://musicall-project.vercel.app'
+      : 'http://localhost:3000'
 
   return path.startsWith('/')
     ? baseURL.concat(path)
     : baseURL.concat('/', path)
 }
-
-const originUrl = 
-  process.env.NODE_ENV === 'production'
-    ? 'https://musicall-project.vercel.app'
-    : 'http://localhost:3000'
 
 interface getDataFromSearchParams {
   term: string;
@@ -30,12 +28,9 @@ export const getDataFromSearch = cache(async ({
   
   try {
     const response = await fetch(
-      url(`/search?${params}`),
+      url(`/api/itunes/search?${params}`),
       {
         method: 'GET',
-        headers: {
-          'Origin': originUrl
-        }
       }
     )
     const data = await response.json()
@@ -60,7 +55,7 @@ export const getDataFromLookup = cache(async ({
   entity,
   limit 
 }: getDataFromLookupParams): Promise<any | null> => {
-  
+
   const params = new URLSearchParams({
     id: id?.toString() || '',
     amgArtistId: amgArtistId?.toString() || '',
@@ -70,14 +65,11 @@ export const getDataFromLookup = cache(async ({
     
   try {
     const response = await fetch(
-      url(`/lookup?${params}`),
+      url(`/api/itunes/lookup?${params}`),
       {
         method: 'GET',
-        headers: {
-          'Origin': originUrl
-        }
       }
-      )
+    )
     const data = await response.json()
   
     return data
