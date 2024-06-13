@@ -1,12 +1,17 @@
 import { cache } from "react";
 
 const url = (path: string) => {
-  const baseURL = 'https://cors-anywhere.herokuapp.com/https://itunes.apple.com'
+  const baseURL = 'https://itunes.apple.com'
 
   return path.startsWith('/')
     ? baseURL.concat(path)
     : baseURL.concat('/', path)
 }
+
+const originUrl = 
+  process.env.NODE_ENV === 'production'
+    ? 'https://musicall-project.vercel.app'
+    : 'http://localhost:3000'
 
 interface getDataFromSearchParams {
   term: string;
@@ -16,7 +21,7 @@ interface getDataFromSearchParams {
 export const getDataFromSearch = cache(async ({
   term, entity, limit
 }: getDataFromSearchParams): Promise<any | null> => {
-  
+
   const params = new URLSearchParams({
     term,
     entity,
@@ -28,9 +33,8 @@ export const getDataFromSearch = cache(async ({
       url(`/search?${params}`),
       {
         method: 'GET',
-        mode: 'no-cors',
         headers: {
-          'Access-Control-Allow-Origin': '*'
+          'Access-Control-Allow-Origin': originUrl
         }
       }
     )
@@ -69,9 +73,8 @@ export const getDataFromLookup = cache(async ({
       url(`/lookup?${params}`),
       {
         method: 'GET',
-        mode: 'no-cors',
         headers: {
-          'Access-Control-Allow-Origin': '*'
+          'Access-Control-Allow-Origin': originUrl
         }
       }
       )
