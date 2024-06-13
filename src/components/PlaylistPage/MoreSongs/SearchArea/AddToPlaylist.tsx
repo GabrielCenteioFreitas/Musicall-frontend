@@ -4,7 +4,7 @@ import { url } from "@/lib/api";
 import { getDataFromLookup } from "@/lib/getITunesData";
 import { cn } from "@/lib/utils";
 import { ITunesAlbum } from "@/types/album";
-import { Artist } from "@/types/artist";
+import { ITunesArtist } from "@/types/artist";
 import { ITunesSong } from "@/types/song";
 import Cookies from "js-cookie";
 import { useRouter, useParams } from "next/navigation";
@@ -37,7 +37,7 @@ export const AddToPlaylist = ({ song, className, size=20 }: AddToPlaylistProps) 
     const { results: songResults } = await getDataFromLookup({ id: trackId })
     const songData: ITunesSong = songResults[0]
     const { results: artistResults } = await getDataFromLookup({ id: artistId })
-    const artistData: Artist = artistResults[0]
+    const artistData: ITunesArtist = artistResults[0]
     const { results: albumResults } = await getDataFromLookup({ id: collectionId })
     const albumData: ITunesAlbum = albumResults[0]
 

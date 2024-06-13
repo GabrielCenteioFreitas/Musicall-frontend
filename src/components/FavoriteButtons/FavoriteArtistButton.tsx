@@ -13,55 +13,66 @@ import { toast } from "react-toastify";
 import { loginURL } from "../DefaultLayout/Header/SignIn";
 import { LoadingIcon } from "../LoadingIcon";
 import { Button } from "../ui/button";
+import { ITunesArtist } from "@/types/artist";
 
-interface FavoriteAlbumButtonProps {
-  album: {
-    collectionId: number;
+interface FavoriteArtistButtonProps {
+  artist: {
+    artistId: number;
   }
   isFavorited: boolean;
   className?: string;
   size?: number;
 }
 
-export const FavoriteAlbumButton = ({ album, isFavorited, className, size=20 }: FavoriteAlbumButtonProps) => {
+export const FavoriteArtistButton = ({ artist, isFavorited, className, size=20 }: FavoriteArtistButtonProps) => {
   const router = useRouter()
   const token = Cookies.get('token')
   const [isLoading, setIsLoading] = useState(false)
 
-  const handleFavoriteAlbumClick = async () => {
+  const handleFavoriteArtistClick = async () => {
     if (!token) {
       router.push(loginURL)
       return
     }
     setIsLoading(true)
 
-    const { collectionId } = album
+    const { artistId } = artist
     
-    const { results: albumResults } = await getDataFromLookup({
-      id: collectionId
+    const { results: artistResults } = await getDataFromLookup({
+      id: artistId
     })
-    const { results: songResults, resultCount } = await getDataFromLookup({
-      id: collectionId,
+    const artistData: ITunesArtist = artistResults[0]
+
+    const { results: albumResults, resultCount: albumCount } = await getDataFromLookup({
+      amgArtistId: artistData.amgArtistId,
+      entity: 'album',
+      limit: 201,
+    })
+    const albumData: ITunesAlbum[] = albumResults.slice(1, albumCount)
+
+    const { results: songResults, resultCount: songCount } = await getDataFromLookup({
+      amgArtistId: artistData.amgArtistId,
       entity: 'song',
       limit: 201,
-      })
-    const albumData: ITunesAlbum = albumResults[0]
-    const songData: ITunesSong[] = songResults.slice(1, resultCount)
+    })
+    const songData: ITunesSong[] = songResults.slice(1, songCount)
 
     const requestBody = {
-      albumToBeFavorited: {
-        name: albumData.collectionName,
-        portrait: albumData.artworkUrl100,
-        iTunesId: albumData.collectionId,
-        iTunesViewUrl: albumData.collectionViewUrl,
-        releaseDate: albumData.releaseDate,
-        genre: albumData.primaryGenreName,
-        artist: {
-          name: albumData.artistName,
-          iTunesId: albumData.artistId,
-          iTunesViewUrl: albumData.artistViewUrl,
-          genre: albumData.primaryGenreName,
-        },
+      artistToBeFavorited: {
+        name: artistData.artistName,
+        iTunesId: artistData.artistId,
+        iTunesViewUrl: artistData.artistLinkUrl,
+        genre: artistData.primaryGenreName,
+        albums: albumData.map((album) => {
+          return {
+            name: album.collectionName,
+            portrait: album.artworkUrl100,
+            iTunesId: album.collectionId,
+            iTunesViewUrl: album.collectionViewUrl,
+            releaseDate: album.releaseDate,
+            genre: album.primaryGenreName,
+          }
+        }),
         songs: songData.map((song) => {
           return {
             name: song.trackName,
@@ -72,14 +83,22 @@ export const FavoriteAlbumButton = ({ album, isFavorited, className, size=20 }: 
             releaseDate: song.releaseDate,
             durationInSeconds: song.trackTimeMillis / 1000,
             genre: song.primaryGenreName,
+            album: {
+              name: song.collectionName,
+              portrait: song.artworkUrl100,
+              iTunesId: song.collectionId,
+              iTunesViewUrl: song.collectionViewUrl,
+              releaseDate: song.releaseDate,
+              genre: song.primaryGenreName,
+            },
           }
         })
       }
     };
 
     try {
-      await fetch(
-        url(`/favorites/album`),
+      const response = await fetch(
+        url(`/favorites/artist`),
         {
           method: 'POST',
           body: JSON.stringify(requestBody),
@@ -88,11 +107,16 @@ export const FavoriteAlbumButton = ({ album, isFavorited, className, size=20 }: 
             Authorization: `Bearer ${token}`
           }
         }
-      ).then(() => {
+      )
+      const data = await response.json()
+
+      if (!data.favoritedArtist) {
+        throw new Error()
+      } else {
         toast.success(
           (
             <span>
-              Álbum adicionado aos favoritos<br/>com sucesso!
+              Artista adicionado aos favoritos<br/>com sucesso!
             </span>
           ),
           {
@@ -101,7 +125,7 @@ export const FavoriteAlbumButton = ({ album, isFavorited, className, size=20 }: 
         ) 
 
         router.refresh()
-      })
+      }
     } catch(error) {
       console.error(error)
       toast.error("Ocorreu um erro!")
@@ -110,7 +134,7 @@ export const FavoriteAlbumButton = ({ album, isFavorited, className, size=20 }: 
     }
   }
 
-  const handleUnfavoriteAlbumClick = async () => {
+  const handleUnfavoriteArtistClick = async () => {
     if (!token) {
       router.push(loginURL)
       return
@@ -118,14 +142,14 @@ export const FavoriteAlbumButton = ({ album, isFavorited, className, size=20 }: 
     setIsLoading(true)
 
     const requestBody = {
-      albumToBeUnfavorited: {
-        iTunesId: album.collectionId,
+      artistToBeUnfavorited: {
+        iTunesId: artist.artistId,
       }
     }
 
     try {
-      await fetch(
-        url(`/favorites/album`),
+      const response = await fetch(
+        url(`/favorites/artist`),
         {
           method: 'DELETE',
           body: JSON.stringify(requestBody),
@@ -134,11 +158,13 @@ export const FavoriteAlbumButton = ({ album, isFavorited, className, size=20 }: 
             Authorization: `Bearer ${token}`
           }
         }
-      ).then(() => {
+      )
+
+      if (response) {
         toast.success(
           (
             <span>
-              Álbum removido dos favoritos<br/>com sucesso!
+              Artista removido dos favoritos<br/>com sucesso!
             </span>
           ),
           {
@@ -147,7 +173,7 @@ export const FavoriteAlbumButton = ({ album, isFavorited, className, size=20 }: 
         ) 
 
         router.refresh()
-      })
+      }
     } catch(error) {
       console.error(error)
       toast.error("Ocorreu um erro!")
@@ -158,9 +184,9 @@ export const FavoriteAlbumButton = ({ album, isFavorited, className, size=20 }: 
 
   const handleClick = async () => {
     if (isFavorited) {
-      await handleUnfavoriteAlbumClick()
+      await handleUnfavoriteArtistClick()
     } else {
-      await handleFavoriteAlbumClick()
+      await handleFavoriteArtistClick()
     }
   }
 

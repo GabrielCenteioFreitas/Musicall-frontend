@@ -1,3 +1,6 @@
+import { DBAlbum } from "./album";
+import { DBArtist } from "./artist";
+
 export type ITunesSong = {
   artistId: number;
   collectionId: number;
@@ -22,14 +25,6 @@ export type DBSong = {
   portrait: string;
   previewUrl: string;
   durationInSeconds: number;
-  artist: {
-    id: string;
-    iTunesId: number;
-    name: string;
-  };
-  album: {
-    id: string;
-    iTunesId: number;
-    name: string;
-  }
+  artist: DBArtist;
+  album: DBAlbum;
 }

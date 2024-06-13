@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import { loginURL } from "../DefaultLayout/Header/SignIn";
 import { getDataFromLookup } from "@/lib/getITunesData";
 import { ITunesSong } from "@/types/song";
-import { Artist } from "@/types/artist";
+import { ITunesArtist } from "@/types/artist";
 import { ITunesAlbum } from "@/types/album";
 import { url } from "@/lib/api";
 import { toast } from "react-toastify";
@@ -43,7 +43,7 @@ export const FavoriteSongButton = ({ song, isFavorited, className, size=20 }: Fa
     const { results: songResults } = await getDataFromLookup({ id: trackId })
     const songData: ITunesSong = songResults[0]
     const { results: artistResults } = await getDataFromLookup({ id: artistId })
-    const artistData: Artist = artistResults[0]
+    const artistData: ITunesArtist = artistResults[0]
     const { results: albumResults } = await getDataFromLookup({ id: collectionId })
     const albumData: ITunesAlbum = albumResults[0]
 

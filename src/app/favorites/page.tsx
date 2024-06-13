@@ -32,6 +32,15 @@ const FavoritesPage = async () => {
       )}
 
       <Divider className="my-4" />
+
+      <h1 className="text-2xl font-semibold">Artistas</h1>
+      {favorites?.favoriteArtists.map((favoritedArtist) =>
+        <span key={favoritedArtist.artist.iTunesId}>
+          {favoritedArtist.artist.name}
+        </span>
+      )}
+
+      <Divider className="my-4" />
     </div>
   );
 }
