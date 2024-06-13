@@ -18,7 +18,7 @@ export const SearchInput = () => {
     const formData = new FormData(e.currentTarget)
     const term = formData.get('term')
 
-    if (!term || term === 'b') {
+    if (!term) {
       router.push('/')
       return
     }

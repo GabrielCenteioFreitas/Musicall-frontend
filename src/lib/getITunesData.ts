@@ -38,7 +38,10 @@ export const getDataFromSearch = cache(async ({
     return data
   } catch (error) {
     console.error(error)
-    return null
+    return {
+      resultCount: 0,
+      results: []
+    }
   }
 })
 
@@ -75,6 +78,9 @@ export const getDataFromLookup = cache(async ({
     return data
   } catch (error) {
     console.error(error)
-    return null
+    return {
+      resultCount: 0,
+      results: []
+    }
   }
 })
