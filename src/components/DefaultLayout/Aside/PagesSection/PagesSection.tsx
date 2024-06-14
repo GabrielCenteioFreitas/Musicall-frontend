@@ -1,17 +1,17 @@
 'use client'
 
-import { GoHomeFill, GoHome } from "react-icons/go";
-import { MdLibraryMusic, MdOutlineLibraryMusic } from "react-icons/md";
-import { VscHeartFilled, VscHeart } from "react-icons/vsc";
-import { PageItem } from "./PageItem";
 import { usePathname } from "next/navigation";
+import { GoHome, GoHomeFill } from "react-icons/go";
+import { MdLibraryMusic, MdOutlineLibraryMusic } from "react-icons/md";
+import { VscHeart, VscHeartFilled } from "react-icons/vsc";
+import { PageItem } from "./PageItem";
 
 export const PagesSection = () => {
   const pathname = usePathname();
   
   return (
     <nav>
-      <ul className="text-md flex flex-col gap-3 font-medium">
+      <ul className="text-md flex flex-col gap-3 font-medium #000000">
         <PageItem
           name="Home"
           href="/"

@@ -1,9 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import Cookies from "js-cookie";
 import Link from "next/link";
 import { ReactNode, memo } from "react";
-import { loginURL } from "../../Header/SignIn";
 
 interface PageItemProps {
   name: string;
@@ -14,8 +12,6 @@ interface PageItemProps {
 }
 
 const PageItemComponent = ({ name, href, active=false, className, children }: PageItemProps) => {
-  const token = Cookies.get('token')
-
   return (
     <li className="w-full">
       <Button
@@ -28,7 +24,7 @@ const PageItemComponent = ({ name, href, active=false, className, children }: Pa
         title={name}
         asChild
       >
-        <Link href={token ? href : loginURL}>
+        <Link href={href}>
           {children}
           {name}
         </Link>
