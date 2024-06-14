@@ -174,7 +174,10 @@ export const FavoriteSongButton = ({ song, isFavorited, className, size=20 }: Fa
   return (
     <Button
       variant="none"
-      className={cn("size-fit p-0 text-gray-400", className)}
+      size="icon"
+      className={cn(`
+        text-gray-400 p-1.5 rounded-full hover:scale-110 hover:text-gray-50 transition-all
+      `, className, isLoading && "!top-5 !opacity-100")}
       disabled={isLoading}
       onClick={handleClick}
     >
@@ -184,13 +187,11 @@ export const FavoriteSongButton = ({ song, isFavorited, className, size=20 }: Fa
             <VscHeartFilled 
               size={size}
               title="Remover dos favoritos"
-              className="hover:scale-110 transition-all"
             />
           ) : (
             <VscHeart 
               size={size}
               title="Adicionar aos favoritos"
-              className="hover:scale-110 transition-all"
             />
           )}
         </>

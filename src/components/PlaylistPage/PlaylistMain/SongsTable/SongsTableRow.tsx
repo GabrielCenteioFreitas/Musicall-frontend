@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { AddToPlaylist } from "@/components/AddToPlaylist";
-import { FavoriteSongButton } from "@/components/FavoriteButtons/FavoriteSongButton";
+import { SmallFavoriteSongButton } from "@/components/FavoriteButtons/SmallFavoriteSongButton";
 import { PreviewPlaylist } from "@/types/previewPlaylist";
 import dayjs from 'dayjs';
 import ptBr from 'dayjs/locale/pt-br';
@@ -87,7 +87,7 @@ const SongsTableRowComponent = ({
             className="text-zinc-400"
           />
 
-          <FavoriteSongButton
+          <SmallFavoriteSongButton
             isFavorited={isFavorited}
             song={{
               trackId: currentSong.song.iTunesId,

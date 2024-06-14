@@ -1,5 +1,12 @@
+import { AlbumCard } from "@/components/AlbumCard";
+import { ArtistCard } from "@/components/ArtistCard";
 import { loginURL } from "@/components/DefaultLayout/Header/SignIn";
-import { Divider } from "@/components/Divider";
+import { AlbumsSection } from "@/components/Favorites/AlbumsSection";
+import { ArtistsSection } from "@/components/Favorites/ArtistsSection";
+import { SongsSection } from "@/components/Favorites/SongsSection";
+import { SectionsContainer } from "@/components/SectionsContainer";
+import { SectionsTitle } from "@/components/SectionsTitle";
+import { SongCard } from "@/components/SongCard";
 import { getFavorites } from "@/lib/getFavoritesData";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -14,33 +21,12 @@ const FavoritesPage = async () => {
   const favorites = await getFavorites(token)
 
   return (
-    <div className="flex flex-col gap-2">
-      <h1 className="text-2xl font-semibold">Songs</h1>
-      {favorites?.favoriteSongs.map((favoritedSong) =>
-        <span key={favoritedSong.song.iTunesId}>
-          {favoritedSong.song.artist.name} - {favoritedSong.song.name}
-        </span>
-      )}
+    <div className="space-y-5 p-5 pb-20">
+      <SongsSection favoriteSongs={favorites?.favoriteSongs} />
 
-      <Divider className="my-4" />
+      <AlbumsSection favoriteAlbums={favorites?.favoriteAlbums} />
 
-      <h1 className="text-2xl font-semibold">Álbuns</h1>
-      {favorites?.favoriteAlbums.map((favoritedAlbum) =>
-        <span key={favoritedAlbum.album.iTunesId}>
-          {favoritedAlbum.album.artist.name} - {favoritedAlbum.album.name}
-        </span>
-      )}
-
-      <Divider className="my-4" />
-
-      <h1 className="text-2xl font-semibold">Artistas</h1>
-      {favorites?.favoriteArtists.map((favoritedArtist) =>
-        <span key={favoritedArtist.artist.iTunesId}>
-          {favoritedArtist.artist.name}
-        </span>
-      )}
-
-      <Divider className="my-4" />
+      <ArtistsSection favoriteArtists={favorites?.favoriteArtists} />
     </div>
   );
 }

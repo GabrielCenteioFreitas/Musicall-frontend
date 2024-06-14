@@ -1,5 +1,5 @@
 import { AddToPlaylist } from "@/components/AddToPlaylist";
-import { FavoriteSongButton } from "@/components/FavoriteButtons/FavoriteSongButton";
+import { SmallFavoriteSongButton } from "@/components/FavoriteButtons/SmallFavoriteSongButton";
 import { Button } from "@/components/ui/button";
 import { PreviewPlaylist } from "@/types/previewPlaylist";
 import { ITunesSong } from "@/types/song";
@@ -60,7 +60,7 @@ const SongCardComponent = ({ previewPlaylists, song, isFavorited }: SongCardProp
         <div className="flex gap-2.5 items-center">
           <AddToPlaylist previewPlaylists={previewPlaylists} song={song} />
           
-          <FavoriteSongButton song={song} isFavorited={isFavorited} className="text-gray-300" />
+          <SmallFavoriteSongButton song={song} isFavorited={isFavorited} className="text-gray-300" />
         </div>
 
         <time className="font-medium text-sm text-zinc-600 ml-3">

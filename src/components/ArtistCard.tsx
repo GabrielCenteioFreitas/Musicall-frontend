@@ -1,9 +1,9 @@
-import { ITunesArtist } from "@/types/artist";
-import { Button } from "../../ui/button";
-import { getInitialLetters } from "@/utils/getInitalLetters";
-import { memo } from "react";
 import { FavoriteArtistButton } from "@/components/FavoriteButtons/FavoriteArtistButton";
 import { cn } from "@/lib/utils";
+import { ITunesArtist } from "@/types/artist";
+import { getInitialLetters } from "@/utils/getInitalLetters";
+import { memo } from "react";
+import { Button } from "./ui/button";
 
 interface ArtistCardProps {
   artist: Pick<ITunesArtist,

@@ -3,10 +3,10 @@ import { SectionsContainer } from "@/components/SectionsContainer";
 import { SectionsTitle } from "@/components/SectionsTitle";
 import { getDataFromSearch } from "@/lib/getITunesData";
 
-import { ITunesAlbum } from "@/types/album";
-import { AlbumCard } from "../Cards/AlbumCard";
-import { cookies } from "next/headers";
 import { getFavorites } from "@/lib/getFavoritesData";
+import { ITunesAlbum } from "@/types/album";
+import { cookies } from "next/headers";
+import { AlbumCard } from "../../AlbumCard";
 
 interface AlbumsSectionProps {
   term: string;

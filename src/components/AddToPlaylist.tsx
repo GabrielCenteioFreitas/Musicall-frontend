@@ -21,7 +21,6 @@ import { MouseEvent, useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import { LuPlusCircle } from "react-icons/lu";
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { loginURL } from "./DefaultLayout/Header/SignIn";
 import { LoadingIcon } from "./LoadingIcon";
 

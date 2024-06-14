@@ -1,6 +1,6 @@
 import { SectionsContainer } from "../../SectionsContainer";
 import { SectionsTitle } from "../../SectionsTitle";
-import { SongCard } from "../Cards/SongCard";
+import { FakeSongCard } from "../Cards/FakeSongCard";
 import { SectionsItemsContainer } from "../SectionsItemsContainer";
 
 interface RecentSongsSectionProps {
@@ -8,14 +8,6 @@ interface RecentSongsSectionProps {
 }
 
 export const RecentSongsSection = ({ className, ...rest }: RecentSongsSectionProps) => {
-  const recentSongs = Array.from({ length: 15 }).map((_, i) => {
-    return {
-      id: i,
-      name: `Música ${i+1}`,
-      artists: 'Gabriel Centeio Freitas, Gabriel Centeio Freitas e Gabriel Centeio Freitas'
-    }
-  }) // temporário
-
   return (
     <SectionsContainer className={className} {...rest}>
       <SectionsTitle
@@ -24,11 +16,8 @@ export const RecentSongsSection = ({ className, ...rest }: RecentSongsSectionPro
       />
 
       <SectionsItemsContainer>
-        {recentSongs.map(song => 
-          <SongCard
-            key={song.id}
-            song={song}
-          />
+        {Array.from({ length: 12 }).map((_, i) => 
+          <FakeSongCard key={i} i={i+1} className="w-52" />
         )}
       </SectionsItemsContainer>
     </SectionsContainer>
