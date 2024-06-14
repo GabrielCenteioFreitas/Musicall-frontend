@@ -36,7 +36,10 @@ const PlaylistItemComponent = ({ playlist }: PlaylistItemProps) => {
         </Link>
       </Button>
       
-      <FixPlaylistButton playlist={playlist} className="absolute top-3 right-2" />
+      <FixPlaylistButton
+        playlist={playlist}
+        className="absolute top-3 right-2 !bg-transparent !p-0"
+      />
     </li>
   );
 }

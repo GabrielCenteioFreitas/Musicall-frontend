@@ -39,7 +39,7 @@ export const FixPlaylistButton = ({ playlist, className }: FixPlaylistButtonProp
       )
       const data = await response.json()
 
-      if (!data.addedSong) {
+      if (!data.playlist) {
         throw new Error()
       } else {
         router.refresh()
@@ -65,7 +65,7 @@ export const FixPlaylistButton = ({ playlist, className }: FixPlaylistButtonProp
     <button
       className={cn(`
         hover:scale-110 group-hover:opacity-100 transition-all`,
-        playlist.isFixed ? "opacity-100" : "opacity-0",
+        playlist.isFixed ? "opacity-100" : "opacity-0 p-1 bg-black rounded-full",
         className
       )}
       onClick={handleFixPlaylistClick}

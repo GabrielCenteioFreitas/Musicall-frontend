@@ -10,7 +10,7 @@ export const SectionsItemsContainer = ({ children, className, ...rest }: Section
   return (
     <div
       className={cn(
-        "-ml-3 flex items-start overflow-x-scroll no-scrollbar",
+        "grid grid-cols-7 -ml-3",
         className
       )}
       {...rest}

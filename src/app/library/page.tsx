@@ -1,3 +1,4 @@
+import { SectionsItemsContainer } from "@/components/Home/SectionsItemsContainer";
 import { PlaylistCard } from "@/components/PlaylistCard";
 import { SectionsTitle } from "@/components/SectionsTitle";
 import { getPreviewPlaylists } from "@/lib/getPlaylistsData";
@@ -12,11 +13,11 @@ const Library = async () => {
       <SectionsTitle title="Biblioteca" dividerMargins="my-2" />
 
       {previewPlaylists && previewPlaylists.length > 0 ? (
-        <div className="grid grid-cols-7 -ml-3">
+        <SectionsItemsContainer>
           {previewPlaylists?.map((previewPlaylist) => 
             <PlaylistCard key={previewPlaylist.id} playlist={previewPlaylist} />
           )}
-        </div>
+        </SectionsItemsContainer>
       ) : (
         <p>Você não possui nenhuma playlist.</p>
       )}

@@ -26,6 +26,7 @@ export const PlaylistPortrait = ({ playlist, size=50, className, iconClassName }
         alt={playlist.name}
         width={size}
         height={size}
+        priority
       />
     )
   }

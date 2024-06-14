@@ -16,8 +16,8 @@ export const RecentSongsSection = ({ className, ...rest }: RecentSongsSectionPro
       />
 
       <SectionsItemsContainer>
-        {Array.from({ length: 12 }).map((_, i) => 
-          <FakeSongCard key={i} i={i+1} className="w-52" />
+        {Array.from({ length: 7 }).map((_, i) => 
+          <FakeSongCard key={i} i={i+1} />
         )}
       </SectionsItemsContainer>
     </SectionsContainer>

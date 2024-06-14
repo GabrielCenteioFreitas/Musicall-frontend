@@ -16,7 +16,7 @@ const PlaylistCardComponent = ({ playlist, className }: PlaylistCardProps) => {
     <div className="group relative">
       <Button
         variant="ghost"
-        className={cn("w-52 h-fit p-3 flex flex-col gap-3 shrink-0 rounded-md transition-colors", className)}
+        className={cn("h-fit p-3 flex flex-col gap-3 shrink-0 rounded-md transition-colors", className)}
         asChild
       >
         <Link href={`/playlists/${playlist.id}`}>
@@ -24,7 +24,7 @@ const PlaylistCardComponent = ({ playlist, className }: PlaylistCardProps) => {
             playlist={playlist}
             iconClassName="size-32"
             className="rounded-md overflow-hidden"
-            size={180}
+            size={200}
           />
 
           <div className="flex flex-col gap-2.5 self-start text-left max-w-full">
@@ -43,7 +43,10 @@ const PlaylistCardComponent = ({ playlist, className }: PlaylistCardProps) => {
         </Link>
       </Button>
 
-      <FixPlaylistButton className="absolute top-5 right-5" playlist={playlist} />
+      <FixPlaylistButton
+        className={cn("absolute", playlist.isFixed ? "top-5 right-5" : "top-4 right-4")}
+        playlist={playlist}
+      />
     </div>
   );
 }
