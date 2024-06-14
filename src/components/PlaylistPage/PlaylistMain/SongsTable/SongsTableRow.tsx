@@ -63,8 +63,10 @@ const SongsTableRowComponent = ({
         </Link>
       </TableCell>
 
-      <TableCell className="text-sm text-zinc-400 truncate ... overflow-hidden" title={currentSong.song.album.name}>
-        {currentSong.song.album.name}
+      <TableCell className="text-sm text-zinc-400 truncate ... overflow-hidden hover:underline" title={currentSong.song.album.name}>
+        <Link href={`/albums/${currentSong.song.album.iTunesId}`}>
+          {currentSong.song.album.name}
+        </Link>
       </TableCell>
 
       <TableCell className="text-sm text-zinc-400">
@@ -109,5 +111,5 @@ const SongsTableRowComponent = ({
 }
 
 export const SongsTableRow = memo(SongsTableRowComponent, (prevProps, nextProps) => {
-  return Object.is(prevProps.currentSong, nextProps.currentSong)
+  return Object.is(prevProps.currentSong, nextProps.currentSong) && prevProps.i === nextProps.i
 })

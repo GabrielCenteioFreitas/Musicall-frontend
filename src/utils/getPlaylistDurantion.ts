@@ -1,9 +1,9 @@
-export function getPlaylistDuration(duration: number) {
+export function getTotalDuration(duration: number) {
   const hours = Math.floor(duration / 3600)
   const minutes = Math.floor((duration % 3600) / 60)
   const seconds = duration - (hours*3600 + minutes*60)
   
-  const playlistDuration = ''.concat(
+  const totalDuration = ''.concat(
     hours > 0
       ? `
         ${hours}h
@@ -26,5 +26,5 @@ export function getPlaylistDuration(duration: number) {
           : `${seconds}s`
   )
 
-  return playlistDuration
+  return totalDuration
 }

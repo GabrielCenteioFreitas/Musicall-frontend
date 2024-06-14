@@ -1,5 +1,5 @@
 import { Playlist } from "@/types/playlist";
-import { getPlaylistDuration } from "@/utils/getPlaylistDurantion";
+import { getTotalDuration } from "@/utils/getPlaylistDurantion";
 import Image from "next/image";
 
 interface PlaylistInfoProps {
@@ -47,11 +47,10 @@ export const PlaylistInfo = ({ playlist }: PlaylistInfoProps) => {
             </span>
             •
             <span>
-              {getPlaylistDuration(Math.floor(playlistDurationInSeconds))}
+              {getTotalDuration(Math.floor(playlistDurationInSeconds))}
             </span>
           </>
         )}
-        <div></div>
       </div>
     </div>
   );

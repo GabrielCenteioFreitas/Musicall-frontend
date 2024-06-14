@@ -1,6 +1,6 @@
 import { ChangeEvent } from "react";
 import { IoSearch } from "react-icons/io5";
-import { Button } from "../../ui/button";
+import { Button } from "./ui/button";
 
 interface SearchInputProps {
   search: string;
@@ -9,9 +9,7 @@ interface SearchInputProps {
 
 export const SearchInput = ({ search, handleSearch }: SearchInputProps) => {
   return (
-    <div
-      className="flex gap-1 items-center max-w-50 group"
-    >
+    <div className="flex gap-1 items-center max-w-50 group">
       <input
         type="text"
         value={search}

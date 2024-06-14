@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ITunesAlbum } from "@/types/album";
 import Image from "next/image";
+import Link from "next/link";
 import { memo } from "react";
 
 interface AlbumCardProps {
@@ -24,7 +25,7 @@ const AlbumCardComponent = ({ album, isFavorited }: AlbumCardProps) => {
         className="h-fit p-3 flex flex-col gap-3 shrink-0 rounded-md transition-colors"
         asChild
       >
-        <a href={album.collectionViewUrl} target="_blank">
+        <Link href={`/albums/${album.collectionId}`}>
           <Image
             className="size-full rounded-md"
             src={album.artworkUrl100}
@@ -41,7 +42,7 @@ const AlbumCardComponent = ({ album, isFavorited }: AlbumCardProps) => {
               De {album.artistName}
             </span>
           </div>
-        </a>
+        </Link>
       </Button>
 
       <FavoriteAlbumButton

@@ -11,7 +11,7 @@ export const PortraitAsideSection = ({ playlist, isUserTheCreator }: PortraitAsi
   return (
     <div className="relative w-full aspect-square border-2 border-neutral-800 rounded-xl overflow-hidden group">
       <PlaylistPortrait
-        className="size-full"
+        className="w-full aspect-square"
         iconClassName="size-44"
         playlist={playlist}
         size={320}

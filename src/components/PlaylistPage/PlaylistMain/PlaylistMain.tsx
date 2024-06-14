@@ -4,10 +4,10 @@ import { FavoriteSong } from "@/types/favorites";
 import { Playlist } from "@/types/playlist";
 import { PreviewPlaylist } from "@/types/previewPlaylist";
 import { ChangeEvent, useEffect, useState } from "react";
+import { SearchInput } from "../../SearchInput";
 import { DeletePlaylistButton } from "./DeletePlaylistButton";
 import { EditPlaylistInfo } from "./EditPlaylistInfo";
 import { PlayButton } from "./PlayButton";
-import { SearchInput } from "./SearchInput";
 import { SongsTable } from "./SongsTable/SongsTable";
 
 interface PlaylistMainProps {
