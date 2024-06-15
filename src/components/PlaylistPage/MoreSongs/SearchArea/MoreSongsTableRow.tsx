@@ -42,7 +42,9 @@ export const MoreSongsTableRow = ({ song, i }: MoreSongsTableRowProps) => {
       </TableCell>
 
       <TableCell className="text-sm text-zinc-400 truncate ..." title={song.collectionName}>
-        {song.collectionName}
+        <Link href={`/albums/${song.collectionId}`} className="hover:underline">
+          {song.collectionName}
+        </Link>
       </TableCell>
 
       <TableCell className="text-sm text-zinc-400">

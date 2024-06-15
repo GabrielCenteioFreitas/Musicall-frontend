@@ -30,16 +30,16 @@ const PlaylistPage = async ({ params }: { params: { id: string } }) => {
   let predominantColor: string | undefined = '';
   if (playlist.portrait) {
     predominantColor = await getPredominantColor(playlist.portrait)
+  } else {
+    predominantColor = "#52525B"
   }
 
   return (
     <div className="flex gap-5 p-5 pb-20 relative min-h-full">
-      {playlist.portrait && (
-        <div
-          className="absolute inset-0 -z-50"
-          style={{ background: `radial-gradient(circle at top right, ${predominantColor}15 50%, transparent 75%) fixed` }}
-        />
-      )}
+      <div
+        className="absolute inset-0 -z-50"
+        style={{ background: `radial-gradient(circle at top right, ${predominantColor}15 50%, transparent 75%) fixed` }}
+      />
 
       <div className="flex-1">
         <div className="flex flex-col gap-4">

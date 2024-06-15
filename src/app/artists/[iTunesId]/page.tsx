@@ -26,19 +26,26 @@ const ArtistPage = async ({ params }: { params: { iTunesId: number } }) => {
   const favorites = await getFavorites(token || null)
   
   return (
-    <div className="flex flex-col gap-4 p-5 pb-20 relative min-h-full">
-      <ArtistInfo
-        artist={artistData}
-        albums={albumData}
+    <div className="p-5 pb-20 relative min-h-full">
+      <div
+        className="absolute inset-0 -z-50"
+        style={{ background: `radial-gradient(circle at top right, #52525B15 50%, transparent 75%) fixed` }}
       />
 
-      <ArtistMain
-        artist={artistData}
-        albums={albumData}
-        previewPlaylists={previewPlaylists}
-        favoriteArtists={favorites?.favoriteArtists || null}
-        favoriteAlbums={favorites?.favoriteAlbums || null}
-      />
+      <div className="flex flex-col gap-4">
+        <ArtistInfo
+          artist={artistData}
+          albums={albumData}
+        />
+
+        <ArtistMain
+          artist={artistData}
+          albums={albumData}
+          previewPlaylists={previewPlaylists}
+          favoriteArtists={favorites?.favoriteArtists || null}
+          favoriteAlbums={favorites?.favoriteAlbums || null}
+        />
+      </div>
     </div>
   );
 }
