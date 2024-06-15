@@ -20,25 +20,25 @@ export const MoreSongsTableRow = ({ song, i }: MoreSongsTableRowProps) => {
         {i+1}
       </TableCell>
 
-      <TableCell className="py-2">
-        <Link href="#" className="flex items-center gap-2">
-          <Image
-            src={song.artworkUrl100}
-            alt={song.trackName}
-            width={48}
-            height={48}
-            className="rounded-lg h-full aspect-square"
-          />
+      <TableCell className="py-2 flex items-center gap-2">
+        <Image
+          src={song.artworkUrl100}
+          alt={song.trackName}
+          width={48}
+          height={48}
+          className="rounded-lg h-full aspect-square"
+        />
 
-          <div className="flex flex-col justify-center text-left max-w-[360px]">
-            <span className="text-md font-medium truncate ..." title={song.trackName}>
-              {song.trackName}
-            </span>
-            <span className="text-xs text-zinc-400 line-clamp-2 text-wrap truncate ..." title={song.artistName}>
+        <div className="flex flex-col justify-center text-left max-w-[360px]">
+          <span className="text-md font-medium truncate ..." title={song.trackName}>
+            {song.trackName}
+          </span>
+          <Link href={`/artists/${song.artistId}`} className="w-fit">
+            <span className="text-xs hover:underline text-zinc-400 line-clamp-2 text-wrap truncate ..." title={song.artistName}>
               {song.artistName}
             </span>
-          </div>
-        </Link>
+          </Link>
+        </div>
       </TableCell>
 
       <TableCell className="text-sm text-zinc-400 truncate ..." title={song.collectionName}>

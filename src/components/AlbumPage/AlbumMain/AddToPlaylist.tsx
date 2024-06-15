@@ -17,26 +17,24 @@ import { PreviewPlaylist } from "@/types/previewPlaylist";
 import { ITunesSong } from "@/types/song";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
-import { MouseEvent, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import { LuPlusCircle } from "react-icons/lu";
 import { toast } from 'react-toastify';
 
 interface AddToPlaylistProps {
   previewPlaylists: PreviewPlaylist[] | null;
-  songs: {
-    trackId: number;
-    collectionId: number;
-    artistId: number;
-  }[];
+  album?: ITunesAlbum;
+  songs?: ITunesSong[];
   className?: string;
   size?: number;
 }
 
-export const AddToPlaylist = ({ previewPlaylists, songs, className, size=20 }: AddToPlaylistProps) => {
+export const AddToPlaylist = ({ previewPlaylists, album, songs, className, size=20 }: AddToPlaylistProps) => {
   const router = useRouter()
   const [isOpen, setIsOpen] = useState(false);
   const [selectedPlaylist, setSelectedPlaylist] = useState<PreviewPlaylist | null>(null);
+  const [songsToBeAdded, setSongsToBeAdded] = useState<ITunesSong[]>([] as ITunesSong[])
   
   const token = Cookies.get('token')
 
@@ -54,7 +52,7 @@ export const AddToPlaylist = ({ previewPlaylists, songs, className, size=20 }: A
     setSelectedPlaylist(previewPlaylist)
 
     try {
-      for (const song of songs) {
+      for (const song of songsToBeAdded) {
         const { trackId, collectionId, artistId } = song
   
         const { results: songResults } = await getDataFromLookup({ id: trackId })
@@ -146,12 +144,38 @@ export const AddToPlaylist = ({ previewPlaylists, songs, className, size=20 }: A
       trackId: number;
     }[],
   ) => {
+    if (!albumSongs) {
+      return false;
+    }
+
     return albumSongs.every(
       (albumSong) => playlistSongs.some(
         (playlistSong) => playlistSong.song.iTunesId === albumSong.trackId
       )
     )
   }
+
+  useEffect(() => {
+    if (songs) {
+      setSongsToBeAdded(songs)
+    } else {
+      const getData = async () => {
+        const { results, resultCount } = await getDataFromLookup({
+          id: album?.collectionId,
+          entity: 'song',
+          limit: 200
+        })
+
+        if (results.length === 1) {
+          setSongsToBeAdded([] as ITunesSong[])
+        }
+
+        setSongsToBeAdded(results.slice(1, resultCount))
+      }
+
+      getData()
+    }
+  }, [songs, album])
 
   return (
     <DropdownMenu onOpenChange={handleOpen} open={isOpen}>
@@ -181,7 +205,7 @@ export const AddToPlaylist = ({ previewPlaylists, songs, className, size=20 }: A
               {
                 previewPlaylist.id === selectedPlaylist?.id 
                   ? <LoadingIcon size={12} />
-                  : doesPlaylistHaveAllSongs(previewPlaylist.songs, songs)
+                  : doesPlaylistHaveAllSongs(previewPlaylist.songs, songsToBeAdded)
                     && <FaCheckCircle size={12} />
               }
             </button>

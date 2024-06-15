@@ -1,9 +1,10 @@
 import Image from "next/image";
 import { ITunesAlbum } from "@/types/album";
 import { ITunesSong } from "@/types/song";
-import { getTotalDuration } from "@/utils/getPlaylistDurantion";
+import { getTotalDuration } from "@/utils/getTotalDuration";
 import dayjs from "dayjs";
 import ptBr from 'dayjs/locale/pt-br';
+import Link from "next/link";
 dayjs.locale(ptBr)
 
 interface AlbumInfoProps {
@@ -11,6 +12,7 @@ interface AlbumInfoProps {
     "collectionName" | 
     "artworkUrl100" | 
     "artistName" | 
+    "artistId" |
     "releaseDate"
   >;
   songs: ITunesSong[];
@@ -26,9 +28,9 @@ export const AlbumInfo = ({ album, songs }: AlbumInfoProps) => {
       <Image
         src={album.artworkUrl100}
         alt={album.collectionName}
-        width={180}
-        height={180}
-        className="size-42 rounded-lg shrink-0"
+        width={192}
+        height={192}
+        className="size-48 rounded-lg shrink-0"
       />
 
       <div className="flex flex-col gap-0 overflow-hidden py-1">
@@ -37,7 +39,9 @@ export const AlbumInfo = ({ album, songs }: AlbumInfoProps) => {
         </h2>
 
         <div className="flex gap-2 items-center text-md text-zinc-400 leading-none">
-          <span>{album.artistName}</span>
+          <Link href={`/artists/${album.artistId}`} className="hover:underline">
+            {album.artistName}
+          </Link>
           •
           <span>
             {dayjs(album.releaseDate).format("YYYY")}

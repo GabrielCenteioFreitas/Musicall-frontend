@@ -1,4 +1,4 @@
-import { PlaylistPortrait } from "@/components/PlaylistPortrait";
+import { PlaylistPortrait } from "@/components/Portraits/PlaylistPortrait";
 import { Button } from "@/components/ui/button";
 import { PreviewPlaylist } from "@/types/previewPlaylist";
 import Image from "next/image";

@@ -1,4 +1,4 @@
-import { PlaylistPortrait } from "@/components/PlaylistPortrait";
+import { PlaylistPortrait } from "@/components/Portraits/PlaylistPortrait";
 import { Playlist } from "@/types/playlist";
 import { MediaInput } from "./MediaInput";
 

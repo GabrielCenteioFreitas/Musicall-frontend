@@ -12,6 +12,7 @@ export const ArtistsAsideSection = ({ playlist }: ArtistsAsideSectionProps) => {
       const artist = {
         id: curSong.song.artist.id,
         name: curSong.song.artist.name,
+        iTunesId: curSong.song.artist.iTunesId,
       };
   
       acc.set(artist.id, artist);

@@ -10,7 +10,7 @@ import { FavoriteSong } from "@/types/favorites";
 import { PlaylistSong } from "@/types/playlistSong";
 import { PreviewPlaylist } from "@/types/previewPlaylist";
 import { LuClock } from "react-icons/lu";
-import { SongsTableHead } from "./SongsTableHead";
+import { TableHead } from "@/components/TableHead";
 import { SongsTableRow } from "./SongsTableRow";
 
 
@@ -42,12 +42,12 @@ export const SongsTable = ({ playlist, songs, favoriteSongs, previewPlaylists, i
     <Table className="w-full table-fixed">
       <TableHeader className="text-md text-zinc-200/40">
         <TableRow className="border-b border-b-zinc-200/40 text-left">
-          <SongsTableHead className="w-9 pl-3">#</SongsTableHead>
-          <SongsTableHead className="w-1/2">Título</SongsTableHead>
-          <SongsTableHead className="w-1/2">Álbum</SongsTableHead>
-          <SongsTableHead className="w-16"><LuClock size={20} /></SongsTableHead>
-          <SongsTableHead className="w-44">Adicionada em</SongsTableHead>
-          <SongsTableHead className="w-28"></SongsTableHead>
+          <TableHead className="w-9 pl-3">#</TableHead>
+          <TableHead className="w-1/2">Título</TableHead>
+          <TableHead className="w-1/2">Álbum</TableHead>
+          <TableHead className="w-16"><LuClock size={20} /></TableHead>
+          <TableHead className="w-44">Adicionada em</TableHead>
+          <TableHead className="w-28"></TableHead>
         </TableRow>
       </TableHeader>
 

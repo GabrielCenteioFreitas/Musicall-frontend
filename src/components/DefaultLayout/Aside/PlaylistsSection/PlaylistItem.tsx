@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { PreviewPlaylist } from "@/types/previewPlaylist";
-import { memo } from "react";
-import { PlaylistPortrait } from "../../../PlaylistPortrait";
 import Link from "next/link";
+import { memo } from "react";
+import { PlaylistPortrait } from "../../../Portraits/PlaylistPortrait";
 import { FixPlaylistButton } from "./FixPlaylistButton";
 
 interface PlaylistItemProps {

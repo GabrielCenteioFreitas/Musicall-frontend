@@ -1,5 +1,5 @@
 import { Playlist } from "@/types/playlist";
-import { getTotalDuration } from "@/utils/getPlaylistDurantion";
+import { getTotalDuration } from "@/utils/getTotalDuration";
 import Image from "next/image";
 
 interface PlaylistInfoProps {

@@ -42,29 +42,31 @@ const SongsTableRowComponent = ({
         {i+1}
       </TableCell>
 
-      <TableCell className="py-2">
-        <Link href="#" className="flex items-center gap-2">
-          <Image
-            src={currentSong.song.portrait}
-            alt={currentSong.song.name}
-            width={48}
-            height={48}
-            className="rounded-lg h-full aspect-square"
-          />
+      <TableCell className="py-2 flex items-center gap-2">
+        <Image
+          src={currentSong.song.portrait}
+          alt={currentSong.song.name}
+          width={48}
+          height={48}
+          className="rounded-lg h-full aspect-square"
+        />
 
-          <div className="flex flex-col justify-center text-left max-w-[360px] overflow-hidden">
-            <span className="text-md font-medium truncate ..." title={currentSong.song.name}>
-              {currentSong.song.name}
-            </span>
-            <span className="text-xs text-zinc-400 line-clamp-2 text-wrap truncate ..." title={currentSong.song.artist.name}>
-              {currentSong.song.artist.name}
-            </span>
-          </div>
-        </Link>
+        <div className="flex flex-col justify-center text-left max-w-[360px] overflow-hidden">
+          <span className="text-md font-medium truncate ..." title={currentSong.song.name}>
+            {currentSong.song.name}
+          </span>
+          <Link
+            href={`/artists/${currentSong.song.artist.iTunesId}`}
+            title={currentSong.song.artist.name}
+            className="w-fit text-xs hover:underline text-zinc-400 line-clamp-2 text-wrap truncate ..."
+          >
+            {currentSong.song.artist.name}
+          </Link>
+        </div>
       </TableCell>
 
-      <TableCell className="text-sm text-zinc-400 truncate ... overflow-hidden hover:underline" title={currentSong.song.album.name}>
-        <Link href={`/albums/${currentSong.song.album.iTunesId}`}>
+      <TableCell className="text-sm text-zinc-400 truncate ... overflow-hidden" title={currentSong.song.album.name}>
+        <Link href={`/albums/${currentSong.song.album.iTunesId}`} className="hover:underline">
           {currentSong.song.album.name}
         </Link>
       </TableCell>

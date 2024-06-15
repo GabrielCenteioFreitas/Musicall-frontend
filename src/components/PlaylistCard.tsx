@@ -1,10 +1,10 @@
-import { PlaylistPortrait } from "@/components//PlaylistPortrait";
-import { PreviewPlaylist } from "@/types/previewPlaylist";
-import { Button } from "./ui/button";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
 import { FixPlaylistButton } from "@/components/DefaultLayout/Aside/PlaylistsSection/FixPlaylistButton";
+import { PlaylistPortrait } from "@/components/Portraits/PlaylistPortrait";
+import { cn } from "@/lib/utils";
+import { PreviewPlaylist } from "@/types/previewPlaylist";
+import Link from "next/link";
 import { memo } from "react";
+import { Button } from "./ui/button";
 
 interface PlaylistCardProps {
   playlist: PreviewPlaylist;

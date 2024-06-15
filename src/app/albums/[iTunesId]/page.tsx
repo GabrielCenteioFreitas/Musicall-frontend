@@ -7,6 +7,7 @@ import { getPredominantColor } from "@/lib/getPredominantColor";
 import { ITunesAlbum } from "@/types/album";
 import { ITunesSong } from "@/types/song";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 const AlbumPage = async ({ params }: { params: { iTunesId: number } }) => {
   const { iTunesId } = params
@@ -15,6 +16,9 @@ const AlbumPage = async ({ params }: { params: { iTunesId: number } }) => {
     entity: 'song'
   })
   const albumData: ITunesAlbum = results[0]
+  if (!albumData) {
+    return redirect('/')
+  }
   const songData: ITunesSong[] = results.slice(1, resultCount)
   const predominantColor = await getPredominantColor(albumData.artworkUrl100)
   

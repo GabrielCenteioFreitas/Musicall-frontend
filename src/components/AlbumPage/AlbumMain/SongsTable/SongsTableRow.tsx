@@ -30,15 +30,12 @@ const SongsTableRowComponent = ({
         {i+1}
       </TableCell>
 
-      <TableCell className="py-2.5 px-2">
-        <Link
-          href="#"
-          className="flex flex-col justify-center text-left max-w-[360px] overflow-hidden"
-        >
-          <span className="text-base font-medium truncate ..." title={song.trackName}>
-            {song.trackName}
-          </span>
-          <span className="text-sm text-zinc-400 text-wrap truncate ..." title={song.artistName}>
+      <TableCell className="max-w-[360px] py-2.5 px-2 flex flex-col justify-center text-left overflow-hidden">
+        <span className="text-base font-medium truncate ..." title={song.trackName}>
+          {song.trackName}
+        </span>
+        <Link href={`/artists/${song.artistId}`} className="w-fit">
+          <span className="text-sm hover:underline text-zinc-400 text-wrap truncate ..." title={song.artistName}>
             {song.artistName}
           </span>
         </Link>

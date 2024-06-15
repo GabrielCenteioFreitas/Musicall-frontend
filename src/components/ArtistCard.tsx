@@ -4,6 +4,8 @@ import { ITunesArtist } from "@/types/artist";
 import { getInitialLetters } from "@/utils/getInitalLetters";
 import { memo } from "react";
 import { Button } from "./ui/button";
+import Link from "next/link";
+import { ArtistPortrait } from "./Portraits/ArtistPortrait";
 
 interface ArtistCardProps {
   artist: Pick<ITunesArtist,
@@ -22,15 +24,8 @@ const ArtistCardComponent = ({ artist, isFavorited }: ArtistCardProps) => {
         className="h-fit p-3 flex flex-col gap-3 shrink-0 rounded-2xl transition-colors group"
         asChild
       >
-        <a href={artist.artistLinkUrl} target="_blank">
-          <div
-            className="
-            w-full aspect-square grid place-content-center
-            rounded-full bg-zinc-900 border-4 border-zinc-800 group-hover:border-zinc-500
-            text-zinc-400 font-semibold text-5xl group-hover:text-zinc-200 transition-colors
-          ">
-            {getInitialLetters(artist.artistName)}
-          </div>
+        <Link href={`/artists/${artist.artistId}`}>
+          <ArtistPortrait name={artist.artistName} className="w-full aspect-square text-5xl" />
 
           <div className="flex flex-col gap-2.5 self-start text-left max-w-full">
             <span className="text-lg font-medium leading-none truncate ..." title={artist.artistName}>
@@ -40,7 +35,7 @@ const ArtistCardComponent = ({ artist, isFavorited }: ArtistCardProps) => {
               Artista
             </span>
           </div>
-        </a>
+        </Link>
       </Button>
 
       <FavoriteArtistButton
