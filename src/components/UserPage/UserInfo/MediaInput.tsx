@@ -10,12 +10,12 @@ import { IoCameraOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
 
 interface MediaInputProps {
-  playlist: {
+  user: {
     id: string;
   };
 }
 
-export const MediaInput = ({ playlist }: MediaInputProps) => {
+export const MediaInput = ({ user }: MediaInputProps) => {
   const router = useRouter()
   const token = Cookies.get('token')
   const [isLoading, setIsLoading] = useState(false)
@@ -32,12 +32,12 @@ export const MediaInput = ({ playlist }: MediaInputProps) => {
     const portraitURL = await uploadImage(files[0])
 
     const requestBody = {
-      portrait: portraitURL,
+      avatarUrl: portraitURL,
     }
 
     try {
       const response = await fetch(
-        url(`/playlists/${playlist.id}`),
+        url(`/users/${user.id}`),
         {
           method: 'PUT',
           body: JSON.stringify(requestBody),
@@ -49,7 +49,7 @@ export const MediaInput = ({ playlist }: MediaInputProps) => {
       )
       const data = await response.json()
 
-      if (!data.playlist) {
+      if (!data.token) {
         throw new Error()
       } else {
         toast.success(
@@ -58,6 +58,7 @@ export const MediaInput = ({ playlist }: MediaInputProps) => {
             autoClose: 2500,
           }
         )
+        Cookies.set('token', data.token)
         router.refresh()
   
         setTimeout(() => {
@@ -80,11 +81,12 @@ export const MediaInput = ({ playlist }: MediaInputProps) => {
             htmlFor="media"
             className="
               opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer
-              absolute inset-0 bg-black/90 flex flex-col gap-3 items-center justify-center
+              absolute inset-0 bg-black/90 flex flex-col items-center justify-center
+              rounded-lg
             "
           >
-            <IoCameraOutline size={128} />
-            <span className="text-2xl font-semibold">
+            <IoCameraOutline size={100} />
+            <span className="text-xl font-semibold">
               Escolher foto
             </span>
           </label>
@@ -99,10 +101,8 @@ export const MediaInput = ({ playlist }: MediaInputProps) => {
           />
         </>
       ) : (
-        <div
-          className="absolute inset-0 bg-black/90 flex items-center justify-center"
-        >
-          <LoadingIcon size={128} />
+        <div className="absolute inset-0 bg-black/90 flex items-center justify-center">
+          <LoadingIcon size={100} />
         </div>
       )}
     </>

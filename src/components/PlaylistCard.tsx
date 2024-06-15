@@ -9,9 +9,10 @@ import { Button } from "./ui/button";
 interface PlaylistCardProps {
   playlist: PreviewPlaylist;
   className?: string;
+  section: 'home' | 'library' | 'profile';
 }
 
-const PlaylistCardComponent = ({ playlist, className }: PlaylistCardProps) => {
+const PlaylistCardComponent = ({ playlist, className, section }: PlaylistCardProps) => {
   return (
     <div className="group relative">
       <Button
@@ -43,10 +44,12 @@ const PlaylistCardComponent = ({ playlist, className }: PlaylistCardProps) => {
         </Link>
       </Button>
 
-      <FixPlaylistButton
-        className={cn("absolute", playlist.isFixed ? "top-5 right-5" : "top-4 right-4")}
-        playlist={playlist}
-      />
+      {(section === 'home' || section === 'library') && (
+        <FixPlaylistButton
+          className={cn("absolute", playlist.isFixed ? "top-5 right-5" : "top-4 right-4")}
+          playlist={playlist}
+        />
+      )}
     </div>
   );
 }

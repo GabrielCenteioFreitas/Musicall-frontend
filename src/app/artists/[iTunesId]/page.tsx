@@ -29,7 +29,7 @@ const ArtistPage = async ({ params }: { params: { iTunesId: number } }) => {
     <div className="p-5 pb-20 relative min-h-full">
       <div
         className="absolute inset-0 -z-50"
-        style={{ background: `radial-gradient(circle at top right, #52525B15 50%, transparent 75%) fixed` }}
+        style={{ background: `radial-gradient(circle at top right, #52525B30, transparent 100%) fixed` }}
       />
 
       <div className="flex flex-col gap-4">

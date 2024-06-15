@@ -1,27 +1,26 @@
 import { FavoriteArtistButton } from "@/components/FavoriteButtons/FavoriteArtistButton";
 import { cn } from "@/lib/utils";
 import { ITunesArtist } from "@/types/artist";
-import { getInitialLetters } from "@/utils/getInitalLetters";
-import { memo } from "react";
-import { Button } from "./ui/button";
 import Link from "next/link";
+import { memo } from "react";
 import { ArtistPortrait } from "./Portraits/ArtistPortrait";
+import { Button } from "./ui/button";
 
 interface ArtistCardProps {
   artist: Pick<ITunesArtist,
     'artistId' |
-    'artistName' |
-    'artistLinkUrl'
+    'artistName'
   >;
-  isFavorited: boolean;
+  isFavorited?: boolean;
+  className?: string;
 }
 
-const ArtistCardComponent = ({ artist, isFavorited }: ArtistCardProps) => {
+const ArtistCardComponent = ({ artist, isFavorited, className }: ArtistCardProps) => {
   return (
     <div className="group relative">
       <Button
         variant="ghost"
-        className="h-fit p-3 flex flex-col gap-3 shrink-0 rounded-2xl transition-colors group"
+        className={cn("h-fit p-3 flex flex-col gap-3 shrink-0 rounded-2xl transition-colors group", className)}
         asChild
       >
         <Link href={`/artists/${artist.artistId}`}>
@@ -38,13 +37,15 @@ const ArtistCardComponent = ({ artist, isFavorited }: ArtistCardProps) => {
         </Link>
       </Button>
 
-      <FavoriteArtistButton
-        artist={artist}
-        isFavorited={isFavorited}
-        className={cn("absolute right-4 bg-zinc-950 text-gray-50 transition-all duration-200",
-          isFavorited ? "top-4" : "top-0 group-hover:top-4 opacity-0 group-hover:opacity-100"
-        )}
-      />
+      {isFavorited !== undefined && (
+        <FavoriteArtistButton
+          artist={artist}
+          isFavorited={isFavorited}
+          className={cn("absolute right-4 bg-zinc-950 text-gray-50 transition-all duration-200",
+            isFavorited ? "top-4" : "top-0 group-hover:top-4 opacity-0 group-hover:opacity-100"
+          )}
+        />
+      )}
     </div>
   );
 }

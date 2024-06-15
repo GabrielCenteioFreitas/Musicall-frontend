@@ -27,18 +27,13 @@ const PlaylistPage = async ({ params }: { params: { id: string } }) => {
   const user = await getUserFromServer()
   const isUserTheCreator = !!user && user.sub ===  playlist.userId
 
-  let predominantColor: string | undefined = '';
-  if (playlist.portrait) {
-    predominantColor = await getPredominantColor(playlist.portrait)
-  } else {
-    predominantColor = "#52525B"
-  }
+  const predominantColor = await getPredominantColor(playlist.portrait) || "#52525B"
 
   return (
     <div className="flex gap-5 p-5 pb-20 relative min-h-full">
       <div
         className="absolute inset-0 -z-50"
-        style={{ background: `radial-gradient(circle at top right, ${predominantColor}15 50%, transparent 75%) fixed` }}
+        style={{ background: `radial-gradient(circle at top right, ${predominantColor}30, transparent 100%) fixed` }}
       />
 
       <div className="flex-1">
@@ -58,7 +53,11 @@ const PlaylistPage = async ({ params }: { params: { id: string } }) => {
         </div>
       </div>
 
-      <PlaylistAside isUserTheCreator={isUserTheCreator} playlist={playlist} />
+      <PlaylistAside
+        isUserTheCreator={isUserTheCreator}
+        playlist={playlist}
+        predominantColor={predominantColor}
+      />
     </div>
   );
 }

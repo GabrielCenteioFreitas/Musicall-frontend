@@ -15,7 +15,11 @@ const Library = async () => {
       {previewPlaylists && previewPlaylists.length > 0 ? (
         <SectionsItemsContainer>
           {previewPlaylists?.map((previewPlaylist) => 
-            <PlaylistCard key={previewPlaylist.id} playlist={previewPlaylist} />
+            <PlaylistCard
+              key={previewPlaylist.id}
+              playlist={previewPlaylist}
+              section="library"
+            />
           )}
         </SectionsItemsContainer>
       ) : (

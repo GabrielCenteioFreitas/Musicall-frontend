@@ -9,9 +9,10 @@ interface PlaylistPortraitProps {
   size: number;
   className?: string;
   iconClassName?: string;
+  predominantColor?: string;
 }
 
-export const PlaylistPortrait = ({ playlist, size=50, className, iconClassName }: PlaylistPortraitProps) => {
+export const PlaylistPortrait = ({ playlist, size=50, className, iconClassName, predominantColor }: PlaylistPortraitProps) => {
   const differentPortraits = Array.from(
     new Set(playlist.songs?.map(
       curSong => curSong.song.portrait
@@ -21,7 +22,8 @@ export const PlaylistPortrait = ({ playlist, size=50, className, iconClassName }
   const ImageComponent = ({ className, i }: { className?: string, i?: number }) => {
     return (
       <Image
-        className={cn("w-full aspect-square object-cover bg-zinc-600", className)}
+        className={cn("w-full aspect-square object-cover", className)}
+        style={{ backgroundColor: predominantColor || "#52525B" }}
         src={i !== undefined ? differentPortraits[i] : playlist.portrait}
         alt={playlist.name}
         width={size}

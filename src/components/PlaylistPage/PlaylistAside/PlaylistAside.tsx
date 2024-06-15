@@ -6,12 +6,17 @@ import { DescriptionAsideSection } from "./DescriptionAsideSection/DescriptionAs
 interface PlaylistAsideProps {
   playlist: Playlist;
   isUserTheCreator: boolean;
+  predominantColor: string;
 }
 
-export const PlaylistAside = ({ playlist, isUserTheCreator }: PlaylistAsideProps) => {
+export const PlaylistAside = ({ playlist, isUserTheCreator, predominantColor }: PlaylistAsideProps) => {
   return (
     <aside className="w-80 flex flex-col items-center">
-      <PortraitAsideSection playlist={playlist} isUserTheCreator={isUserTheCreator} />
+      <PortraitAsideSection
+        playlist={playlist}
+        isUserTheCreator={isUserTheCreator}
+        predominantColor={predominantColor}
+      />
 
       {playlist.description && (
         <DescriptionAsideSection playlist={playlist} />

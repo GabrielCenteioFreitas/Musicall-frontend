@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { getUserFromServer } from "@/lib/getUserFromServer";
 import Image from "next/image";
+import Link from "next/link";
 import { GoPerson } from "react-icons/go";
 import { LuLogOut } from "react-icons/lu";
 import { VscSymbolColor } from "react-icons/vsc";
@@ -17,7 +18,7 @@ export const Profile = () => {
   if (!user) {
     return null
   }
-  const { name, avatarUrl } = user
+  const { name, avatarUrl, sub } = user
 
   return (
     <DropdownMenu>
@@ -43,8 +44,10 @@ export const Profile = () => {
 
         <DropdownMenuSeparator/>
 
-        <DropdownMenuItem className="flex gap-1">
-          <GoPerson size={16} /> Perfil
+        <DropdownMenuItem className="flex gap-1 cursor-pointer" asChild>
+          <Link href={`/users/${sub}`}>
+            <GoPerson size={16} /> Perfil
+          </Link>
         </DropdownMenuItem>
         <DropdownMenuItem className="flex gap-1">
           <VscSymbolColor size={16} /> Tema

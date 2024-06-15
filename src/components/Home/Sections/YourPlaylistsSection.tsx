@@ -23,11 +23,13 @@ export const YourPlaylistsSection = async ({ className, ...rest }: YourPlaylists
         dividerMargins="my-2"
       />
       
-      <SectionsItemsContainer>
-        {(!token || previewPlaylists?.length === 0) && (
+      {(!token || previewPlaylists?.length === 0) && (
+        <div className="-ml-3">
           <CreatePlaylistCard />
-        )}
+        </div>
+      )}
 
+      <SectionsItemsContainer>
         {!previewPlaylists && token && (
           <LoadingIcon />
         )}
@@ -36,6 +38,7 @@ export const YourPlaylistsSection = async ({ className, ...rest }: YourPlaylists
           <PlaylistCard
             key={playlist.id}
             playlist={playlist}
+            section="home"
           />
         )}
       </SectionsItemsContainer>
