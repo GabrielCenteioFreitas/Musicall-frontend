@@ -146,26 +146,30 @@ export const AddToPlaylist = ({ previewPlaylists, song, className, size=20 }: Ad
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuLabel>Adicionar</DropdownMenuLabel>
+        
         <DropdownMenuSeparator />
-        {previewPlaylists?.map((previewPlaylist) => 
-          <DropdownMenuItem key={previewPlaylist.id} asChild>
-            <button
-              className="w-full max-w-36 flex gap-4 justify-between"
-              onClick={(e) => handleAddToPlaylistClick(e, previewPlaylist)}
-              disabled={selectedPlaylist !== null}
-            >
-              <span className="flex-1 text-left truncate">
-                {previewPlaylist.name}
-              </span>
-              {
-                previewPlaylist.id === selectedPlaylist?.id 
-                  ? <LoadingIcon size={12} />
-                  : previewPlaylist.songs.some(curSong => curSong.song.iTunesId === song.trackId)
-                    && <FaCheckCircle size={12} />
-              }
-            </button>
-          </DropdownMenuItem>
-        )}
+
+        <div className="max-h-44 overflow-y-scroll no-scrollbar">
+          {previewPlaylists?.map((previewPlaylist) => 
+            <DropdownMenuItem key={previewPlaylist.id} asChild>
+              <button
+                className="w-full max-w-36 flex gap-4 justify-between"
+                onClick={(e) => handleAddToPlaylistClick(e, previewPlaylist)}
+                disabled={selectedPlaylist !== null}
+              >
+                <span className="flex-1 text-left truncate">
+                  {previewPlaylist.name}
+                </span>
+                {
+                  previewPlaylist.id === selectedPlaylist?.id 
+                    ? <LoadingIcon size={12} />
+                    : previewPlaylist.songs.some(curSong => curSong.song.iTunesId === song.trackId)
+                      && <FaCheckCircle size={12} />
+                }
+              </button>
+            </DropdownMenuItem>
+          )}
+        </div>
       </DropdownMenuContent>
     </DropdownMenu>
   );

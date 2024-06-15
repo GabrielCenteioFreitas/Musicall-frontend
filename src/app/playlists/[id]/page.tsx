@@ -27,7 +27,12 @@ const PlaylistPage = async ({ params }: { params: { id: string } }) => {
   const user = await getUserFromServer()
   const isUserTheCreator = !!user && user.sub ===  playlist.userId
 
-  const predominantColor = await getPredominantColor(playlist.portrait) || "#52525B"
+  let predominantColor: string = '';
+  if (playlist.portrait) {
+    predominantColor = await getPredominantColor(playlist.portrait) || "#52525B"
+  } else {
+    predominantColor = "#52525B"
+  }
 
   return (
     <div className="flex gap-5 p-5 pb-20 relative min-h-full">
