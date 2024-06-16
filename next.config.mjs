@@ -5,7 +5,8 @@ const nextConfig = {
       { hostname: 'lh3.googleusercontent.com' },
       { hostname: 'is1-ssl.mzstatic.com' },
       { hostname: 'i.ibb.co' },
-    ]
+    ],
+    unoptimized: true,
   }
 };
 
