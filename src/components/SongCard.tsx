@@ -29,7 +29,7 @@ const SongCardComponent = ({ song, isFavorited, className }: SongCardProps) => {
       >
         <div>
           <Image
-            className="size-full rounded-md"
+            className="w-full aspect-square object-cover rounded-md"
             src={song.artworkUrl100}
             alt={song.trackName}
             width={100}
