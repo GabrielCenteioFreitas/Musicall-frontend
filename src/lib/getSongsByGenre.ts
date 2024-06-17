@@ -11,7 +11,6 @@ export const getSongsByGenre = async ({ genre, limit }: GetSongsByGenreProps): P
   if (limit) {
     fetchURL += `?limit=${limit}`;
   }
-  console.log(fetchURL)
 
   const response = await fetch(
     fetchURL,
