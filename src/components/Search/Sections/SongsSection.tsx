@@ -40,6 +40,7 @@ export const SongsSection = async ({ term, entity }: SongsSectionProps) => {
                     previewPlaylists={previewPlaylists}
                     key={song.trackId}
                     song={song}
+                    songs={songs}
                     isFavorited={favorites?.favoriteSongs?.some(
                       (favoritedSong) => favoritedSong.song.iTunesId === song.trackId
                     ) || false}
@@ -53,6 +54,7 @@ export const SongsSection = async ({ term, entity }: SongsSectionProps) => {
                     previewPlaylists={previewPlaylists}
                     key={song.trackId}
                     song={song}
+                    songs={songs}
                     isFavorited={favorites?.favoriteSongs?.some(
                       (favoritedSong) => favoritedSong.song.iTunesId === song.trackId
                     ) || false}

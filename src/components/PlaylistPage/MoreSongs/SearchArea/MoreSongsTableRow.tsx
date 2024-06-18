@@ -80,7 +80,7 @@ export const MoreSongsTableRow = ({ song, moreSongs, i }: MoreSongsTableRowProps
               opacity-0 group-hover:opacity-100 transition-opacity 
             "
           >
-            {isSongPlaying ? (
+            {isSongPlaying && isPlaying ? (
               <IoPauseSharp className="size-6"/>
             ) : (
               <IoPlaySharp className="size-5"/>
