@@ -6,7 +6,7 @@ import { SongInfo } from "./SongInfo";
 import { VolumeSlider } from "./VolumeSlider";
 
 export const PlayerContent = () => {
-  const { playingSong, setCurrentSound, playNextSong } = usePlayer()
+  const { playingSong, currentSound, setCurrentSound, playNextSong } = usePlayer()
   const [volume, setVolume] = useState(0.25);
   const [_, { sound }] = useSound(playingSong?.song.previewUrl || '', {
     volume,
@@ -14,8 +14,10 @@ export const PlayerContent = () => {
   })
 
   useEffect(() => {
+    currentSound?.stop();
     sound?.play();
     setCurrentSound(sound)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   } , [sound, setCurrentSound])
 
   if (!playingSong) {

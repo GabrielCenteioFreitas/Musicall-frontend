@@ -1,7 +1,16 @@
 import { ITunesSong, PlayingSong } from "@/types/song";
 
 // this function transforms a song of iTunesSong type to PlayingSong type
-export const iTunesToPlaying = (song: ITunesSong): PlayingSong => {
+export type ITunesNecessaryType = Pick<ITunesSong, 
+  "trackName" |
+  "artworkUrl100" |
+  "previewUrl" |
+  "trackId" |
+  "collectionId" |
+  "artistName" |
+  "artistId"
+>
+export const iTunesToPlaying = (song: ITunesNecessaryType): PlayingSong => {
   return {
     song: {
       name: song.trackName,
@@ -9,7 +18,6 @@ export const iTunesToPlaying = (song: ITunesSong): PlayingSong => {
       previewUrl: song.previewUrl,
       iTunesId: song.trackId,
       album: {
-        name: song.collectionName,
         iTunesId: song.collectionId,
       },
       artist: {

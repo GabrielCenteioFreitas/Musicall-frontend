@@ -37,9 +37,14 @@ export const MoreSongsTableRow = ({ song, moreSongs, i }: MoreSongsTableRowProps
       currentSound?.stop()
       addCurrentToPrev()
       setPlayingSong(iTunesToPlaying(song))
-      setNextSongs(moreSongs
-        .slice(songIndex+1, moreSongs.length)
-        .map(song => iTunesToPlaying(song)))
+      setNextSongs([
+        ...moreSongs
+          .slice(songIndex+1, moreSongs.length)
+          .map(song => iTunesToPlaying(song)),
+        ...moreSongs
+          .slice(0, songIndex)
+          .map(song => iTunesToPlaying(song)),
+      ])
       setIsPlaying(true)
     }
   }

@@ -53,7 +53,14 @@ const SongsTableRowComponent = ({
       currentSound?.stop()
       addCurrentToPrev()
       setPlayingSong(currentSong)
-      setNextSongs(playlist.songs.slice(songIndex+1, playlist.songs.length).map(song => song))
+      setNextSongs([
+        ...playlist.songs
+          .slice(songIndex+1, playlist.songs.length)
+          .map(song => song),
+        ...playlist.songs
+          .slice(0, songIndex)
+          .map(song => song),
+      ])
       setIsPlaying(true)
     }
   }

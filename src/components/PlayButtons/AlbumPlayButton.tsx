@@ -25,7 +25,11 @@ export const PlayButton = ({ album, songs }: PlayButtonProps) => {
     const playFirstAlbumSong = () => {
       addCurrentToPrev()
       setPlayingSong(iTunesToPlaying(songs[0]))
-      setNextSongs(songs.slice(1, songs.length).map(song => iTunesToPlaying(song)))
+      setNextSongs(
+        songs
+          .slice(1, songs.length)
+          .map(song => iTunesToPlaying(song))
+      )
       setIsPlaying(true)
     }
 

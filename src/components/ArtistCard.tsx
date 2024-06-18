@@ -41,7 +41,7 @@ const ArtistCardComponent = ({ artist, isFavorited, className }: ArtistCardProps
         <FavoriteArtistButton
           artist={artist}
           isFavorited={isFavorited}
-          className={cn("absolute right-4 bg-zinc-950 text-gray-50 transition-all duration-200",
+          className={cn("absolute left-4 bg-zinc-950 text-gray-50 transition-all duration-200",
             isFavorited ? "top-4" : "top-0 group-hover:top-4 opacity-0 group-hover:opacity-100"
           )}
         />

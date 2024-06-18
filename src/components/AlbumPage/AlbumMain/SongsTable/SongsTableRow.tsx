@@ -50,9 +50,14 @@ const SongsTableRowComponent = ({
       currentSound?.stop()
       addCurrentToPrev()
       setPlayingSong(iTunesToPlaying(song))
-      setNextSongs(albumSongs
-        .slice(songIndex+1, albumSongs.length)
-        .map(song => iTunesToPlaying(song)))
+      setNextSongs([
+        ...albumSongs
+          .slice(songIndex+1, albumSongs.length)
+          .map(song => iTunesToPlaying(song)),
+        ...albumSongs
+          .slice(0, songIndex)
+          .map(song => iTunesToPlaying(song)),
+      ])
       setIsPlaying(true)
     }
   }

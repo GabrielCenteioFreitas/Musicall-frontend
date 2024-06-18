@@ -6,7 +6,7 @@ import { FavoriteAlbum, FavoriteSong } from "@/types/favorites";
 import { PreviewPlaylist } from "@/types/previewPlaylist";
 import { ITunesSong } from "@/types/song";
 import { ChangeEvent, useEffect, useState } from "react";
-import { PlayButton } from "./PlayButton";
+import { PlayButton } from "@/components/PlayButtons/AlbumPlayButton";
 import { SongsTable } from "./SongsTable/SongsTable";
 import { SmallFavoriteAlbumButton } from "@/components/FavoriteButtons/SmallFavoriteAlbumButton";
 import { AddToPlaylist } from "./AddToPlaylist";

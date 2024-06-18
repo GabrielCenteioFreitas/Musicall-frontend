@@ -1,10 +1,10 @@
 import { SongCard } from "@/components/SongCard";
 import { getSongsByGenre } from "@/lib/getSongsByGenre";
-import { SectionsContainer } from "../../SectionsContainer";
-import { SectionsTitle } from "../../SectionsTitle";
-import { SectionsItemsContainer } from "../SectionsItemsContainer";
-import { FavoriteSong } from "@/types/favorites";
 import { cn } from "@/lib/utils";
+import { FavoriteSong } from "@/types/favorites";
+import { DBSong } from "@/types/song";
+import { SectionsContainer } from "../../SectionsContainer";
+import { SectionsItemsContainer } from "../SectionsItemsContainer";
 
 interface SongsSectionProps {
   genre: string;
@@ -30,6 +30,8 @@ export const SongsSection = async ({
     return null
   }
 
+  const convertedSongs = songs.map(song => ({ song }))
+
   return (
     <SectionsContainer className={cn("mb-4", className)}>
       <h2 className="text-xl font-semibold">
@@ -37,22 +39,18 @@ export const SongsSection = async ({
       </h2>
 
       <SectionsItemsContainer className="grid-cols-8">
-        {songs.map((song) => 
-          <SongCard
-            key={song.id}
-            song={{
-              trackName: song.name,
-              trackId: song.iTunesId,
-              artworkUrl100: song.portrait,
-              artistName: song.artist.name,
-              artistId: song.artist.iTunesId,
-              collectionId: song.album.iTunesId,
-            }}
-            isFavorited={favoriteSongs?.some(
-              favoritedSong => favoritedSong.song.iTunesId === song.iTunesId
-            ) || false}
-          />
-        )}
+        {convertedSongs.map((song) => {
+          return (
+            <SongCard
+              key={song.song.id}
+              song={song}
+              groupSongs={convertedSongs}
+              isFavorited={favoriteSongs?.some(
+                favoritedSong => favoritedSong.song.iTunesId === song.song.iTunesId
+              ) || false}
+            />
+          )
+        })}
       </SectionsItemsContainer>
     </SectionsContainer>
   );

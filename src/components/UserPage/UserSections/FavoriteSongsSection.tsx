@@ -14,19 +14,16 @@ export const FavoriteSongsSection = ({ favoriteSongs }: FavoriteSongsSectionProp
 
       {favoriteSongs.length > 0 ? (
         <UserSectionsItemsContainer>
-          {favoriteSongs.map(favoriteSong => 
-            <SongCard
-              key={favoriteSong.id}
-              song={{
-                trackName: favoriteSong.song.name,
-                artworkUrl100: favoriteSong.song.portrait,
-                trackId: favoriteSong.song.iTunesId,
-                artistName: favoriteSong.song.artist.name,
-                artistId: favoriteSong.song.artist.iTunesId,
-              }}
-              className="w-44"
-            />
-          )}
+          {favoriteSongs.map((favoritedSong) => {
+            return (
+              <SongCard
+                key={favoritedSong.song.iTunesId}
+                song={favoritedSong}
+                groupSongs={favoriteSongs}
+                className="w-44"
+              />
+            )
+          })}
         </UserSectionsItemsContainer>
       ) : (
         <span className="block mb-5 text-zinc-200">

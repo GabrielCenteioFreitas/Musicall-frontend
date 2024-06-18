@@ -7,7 +7,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { SearchInput } from "../../SearchInput";
 import { DeletePlaylistButton } from "./DeletePlaylistButton";
 import { EditPlaylistInfo } from "./EditPlaylistInfo";
-import { PlayButton } from "./PlayButton";
+import { PlayButton } from "@/components/PlayButtons/PlaylistPlayButton";
 import { SongsTable } from "./SongsTable/SongsTable";
 
 interface PlaylistMainProps {

@@ -15,7 +15,11 @@ export const PlayButton = ({ playlist }: PlayButtonProps) => {
     const playFirstPlaylistSong = () => {
       addCurrentToPrev()
       setPlayingSong(playlist.songs[0])
-      setNextSongs(playlist.songs.slice(1, playlist.songs.length).map(song => song))
+      setNextSongs(
+        playlist.songs
+          .slice(1, playlist.songs.length)
+          .map(song => song)
+      )
       setIsPlaying(true)
     }
 

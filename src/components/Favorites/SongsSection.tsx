@@ -13,20 +13,12 @@ export const SongsSection = ({ favoriteSongs }: SongsSectionProps) => {
 
       {favoriteSongs && favoriteSongs.length > 0 ? (
         <div className="grid grid-cols-8 -ml-3">
-          {favoriteSongs.map((favoritedSong) =>{
-            const iTunesSong = {
-              trackName: favoritedSong.song.name,
-              trackId: favoritedSong.song.iTunesId,
-              artistName: favoritedSong.song.artist.name,
-              artistId: favoritedSong.song.artist.iTunesId,
-              collectionId: favoritedSong.song.album.iTunesId,
-              artworkUrl100: favoritedSong.song.portrait,
-            }
-
+          {favoriteSongs.map((favoritedSong) => {
             return (
               <SongCard
                 key={favoritedSong.song.iTunesId}
-                song={iTunesSong}
+                song={favoritedSong}
+                groupSongs={favoriteSongs}
                 isFavorited
               />
             )
