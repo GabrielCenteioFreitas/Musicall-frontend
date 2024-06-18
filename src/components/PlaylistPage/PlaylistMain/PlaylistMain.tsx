@@ -15,9 +15,10 @@ interface PlaylistMainProps {
   previewPlaylists: PreviewPlaylist[] | null;
   favoriteSongs: FavoriteSong[] | null;
   isUserTheCreator: boolean;
+  predominantColor: string;
 }
 
-export const PlaylistMain = ({ playlist, previewPlaylists, favoriteSongs, isUserTheCreator }: PlaylistMainProps) => {
+export const PlaylistMain = ({ playlist, previewPlaylists, favoriteSongs, isUserTheCreator, predominantColor }: PlaylistMainProps) => {
   const [search, setSearch] = useState('')
   
   useEffect(() => {
@@ -68,6 +69,7 @@ export const PlaylistMain = ({ playlist, previewPlaylists, favoriteSongs, isUser
         favoriteSongs={favoriteSongs}
         previewPlaylists={previewPlaylists}
         isUserTheCreator={isUserTheCreator}
+        predominantColor={predominantColor}
       />
     </div>
   );

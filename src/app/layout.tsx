@@ -4,6 +4,8 @@ import { Inter } from "next/font/google";
 import { ToastContainer } from "react-toastify";
 import "./globals.css";
 import 'react-toastify/dist/ReactToastify.css';
+import { PlayerProvider } from "@/contexts/PlayerContext";
+import { Player } from "@/components/Player/Player";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,9 +22,13 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body className={`${inter.className} dark bg-zinc-950 text-zinc-50 h-screen no-scrollbar`}>
-        <DefaultLayout>
-          {children}
-        </DefaultLayout>
+        <PlayerProvider>
+          <DefaultLayout>
+            {children}
+          </DefaultLayout>
+
+          <Player />
+        </PlayerProvider>
 
         <ToastContainer
           theme="dark" 

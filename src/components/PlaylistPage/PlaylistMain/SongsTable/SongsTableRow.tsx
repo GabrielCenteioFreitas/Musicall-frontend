@@ -1,5 +1,5 @@
 import { TableCell, TableRow } from "@/components/ui/table";
-import { PlaylistSong } from "@/types/playlistSong";
+import { PlaylistSong } from "@/types/song";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -10,6 +10,13 @@ import dayjs from 'dayjs';
 import ptBr from 'dayjs/locale/pt-br';
 import { memo } from "react";
 import { RemoveFromPlaylist } from "../RemoveFromPlaylist";
+import { Playlist } from "@/types/playlist";
+import { PlayButton } from "./PlayButton";
+import { usePlayer } from "@/hooks/usePlayer";
+import { IoPauseSharp, IoPlaySharp } from "react-icons/io5";
+import { twMerge } from "tailwind-merge";
+import { cn } from "@/lib/utils";
+import { LoadingIcon } from "@/components/LoadingIcon";
 dayjs.locale(ptBr)
 
 interface SongsTableRowProps {
@@ -17,12 +24,9 @@ interface SongsTableRowProps {
   isFavorited: boolean;
   i: number;
   isUserTheCreator: boolean;
-  playlist: {
-    name: string;
-    id: string;
-    userId: string;
-  }
+  playlist: Playlist;
   previewPlaylists: PreviewPlaylist[] | null;
+  predominantColor: string;
 }
 
 const SongsTableRowComponent = ({
@@ -31,28 +35,77 @@ const SongsTableRowComponent = ({
   i,
   isUserTheCreator,
   playlist,
-  previewPlaylists
+  previewPlaylists,
+  predominantColor,
 }: SongsTableRowProps) => {
   const minutes = Math.floor(currentSong.song.durationInSeconds / 60)
   const seconds = Math.ceil(currentSong.song.durationInSeconds - (minutes * 60))
 
+  const { playingSong, setPlayingSong, currentSound, isPlaying, setIsPlaying, setNextSongs, addCurrentToPrev } = usePlayer()
+
+  const handleClick = () => {
+    if (currentSong.id === playingSong?.id) {
+      if (isPlaying) {
+        currentSound?.pause()
+        setIsPlaying(false)
+      } else {
+        setIsPlaying(true)
+        currentSound?.play()
+      }
+    } else {
+      const songIndex = playlist.songs.indexOf(currentSong)
+      currentSound?.stop()
+      addCurrentToPrev()
+      setPlayingSong(currentSong)
+      setNextSongs(playlist.songs.slice(songIndex+1, playlist.songs.length).map(song => song))
+      setIsPlaying(true)
+    }
+  }
+
   return (
-    <TableRow key={`${currentSong.id}`} className="hover:bg-zinc-700/20 transition-all">
+    <TableRow
+      className="hover:bg-zinc-700/20 transition-all group"
+      style={{
+        backgroundColor: playingSong?.id === currentSong.id
+          ? `${predominantColor}20`
+          : ''
+      }}
+      onClick={handleClick}
+    >
       <TableCell className="text-sm text-zinc-400 pl-3">
         {i+1}
       </TableCell>
 
-      <TableCell className="py-2 flex items-center gap-2">
-        <Image
-          src={currentSong.song.portrait}
-          alt={currentSong.song.name}
-          width={48}
-          height={48}
-          className="rounded-lg h-full aspect-square"
-        />
+      <TableCell className="flex items-center gap-2">
+        <div className="h-full aspect-square relative shrink-0">
+          <Image
+            src={currentSong.song.portrait}
+            alt={currentSong.song.name}
+            width={48}
+            height={48}
+            className="rounded-lg h-full aspect-square object-cover"
+          />
 
-        <div className="flex flex-col justify-center text-left max-w-[360px] overflow-hidden">
-          <span className="text-md font-medium truncate ..." title={currentSong.song.name}>
+          <div
+            className="
+              absolute inset-0 size-full rounded-md 
+              flex items-center justify-center bg-black/90
+              opacity-0 group-hover:opacity-100 transition-opacity 
+            "
+          >
+            {isPlaying && playingSong?.id === currentSong.id ? (
+              <IoPauseSharp className="size-6"/>
+            ) : (
+              <IoPlaySharp className="size-5"/>
+            )}
+          </div>
+        </div>
+
+        <div className="flex flex-col justify-center text-left max-w-full overflow-hidden">
+          <span
+            title={currentSong.song.name}
+            className="text-md font-medium truncate ..."
+          >
             {currentSong.song.name}
           </span>
           <Link

@@ -28,3 +28,21 @@ export type DBSong = {
   artist: DBArtist;
   album: DBAlbum;
 }
+
+export type PlaylistSong = {
+  id: string;
+  addedAt: Date;
+  song: DBSong;
+}
+
+export type PlayingSong = {
+  id?: string;
+  song: {
+    name: DBSong['name'];
+    iTunesId: DBSong['iTunesId'];
+    portrait: DBSong['portrait'];
+    previewUrl: DBSong['previewUrl'];
+    artist: Pick<DBArtist, 'iTunesId' | 'name'>;
+    album: Pick<DBAlbum, 'iTunesId' | 'name'>;
+  };
+}

@@ -17,8 +17,12 @@ export async function uploadImage(fileToUpload: any) {
     )
 
     const responseData = await uploadResponse.json();
+    if (!responseData.data.url || responseData.data.url.endsWith(".webp")) {
+      return null
+    }
+
     return responseData.data.url;
   } catch (error) {
-    throw new Error(error as any);
+    return null
   }
 }

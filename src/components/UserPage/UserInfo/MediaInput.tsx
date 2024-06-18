@@ -29,7 +29,19 @@ export const MediaInput = ({ user }: MediaInputProps) => {
 
     setIsLoading(true)
 
-    const portraitURL = await uploadImage(files[0])
+    let portraitURL = ''
+    try {
+      const response = await uploadImage(files[0])
+      if (!response) {
+        throw new Error()
+      }
+      portraitURL = response
+    } catch {
+      toast.error('Ocorreu um erro!')
+      return
+    } finally {
+      setIsLoading(false)
+    }
 
     const requestBody = {
       avatarUrl: portraitURL,

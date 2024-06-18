@@ -1,4 +1,5 @@
 import { ArtistPortrait } from "@/components/Portraits/ArtistPortrait";
+import { genres } from "@/lib/genres";
 import { ITunesAlbum } from "@/types/album";
 import { ITunesArtist } from "@/types/artist";
 
@@ -25,7 +26,9 @@ export const ArtistInfo = ({ artist, albums }: ArtistInfoProps) => {
         </h2>
 
         <div className="flex gap-2 items-center text-md text-zinc-400 leading-none">
-          <span>{artist.primaryGenreName}</span>
+          <span>
+            {genres.find(genre => genre.name === artist.primaryGenreName)?.sectionTitle || artist.primaryGenreName}
+          </span>
           
           {albums.length > 0 && (
             <>

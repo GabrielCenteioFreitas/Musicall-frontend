@@ -3,33 +3,87 @@ import { ITunesSong } from "@/types/song";
 import Link from "next/link";
 import Image from "next/image";
 import { AddToPlaylist } from "./AddToPlaylist";
+import { usePlayer } from "@/hooks/usePlayer";
+import { IoPauseSharp, IoPlaySharp } from "react-icons/io5";
+import { iTunesToPlaying } from "@/lib/iTunesToPlaying";
 
 interface MoreSongsTableRowProps {
   song: ITunesSong;
+  moreSongs: ITunesSong[];
   i: number;
 }
 
-export const MoreSongsTableRow = ({ song, i }: MoreSongsTableRowProps) => {
+export const MoreSongsTableRow = ({ song, moreSongs, i }: MoreSongsTableRowProps) => {
   const durationInSeconds = Math.floor(song.trackTimeMillis / 1000)
   const minutes = Math.floor(durationInSeconds / 60)
   const seconds = Math.ceil(durationInSeconds - (minutes * 60))
 
+  const { playingSong, setPlayingSong, currentSound, isPlaying, setIsPlaying, setNextSongs, addCurrentToPrev } = usePlayer()
+  const isSongPlaying = 
+    song.trackId === playingSong?.song.iTunesId && 
+    song.collectionId === playingSong?.song.album.iTunesId
+
+  const handleClick = () => {
+    if (isSongPlaying) {
+      if (isPlaying) {
+        currentSound?.pause()
+        setIsPlaying(false)
+      } else {
+        setIsPlaying(true)
+        currentSound?.play()
+      }
+    } else {
+      const songIndex = moreSongs.indexOf(song)
+      currentSound?.stop()
+      addCurrentToPrev()
+      setPlayingSong(iTunesToPlaying(song))
+      setNextSongs(moreSongs
+        .slice(songIndex+1, moreSongs.length)
+        .map(song => iTunesToPlaying(song)))
+      setIsPlaying(true)
+    }
+  }
+
   return (
-    <TableRow className="hover:bg-zinc-700/20 transition-all">
+    <TableRow
+      className="hover:bg-zinc-700/20 transition-all group"
+      style={{
+        backgroundColor: isSongPlaying
+          ? `#52525B20`
+          : ''
+      }}
+      onClick={handleClick}
+    >
       <TableCell className="pl-3">
         {i+1}
       </TableCell>
 
-      <TableCell className="py-2 flex items-center gap-2">
-        <Image
-          src={song.artworkUrl100}
-          alt={song.trackName}
-          width={48}
-          height={48}
-          className="rounded-lg h-full aspect-square"
-        />
+      <TableCell className="flex items-center gap-2">
+        <div className="h-full aspect-square relative shrink-0">
+          <Image
+            src={song.artworkUrl100}
+            alt={song.trackName}
+            width={48}
+            height={48}
+            className="rounded-lg h-full aspect-square"
+          />
 
-        <div className="flex flex-col justify-center text-left max-w-[360px]">
+          <div
+            className="
+              absolute inset-0 size-full rounded-md 
+              flex items-center justify-center bg-black/90
+              opacity-0 group-hover:opacity-100 transition-opacity 
+            "
+          >
+            {isSongPlaying ? (
+              <IoPauseSharp className="size-6"/>
+            ) : (
+              <IoPlaySharp className="size-5"/>
+            )}
+          </div>
+        </div>
+
+        <div className="flex flex-col justify-center text-left max-w-full overflow-hidden">
           <span className="text-md font-medium truncate ..." title={song.trackName}>
             {song.trackName}
           </span>

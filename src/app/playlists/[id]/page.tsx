@@ -50,6 +50,7 @@ const PlaylistPage = async ({ params }: { params: { id: string } }) => {
             previewPlaylists={previewPlaylists}
             favoriteSongs={favorites?.favoriteSongs || null}
             isUserTheCreator={isUserTheCreator}
+            predominantColor={predominantColor}
           />
 
           {isUserTheCreator && (

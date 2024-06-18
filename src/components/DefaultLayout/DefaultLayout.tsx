@@ -13,7 +13,10 @@ export const DefaultLayout = ({ className, children }: DefaultLayoutProps) => {
     <div className="h-full flex flex-col gap-4 px-16 pt-4 overflow-y-clip no-scrollbar">
       <Header />
       
-      <div className="h-full flex gap-4">
+      <div
+        id="container"
+        className="h-full flex gap-4"
+      >
         <Aside />
 
         <main

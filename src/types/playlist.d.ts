@@ -1,4 +1,4 @@
-import { PlaylistSong } from "./playlistSong";
+import { PlaylistSong } from "./song";
 
 export type Playlist = {
   id: string;

@@ -18,7 +18,7 @@ export const PlaylistsSection = async () => {
   }
 
   return (
-    <ul className="-ml-2 -mt-2 mb-16 text-xs flex flex-col font-medium overflow-y-scroll no-scrollbar">
+    <ul id="aside-playlists-section" className="-ml-2 -mt-2 mb-16 text-xs flex flex-col font-medium overflow-y-scroll no-scrollbar">
       <CreatePlaylistItem />
 
       {token && previewPlaylists?.map((playlist: PreviewPlaylist) => (

@@ -30,7 +30,13 @@ const PlaylistItemComponent = ({ playlist }: PlaylistItemProps) => {
               {playlist.name}
             </span>
             <p className="text-zinc-400 truncate ..." title={playlist.user.name}>
-              Playlist • {playlist.user.name}
+              {playlist.songs.length === 1
+                ? "1 item • "
+                : playlist.songs.length > 1
+                  ? `${playlist.songs.length} itens • `
+                  : null
+              }
+              {playlist.user.name}
             </p>
           </div>
         </Link>

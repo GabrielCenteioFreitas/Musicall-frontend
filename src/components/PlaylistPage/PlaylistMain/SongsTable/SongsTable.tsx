@@ -7,26 +7,23 @@ import {
   TableRow
 } from "@/components/ui/table";
 import { FavoriteSong } from "@/types/favorites";
-import { PlaylistSong } from "@/types/playlistSong";
+import { PlaylistSong } from "@/types/song";
 import { PreviewPlaylist } from "@/types/previewPlaylist";
 import { LuClock } from "react-icons/lu";
 import { TableHead } from "@/components/TableHead";
 import { SongsTableRow } from "./SongsTableRow";
-
+import { Playlist } from "@/types/playlist";
 
 interface SongsTableProps {
-  playlist: {
-    name: string;
-    id: string;
-    userId: string;
-  }
+  playlist: Playlist;
   songs: PlaylistSong[];
   favoriteSongs: FavoriteSong[] | null;
   previewPlaylists: PreviewPlaylist[] | null;
   isUserTheCreator: boolean;
+  predominantColor: string;
 }
 
-export const SongsTable = ({ playlist, songs, favoriteSongs, previewPlaylists, isUserTheCreator }: SongsTableProps) => {
+export const SongsTable = ({ playlist, songs, favoriteSongs, previewPlaylists, isUserTheCreator, predominantColor }: SongsTableProps) => {
   if (!songs?.length) {
     const url = new URL(window.location.toString());
     const searchParam = url.searchParams.get('search');
@@ -63,6 +60,7 @@ export const SongsTable = ({ playlist, songs, favoriteSongs, previewPlaylists, i
             playlist={playlist}
             previewPlaylists={previewPlaylists}
             isUserTheCreator={isUserTheCreator}
+            predominantColor={predominantColor}
           />
         )}
       </TableBody>
