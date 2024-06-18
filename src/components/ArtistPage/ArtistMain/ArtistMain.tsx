@@ -1,15 +1,14 @@
 'use client'
 
 import { SmallFavoriteArtistButton } from "@/components/FavoriteButtons/SmallFavoriteArtistButton";
+import { ITunesURL } from "@/components/ITunesURL";
 import { SearchInput } from "@/components/SearchInput";
 import { ITunesAlbum } from "@/types/album";
 import { ITunesArtist } from "@/types/artist";
 import { FavoriteAlbum, FavoriteArtist } from "@/types/favorites";
 import { PreviewPlaylist } from "@/types/previewPlaylist";
 import { ChangeEvent, useEffect, useState } from "react";
-import { PlayButton } from "./PlayButton";
 import { AlbumsTable } from "./SongsTable/AlbumsTable";
-import { ITunesURL } from "@/components/ITunesURL";
 
 interface ArtistMainProps {
   artist: Pick<ITunesArtist,
@@ -53,23 +52,19 @@ export const ArtistMain = ({ artist, albums, previewPlaylists, favoriteArtists, 
   return (
     <div className="flex flex-col gap-7 w-full">
       <div className="flex justify-between">
-        <div className="flex gap-3 items-center">
-          <PlayButton artist={artist} />
+        <div className="w-48 flex gap-2 justify-center items-center">
+          <SmallFavoriteArtistButton
+            artist={artist}
+            isFavorited={favoriteArtists?.some(
+              favoritedArtist => favoritedArtist.artist.iTunesId === artist.artistId
+            ) || false}
+            size={24}
+            className="hover:text-gray-50 transition-colors"
+          />
 
-          <div className="flex gap-2">
-            <SmallFavoriteArtistButton
-              artist={artist}
-              isFavorited={favoriteArtists?.some(
-                favoritedArtist => favoritedArtist.artist.iTunesId === artist.artistId
-              ) || false}
-              size={24}
-              className="hover:text-gray-50 transition-colors"
-            />
-
-            <ITunesURL
-              url={artist.artistLinkUrl}
-            />
-          </div>
+          <ITunesURL
+            url={artist.artistLinkUrl}
+          />
         </div>
 
         <SearchInput search={search} handleSearch={handleSearch} />
