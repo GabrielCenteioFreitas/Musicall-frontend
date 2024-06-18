@@ -18,9 +18,10 @@ interface SongsTableProps {
   songs: ITunesSong[];
   favoriteSongs: FavoriteSong[] | null;
   previewPlaylists: PreviewPlaylist[] | null;
+  predominantColor: string;
 }
 
-export const SongsTable = ({ songs, favoriteSongs, previewPlaylists }: SongsTableProps) => {
+export const SongsTable = ({ songs, favoriteSongs, previewPlaylists, predominantColor }: SongsTableProps) => {
   if (!songs?.length) {
     const url = new URL(window.location.toString());
     const searchParam = url.searchParams.get('search');
@@ -49,10 +50,12 @@ export const SongsTable = ({ songs, favoriteSongs, previewPlaylists }: SongsTabl
             key={song.trackId}
             i={i}
             song={song}
+            albumSongs={songs}
             isFavorited={favoriteSongs?.some(
               favoritedSong => favoritedSong.song.iTunesId === song.trackId
             ) || false}
             previewPlaylists={previewPlaylists}
+            predominantColor={predominantColor}
           />
         )}
       </TableBody>

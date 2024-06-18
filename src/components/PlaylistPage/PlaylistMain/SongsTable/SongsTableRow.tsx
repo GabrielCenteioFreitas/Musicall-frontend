@@ -5,18 +5,14 @@ import Link from "next/link";
 
 import { AddToPlaylist } from "@/components/AddToPlaylist";
 import { SmallFavoriteSongButton } from "@/components/FavoriteButtons/SmallFavoriteSongButton";
+import { usePlayer } from "@/hooks/usePlayer";
+import { Playlist } from "@/types/playlist";
 import { PreviewPlaylist } from "@/types/previewPlaylist";
 import dayjs from 'dayjs';
 import ptBr from 'dayjs/locale/pt-br';
 import { memo } from "react";
-import { RemoveFromPlaylist } from "../RemoveFromPlaylist";
-import { Playlist } from "@/types/playlist";
-import { PlayButton } from "./PlayButton";
-import { usePlayer } from "@/hooks/usePlayer";
 import { IoPauseSharp, IoPlaySharp } from "react-icons/io5";
-import { twMerge } from "tailwind-merge";
-import { cn } from "@/lib/utils";
-import { LoadingIcon } from "@/components/LoadingIcon";
+import { RemoveFromPlaylist } from "../RemoveFromPlaylist";
 dayjs.locale(ptBr)
 
 interface SongsTableRowProps {
@@ -112,6 +108,7 @@ const SongsTableRowComponent = ({
             href={`/artists/${currentSong.song.artist.iTunesId}`}
             title={currentSong.song.artist.name}
             className="w-fit text-xs hover:underline text-zinc-400 line-clamp-2 text-wrap truncate ..."
+            onClick={(e) => e.stopPropagation()}
           >
             {currentSong.song.artist.name}
           </Link>
@@ -119,7 +116,11 @@ const SongsTableRowComponent = ({
       </TableCell>
 
       <TableCell className="text-sm text-zinc-400 truncate ... overflow-hidden" title={currentSong.song.album.name}>
-        <Link href={`/albums/${currentSong.song.album.iTunesId}`} className="hover:underline">
+        <Link
+          href={`/albums/${currentSong.song.album.iTunesId}`}
+          className="hover:underline"
+          onClick={(e) => e.stopPropagation()}
+        >
           {currentSong.song.album.name}
         </Link>
       </TableCell>

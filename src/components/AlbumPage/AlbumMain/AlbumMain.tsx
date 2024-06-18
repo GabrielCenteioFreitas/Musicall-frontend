@@ -25,9 +25,17 @@ interface AlbumMainProps {
   previewPlaylists: PreviewPlaylist[] | null;
   favoriteSongs: FavoriteSong[] | null;
   favoriteAlbums: FavoriteAlbum[] | null;
+  predominantColor: string;
 }
 
-export const AlbumMain = ({ album, songs, previewPlaylists, favoriteSongs, favoriteAlbums }: AlbumMainProps) => {
+export const AlbumMain = ({
+  album,
+  songs,
+  previewPlaylists,
+  favoriteSongs,
+  favoriteAlbums,
+  predominantColor,
+}: AlbumMainProps) => {
   const [search, setSearch] = useState('')
   
   useEffect(() => {
@@ -58,7 +66,7 @@ export const AlbumMain = ({ album, songs, previewPlaylists, favoriteSongs, favor
     <div className="flex flex-col gap-7 w-3/4">
       <div className="flex justify-between">
         <div className="flex gap-3 items-center">
-          <PlayButton album={album} />
+          <PlayButton album={album} songs={filteredSongs} />
 
           <div className="flex gap-2">
             <AddToPlaylist
@@ -89,6 +97,7 @@ export const AlbumMain = ({ album, songs, previewPlaylists, favoriteSongs, favor
         songs={filteredSongs}
         favoriteSongs={favoriteSongs}
         previewPlaylists={previewPlaylists}
+        predominantColor={predominantColor}
       />
     </div>
   );

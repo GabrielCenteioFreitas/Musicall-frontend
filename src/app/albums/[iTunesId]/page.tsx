@@ -45,6 +45,7 @@ const AlbumPage = async ({ params }: { params: { iTunesId: number } }) => {
           previewPlaylists={previewPlaylists}
           favoriteSongs={favorites?.favoriteSongs || null}
           favoriteAlbums={favorites?.favoriteAlbums || null}
+          predominantColor={predominantColor || "#52525B"}
         />
       </div>
     </div>
