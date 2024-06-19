@@ -44,7 +44,7 @@ export const VolumeSlider = ({ volume, setVolume }: VolumeSliderProps) => {
         <SliderPrimitive.Root
           max={1}
           value={[volume]}
-          step={0.05}
+          step={0.025}
           onValueChange={(value) => setVolume(value[0])}
           className="relative flex w-44 touch-none select-none items-center group/volume"
         >

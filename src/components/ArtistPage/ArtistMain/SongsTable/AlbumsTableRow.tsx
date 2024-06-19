@@ -7,6 +7,7 @@ import { ITunesAlbum } from "@/types/album";
 import { PreviewPlaylist } from "@/types/previewPlaylist";
 import { memo } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 interface AlbumsTableRowProps {
   album: ITunesAlbum;
@@ -21,36 +22,39 @@ const AlbumsTableRowComponent = ({
   i,
   previewPlaylists
 }: AlbumsTableRowProps) => {
+  const router = useRouter()
+
   return (
-    <TableRow className="hover:bg-zinc-700/20 transition-all">
+    <TableRow
+      className="hover:bg-zinc-700/20 transition-all cursor-pointer"
+      onClick={() => router.push(`/albums/${album.collectionId}`)}
+    >
       <TableCell className="text-base text-zinc-400 pl-3">
         {i+1}
       </TableCell>
 
       <TableCell className="flex items-center gap-2 px-2 py-2.5">
-        <Link href={`/albums/${album.collectionId}`}>
-          <Image
-            src={album.artworkUrl100}
-            alt={album.collectionName}
-            width={48}
-            height={48}
-            className="rounded-lg h-full aspect-square"
-          />
-        </Link>
+        <Image
+          src={album.artworkUrl100}
+          alt={album.collectionName}
+          width={48}
+          height={48}
+          className="rounded-lg h-full aspect-square"
+        />
 
         <div className="flex flex-col justify-center text-left max-w-full overflow-hidden">
-          <Link
-            href={`/albums/${album.collectionId}`}
+          <span
             title={album.collectionName}
             className="w-fit text-base font-medium truncate ..."
           >
             {album.collectionName}
-          </Link>
+          </span>
 
           <Link
             href={`/artists/${album.artistId}`}
             title={album.artistName}
             className="w-fit text-sm hover:underline text-zinc-400 text-wrap truncate ..."
+            onClick={(e) => e.stopPropagation()}
           >
             {album.artistName}
           </Link>
@@ -70,7 +74,7 @@ const AlbumsTableRowComponent = ({
         {album.primaryGenreName}
       </TableCell>
 
-      <TableCell className="pr-3">
+      <TableCell className="pr-3" onClick={(e) => e.stopPropagation()}>
         <div className="flex gap-1.5">
           <AddToPlaylist
             previewPlaylists={previewPlaylists}
