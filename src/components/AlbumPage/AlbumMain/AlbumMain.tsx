@@ -66,7 +66,7 @@ export const AlbumMain = ({
     <div className="flex flex-col gap-7 w-3/4">
       <div className="flex justify-between">
         <div className="flex gap-3 items-center">
-          <PlayButton album={album} songs={filteredSongs} />
+          <PlayButton albumSongs={filteredSongs} />
 
           <div className="flex gap-2">
             <AddToPlaylist

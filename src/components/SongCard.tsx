@@ -1,20 +1,20 @@
 import { FavoriteSongButton } from "@/components/FavoriteButtons/FavoriteSongButton";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { PlayingSong } from "@/types/song";
 import Image from "next/image";
 import Link from "next/link";
 import { memo } from "react";
 import { SongCardPlayButton } from "./PlayButtons/SongCardPlayButton";
-import { PlayingSong } from "@/types/song";
 
 interface SongCardProps {
   song: PlayingSong;
-  groupSongs: PlayingSong[];
+  songsGroup: PlayingSong[];
   isFavorited?: boolean;
   className?: string;
 }
 
-const SongCardComponent = ({ song, groupSongs, isFavorited, className }: SongCardProps) => {
+const SongCardComponent = ({ song, songsGroup, isFavorited, className }: SongCardProps) => {
   return (
     <div className="group relative">
       <Button
@@ -62,8 +62,8 @@ const SongCardComponent = ({ song, groupSongs, isFavorited, className }: SongCar
 
       <SongCardPlayButton
         song={song}
-        groupSongs={groupSongs}
-        songIndex={groupSongs.indexOf(song)}
+        songsGroup={songsGroup}
+        songIndex={songsGroup.indexOf(song)}
       />
     </div>
   );

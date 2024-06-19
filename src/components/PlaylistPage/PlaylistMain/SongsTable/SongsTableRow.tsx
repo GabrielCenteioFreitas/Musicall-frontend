@@ -37,32 +37,15 @@ const SongsTableRowComponent = ({
   const minutes = Math.floor(currentSong.song.durationInSeconds / 60)
   const seconds = Math.ceil(currentSong.song.durationInSeconds - (minutes * 60))
 
-  const { playingSong, setPlayingSong, currentSound, isPlaying, setIsPlaying, setNextSongs, addCurrentToPrev } = usePlayer()
+  const { playingSong, isPlaying, playSongInAGroup } = usePlayer()
+  const isSongPlaying = currentSong.id === playingSong?.id
 
   const handleClick = () => {
-    if (currentSong.id === playingSong?.id) {
-      if (isPlaying) {
-        currentSound?.pause()
-        setIsPlaying(false)
-      } else {
-        setIsPlaying(true)
-        currentSound?.play()
-      }
-    } else {
-      const songIndex = playlist.songs.indexOf(currentSong)
-      currentSound?.stop()
-      addCurrentToPrev()
-      setPlayingSong(currentSong)
-      setNextSongs([
-        ...playlist.songs
-          .slice(songIndex+1, playlist.songs.length)
-          .map(song => song),
-        ...playlist.songs
-          .slice(0, songIndex)
-          .map(song => song),
-      ])
-      setIsPlaying(true)
-    }
+    playSongInAGroup({
+      group: playlist.songs,
+      isSongPlaying,
+      songIndex: playlist.songs.indexOf(currentSong),
+    })
   }
 
   return (

@@ -3,9 +3,27 @@
 import { PlayingSong } from "@/types/song";
 import { ReactNode, createContext, useEffect, useState } from "react";
 
+interface PlayAndSetGroupProps {
+  group: PlayingSong[];
+  songIndex: number;
+}
+
+interface PlayGroupProps {
+  group: PlayingSong[];
+  isPlayingSongInGroup: boolean;
+}
+
+interface PlaySongInAGroupProps {
+  group: PlayingSong[];
+  songIndex: number;
+  isSongPlaying: boolean;
+}
+
 interface PlayerContextData {
   playingSong: PlayingSong | null;
   setPlayingSong: (song: PlayingSong | null) => void;
+  playingGroup: PlayingSong[] | null;
+  setPlayingGroup: (songs: PlayingSong[] | null) => void;
   currentSound: Howl | null;
   setCurrentSound: (sound: Howl | null) => void;
   nextSongs: PlayingSong[] | null;
@@ -17,6 +35,8 @@ interface PlayerContextData {
   playNextSong: () => void;
   playPrevSong: () => void;
   addCurrentToPrev: () => void;
+  playGroup: ({}: PlayGroupProps) => void;
+  playSongInAGroup: ({}: PlaySongInAGroupProps) => void;
 }
 
 export const PlayerContext = createContext<PlayerContextData>(
@@ -25,6 +45,7 @@ export const PlayerContext = createContext<PlayerContextData>(
 
 export function PlayerProvider({ children }: { children: ReactNode; }) {
   const [playingSong, setPlayingSong] = useState<PlayingSong | null>(null)
+  const [playingGroup, setPlayingGroup] = useState<PlayingSong[] | null>(null)
   const [currentSound, setCurrentSound] = useState<Howl | null>(null)
   const [prevSongs, setPrevSongs] = useState<PlayingSong[] | null>(null)
   const [nextSongs, setNextSongs] = useState<PlayingSong[] | null>(null)
@@ -52,6 +73,69 @@ export function PlayerProvider({ children }: { children: ReactNode; }) {
           : null
       }
     })
+  }
+  
+  const playAndSetGroup = ({
+    group, songIndex
+  }: PlayAndSetGroupProps) => {  
+    currentSound?.stop()
+    addCurrentToPrev()
+    setPlayingSong(group[songIndex])
+    setNextSongs([
+      ...group
+        .slice(songIndex+1, group.length)
+        .map(song => song),
+      ...group
+        .slice(0, songIndex)
+        .map(song => song),
+    ])
+    setIsPlaying(true)
+    setPlayingGroup(group)
+  }
+
+  const playGroup = ({
+    group, isPlayingSongInGroup,
+  }: PlayGroupProps) => {
+    if (isPlaying) {
+      if (isPlayingSongInGroup) {
+        currentSound?.pause()
+        setIsPlaying(false)
+      } else {
+        playAndSetGroup({
+          group,
+          songIndex: 0,
+        })
+      }
+    } else {
+      if (playingSong && isPlayingSongInGroup) {
+        currentSound?.play()
+        setIsPlaying(true)
+      } else {
+        playAndSetGroup({
+          group,
+          songIndex: 0,
+        })
+      }
+    }
+  }
+
+  const playSongInAGroup = ({
+    group, songIndex, isSongPlaying
+  }: PlaySongInAGroupProps) => {
+    if (isSongPlaying) {
+      if (isPlaying) {
+        currentSound?.pause()
+        setIsPlaying(false)
+      } else {
+        setIsPlaying(true)
+        currentSound?.play()
+      }
+    } else {
+      playAndSetGroup({
+        group,
+        songIndex,
+      })
+    }
   }
 
   const playNextSong = () => {
@@ -96,12 +180,14 @@ export function PlayerProvider({ children }: { children: ReactNode; }) {
   return (
     <PlayerContext.Provider value={{
       playingSong, setPlayingSong,
+      playingGroup, setPlayingGroup,
       currentSound, setCurrentSound,
       nextSongs, setNextSongs,
       prevSongs, setPrevSongs,
       isPlaying, setIsPlaying,
       playNextSong, playPrevSong,
-      addCurrentToPrev
+      addCurrentToPrev,
+      playGroup, playSongInAGroup,
     }}>
       {children}
     </PlayerContext.Provider>

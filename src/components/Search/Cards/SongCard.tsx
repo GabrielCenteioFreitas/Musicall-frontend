@@ -23,35 +23,17 @@ const SongCardComponent = ({ previewPlaylists, song, songs, isFavorited }: SongC
   const durationInMinutes = Math.floor(song.trackTimeMillis / 1000 / 60)
   const durationInSeconds = Math.ceil((song.trackTimeMillis / 1000) - (durationInMinutes * 60))
 
-  const { playingSong, setPlayingSong, currentSound, isPlaying, setIsPlaying, setNextSongs, addCurrentToPrev } = usePlayer()
+  const { playingSong, isPlaying, playSongInAGroup } = usePlayer()
   const isSongPlaying = 
     song.trackId === playingSong?.song.iTunesId && 
     song.collectionId === playingSong?.song.album.iTunesId
-
+  
   const handleClick = () => {
-    if (isSongPlaying) {
-      if (isPlaying) {
-        currentSound?.pause()
-        setIsPlaying(false)
-      } else {
-        setIsPlaying(true)
-        currentSound?.play()
-      }
-    } else {
-      const songIndex = songs.indexOf(song)
-      currentSound?.stop()
-      addCurrentToPrev()
-      setPlayingSong(iTunesToPlaying(song))
-      setNextSongs([
-        ...songs
-          .slice(songIndex+1, songs.length)
-          .map(song => iTunesToPlaying(song)),
-        ...songs
-          .slice(0, songIndex)
-          .map(song => iTunesToPlaying(song)),
-      ])
-      setIsPlaying(true)
-    }
+    playSongInAGroup({
+      group: songs.map((song) => iTunesToPlaying(song)),
+      isSongPlaying,
+      songIndex: songs.indexOf(song),
+    })
   }
 
   return (

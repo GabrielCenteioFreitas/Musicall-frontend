@@ -8,38 +8,21 @@ import { Button } from "../ui/button";
 
 interface SongCardPlayButtonProps {
   song: PlayingSong;
-  groupSongs: PlayingSong[];
+  songsGroup: PlayingSong[];
   songIndex: number;
   className?: string;
 }
 
-export const SongCardPlayButton = ({ song, groupSongs, songIndex, className }: SongCardPlayButtonProps) => {
-  const { playingSong, setPlayingSong, currentSound, isPlaying, setIsPlaying, setNextSongs, addCurrentToPrev } = usePlayer()
+export const SongCardPlayButton = ({ song, songsGroup, songIndex, className }: SongCardPlayButtonProps) => {
+  const { playingSong, isPlaying, playSongInAGroup } = usePlayer()
   const isSongPlaying = song.song.id === playingSong?.song.id
 
   const handleClick = () => {
-    if (isSongPlaying) {
-      if (isPlaying) {
-        currentSound?.pause()
-        setIsPlaying(false)
-      } else {
-        setIsPlaying(true)
-        currentSound?.play()
-      }
-    } else {
-      currentSound?.stop()
-      addCurrentToPrev()
-      setPlayingSong(song)
-      setNextSongs([
-        ...groupSongs
-          .slice(songIndex+1, groupSongs.length)
-          .map(song => song),
-        ...groupSongs
-          .slice(0, songIndex)
-          .map(song => song),
-      ])
-      setIsPlaying(true)
-    }
+    playSongInAGroup({
+      group: songsGroup,
+      isSongPlaying,
+      songIndex,
+    })
   }
 
   const defaultPosition = 'bottom-12 group-hover:bottom-[68px] opacity-0 group-hover:opacity-100'

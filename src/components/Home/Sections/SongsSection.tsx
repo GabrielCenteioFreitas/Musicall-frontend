@@ -43,7 +43,7 @@ export const SongsSection = async ({
             <SongCard
               key={song.song.id}
               song={song}
-              groupSongs={convertedSongs}
+              songsGroup={convertedSongs}
               isFavorited={favoriteSongs?.some(
                 favoritedSong => favoritedSong.song.iTunesId === song.song.iTunesId
               ) || false}

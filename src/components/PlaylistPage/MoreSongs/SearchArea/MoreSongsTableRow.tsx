@@ -18,35 +18,17 @@ export const MoreSongsTableRow = ({ song, moreSongs, i }: MoreSongsTableRowProps
   const minutes = Math.floor(durationInSeconds / 60)
   const seconds = Math.ceil(durationInSeconds - (minutes * 60))
 
-  const { playingSong, setPlayingSong, currentSound, isPlaying, setIsPlaying, setNextSongs, addCurrentToPrev } = usePlayer()
+  const { playingSong, isPlaying, playSongInAGroup } = usePlayer()
   const isSongPlaying = 
     song.trackId === playingSong?.song.iTunesId && 
     song.collectionId === playingSong?.song.album.iTunesId
 
   const handleClick = () => {
-    if (isSongPlaying) {
-      if (isPlaying) {
-        currentSound?.pause()
-        setIsPlaying(false)
-      } else {
-        setIsPlaying(true)
-        currentSound?.play()
-      }
-    } else {
-      const songIndex = moreSongs.indexOf(song)
-      currentSound?.stop()
-      addCurrentToPrev()
-      setPlayingSong(iTunesToPlaying(song))
-      setNextSongs([
-        ...moreSongs
-          .slice(songIndex+1, moreSongs.length)
-          .map(song => iTunesToPlaying(song)),
-        ...moreSongs
-          .slice(0, songIndex)
-          .map(song => iTunesToPlaying(song)),
-      ])
-      setIsPlaying(true)
-    }
+    playSongInAGroup({
+      group: moreSongs.map((song) => iTunesToPlaying(song)),
+      isSongPlaying,
+      songIndex: moreSongs.indexOf(song),
+    })
   }
 
   return (

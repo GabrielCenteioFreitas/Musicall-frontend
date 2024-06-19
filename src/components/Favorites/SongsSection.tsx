@@ -18,7 +18,7 @@ export const SongsSection = ({ favoriteSongs }: SongsSectionProps) => {
               <SongCard
                 key={favoritedSong.song.iTunesId}
                 song={favoritedSong}
-                groupSongs={favoriteSongs}
+                songsGroup={favoriteSongs}
                 isFavorited
               />
             )

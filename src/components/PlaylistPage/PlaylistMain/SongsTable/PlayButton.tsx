@@ -10,32 +10,15 @@ interface PlayButtonProps {
 }
 
 export const PlayButton = ({ playlist, song }: PlayButtonProps) => {
-  const { playingSong, setPlayingSong, currentSound, isPlaying, setIsPlaying, setNextSongs, addCurrentToPrev } = usePlayer()
+  const { playingSong, isPlaying, playSongInAGroup } = usePlayer()
+  const isSongPlaying =  song.id === playingSong?.id
 
   const handleClick = () => {
-    if (song.id === playingSong?.id) {
-      if (isPlaying) {
-        currentSound?.pause()
-        setIsPlaying(false)
-      } else {
-        setIsPlaying(true)
-        currentSound?.play()
-      }
-    } else {
-      const songIndex = playlist.songs.indexOf(song)
-      currentSound?.stop()
-      addCurrentToPrev()
-      setPlayingSong(song)
-      setNextSongs([
-        ...playlist.songs
-          .slice(songIndex+1, playlist.songs.length)
-          .map(song => song),
-        ...playlist.songs
-          .slice(0, songIndex)
-          .map(song => song),
-      ])
-      setIsPlaying(true)
-    }
+    playSongInAGroup({
+      group: playlist.songs,
+      isSongPlaying,
+      songIndex: playlist.songs.indexOf(song),
+    })
   }
 
   return (

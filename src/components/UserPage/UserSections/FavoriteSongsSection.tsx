@@ -1,7 +1,7 @@
 import { SongCard } from "@/components/SongCard";
 import { FavoriteSong } from "@/types/favorites";
-import { UserSectionsTitle } from "./UserSectionsTitle";
 import { UserSectionsItemsContainer } from "./UserSectionsItemsContainer";
+import { UserSectionsTitle } from "./UserSectionsTitle";
 
 interface FavoriteSongsSectionProps {
   favoriteSongs: FavoriteSong[]
@@ -19,7 +19,7 @@ export const FavoriteSongsSection = ({ favoriteSongs }: FavoriteSongsSectionProp
               <SongCard
                 key={favoritedSong.song.iTunesId}
                 song={favoritedSong}
-                groupSongs={favoriteSongs}
+                songsGroup={favoriteSongs}
                 className="w-44"
               />
             )
