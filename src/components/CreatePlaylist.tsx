@@ -15,11 +15,9 @@ import {
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { handleCreatePlaylistClick } from "@/lib/handleCreatePlaylistClick";
-import { cn } from "@/lib/utils";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { FormEvent, ReactNode, useState } from "react";
-import { FaPlus } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { loginURL } from "./DefaultLayout/Header/SignIn";
 

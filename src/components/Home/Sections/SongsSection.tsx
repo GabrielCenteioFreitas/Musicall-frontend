@@ -2,7 +2,6 @@ import { SongCard } from "@/components/SongCard";
 import { getSongsByGenre } from "@/lib/getSongsByGenre";
 import { cn } from "@/lib/utils";
 import { FavoriteSong } from "@/types/favorites";
-import { DBSong } from "@/types/song";
 import { SectionsContainer } from "../../SectionsContainer";
 import { SectionsItemsContainer } from "../SectionsItemsContainer";
 

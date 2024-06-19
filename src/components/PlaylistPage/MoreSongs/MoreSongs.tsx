@@ -1,5 +1,4 @@
 import { Divider } from "@/components/Divider";
-import { useState } from "react";
 import { SearchArea } from "./SearchArea/SearchArea";
 
 export const MoreSongs = ({  }) => {

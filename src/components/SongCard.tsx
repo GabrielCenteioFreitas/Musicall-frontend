@@ -1,6 +1,5 @@
 import { FavoriteSongButton } from "@/components/FavoriteButtons/FavoriteSongButton";
 import { Button } from "@/components/ui/button";
-import { ITunesNecessaryType } from "@/lib/iTunesToPlaying";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
