@@ -1,16 +1,16 @@
 import { usePlayer } from "@/hooks/usePlayer";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import useSound from 'use-sound';
 import { PlayerButtons } from "./PlayerButtons";
 import { SongInfo } from "./SongInfo";
 import { VolumeSlider } from "./VolumeSlider";
 
 export const PlayerContent = () => {
-  const { playingSong, currentSound, setCurrentSound, playNextSong } = usePlayer()
-  const [volume, setVolume] = useState(0.25);
+  const { playingSong, currentSound, setCurrentSound, playNextSong, isLoopModeEnabled, volume } = usePlayer()
   const [_, { sound }] = useSound(playingSong?.song.previewUrl || '', {
     volume,
-    onend: () => playNextSong()
+    onend: () => (isLoopModeEnabled ? {} : playNextSong()),
+    loop: isLoopModeEnabled,
   })
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export const PlayerContent = () => {
 
       <PlayerButtons />
 
-      <VolumeSlider volume={volume} setVolume={setVolume} />
+      <VolumeSlider />
     </div>
   );
 }

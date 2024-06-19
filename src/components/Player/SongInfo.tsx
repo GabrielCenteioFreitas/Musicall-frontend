@@ -19,11 +19,11 @@ export const SongInfo = () => {
       />
 
       <div className="flex flex-col overflow-hidden">
-        <span className="text-md truncate ...">
+        <span className="text-md truncate ..." title={playingSong.song.name}>
           {playingSong.song.name}
         </span>
 
-        <span className="text-xs text-zinc-400 truncate ...">
+        <span className="text-xs text-zinc-400 truncate ..." title={playingSong.song.artist.name}>
           {playingSong.song.artist.name}
         </span>
       </div>

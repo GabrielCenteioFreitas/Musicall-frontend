@@ -26,12 +26,18 @@ interface PlayerContextData {
   setPlayingGroup: (songs: PlayingSong[] | null) => void;
   currentSound: Howl | null;
   setCurrentSound: (sound: Howl | null) => void;
+  volume: number;
+  setVolume: (volumeParam: number) => void;
   nextSongs: PlayingSong[] | null;
   setNextSongs: (nextSongs: PlayingSong[] | null) => void;
   prevSongs: PlayingSong[] | null;
   setPrevSongs: (prevSongs: PlayingSong[] | null) => void;
   isPlaying: boolean;
   setIsPlaying: (isPlayingParam: boolean) => void;
+  isRandomModeEnabled: boolean;
+  setIsRandomModeEnabled: (isRandomModeEnabledParam: boolean) => void;
+  isLoopModeEnabled: boolean;
+  setIsLoopModeEnabled: (isLoopModeEnabledParam: boolean) => void;
   playNextSong: () => void;
   playPrevSong: () => void;
   addCurrentToPrev: () => void;
@@ -47,9 +53,12 @@ export function PlayerProvider({ children }: { children: ReactNode; }) {
   const [playingSong, setPlayingSong] = useState<PlayingSong | null>(null)
   const [playingGroup, setPlayingGroup] = useState<PlayingSong[] | null>(null)
   const [currentSound, setCurrentSound] = useState<Howl | null>(null)
+  const [volume, setVolume] = useState(0.25);
   const [prevSongs, setPrevSongs] = useState<PlayingSong[] | null>(null)
   const [nextSongs, setNextSongs] = useState<PlayingSong[] | null>(null)
   const [isPlaying, setIsPlaying] = useState(false)
+  const [isRandomModeEnabled, setIsRandomModeEnabled] = useState(false)
+  const [isLoopModeEnabled, setIsLoopModeEnabled] = useState(false)
 
   useEffect(() => {
     if (playingSong) {
@@ -60,6 +69,30 @@ export function PlayerProvider({ children }: { children: ReactNode; }) {
       document.querySelector("#container")?.classList.add("h-full")
     }
   }, [playingSong])
+
+  useEffect(() => {
+    if (!playingSong || !playingGroup) {
+      return
+    }    
+
+    const index = playingGroup?.indexOf(playingSong)
+    if (isRandomModeEnabled) {
+      const groupToBeShuffled = [
+        ...playingGroup.slice(index+1, playingGroup.length),
+        ...playingGroup.slice(0, index)
+      ]
+      const shuffledGroup = groupToBeShuffled.sort(() => Math.random() - 0.5)
+
+      setNextSongs(shuffledGroup)
+    } else {
+      const nextSongsToSet = [
+        ...playingGroup.slice(index+1, playingGroup.length),
+        ...playingGroup.slice(0, index)
+      ]
+
+      setNextSongs(nextSongsToSet)
+    }
+  }, [isRandomModeEnabled, playingSong, playingGroup])
 
   const addCurrentToPrev = () => {
     setPrevSongs(cur => {
@@ -82,12 +115,8 @@ export function PlayerProvider({ children }: { children: ReactNode; }) {
     addCurrentToPrev()
     setPlayingSong(group[songIndex])
     setNextSongs([
-      ...group
-        .slice(songIndex+1, group.length)
-        .map(song => song),
-      ...group
-        .slice(0, songIndex)
-        .map(song => song),
+      ...group.slice(songIndex+1, group.length),
+      ...group.slice(0, songIndex)
     ])
     setIsPlaying(true)
     setPlayingGroup(group)
@@ -182,9 +211,12 @@ export function PlayerProvider({ children }: { children: ReactNode; }) {
       playingSong, setPlayingSong,
       playingGroup, setPlayingGroup,
       currentSound, setCurrentSound,
+      volume, setVolume,
       nextSongs, setNextSongs,
       prevSongs, setPrevSongs,
       isPlaying, setIsPlaying,
+      isRandomModeEnabled, setIsRandomModeEnabled,
+      isLoopModeEnabled, setIsLoopModeEnabled,
       playNextSong, playPrevSong,
       addCurrentToPrev,
       playGroup, playSongInAGroup,

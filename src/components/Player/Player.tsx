@@ -4,7 +4,7 @@ import { usePlayer } from "@/hooks/usePlayer";
 import { PlayerContent } from "./PlayerContent";
 
 export const Player = () => {
-  const { playingSong } = usePlayer()
+  const { playingSong, isLoopModeEnabled } = usePlayer()
 
   if (!playingSong) {
     return null
@@ -17,7 +17,7 @@ export const Player = () => {
         px-16 py-4 flex justify-center items-center
       "
     >
-      <PlayerContent key={playingSong.id} />
+      <PlayerContent key={`${playingSong.id}-${isLoopModeEnabled}`} />
     </div>
   );
 }

@@ -7,13 +7,11 @@ import {
   IoVolumeLow,
   IoVolumeMute,
 } from "react-icons/io5";
+import { usePlayer } from "@/hooks/usePlayer";
 
-interface VolumeSliderProps {
-  volume: number;
-  setVolume: (volumeParam: number) => void;
-}
+export const VolumeSlider = () => {
+  const { volume, setVolume } = usePlayer()
 
-export const VolumeSlider = ({ volume, setVolume }: VolumeSliderProps) => {
   const handleVolumeClick = () => {
     if (volume > 0) {
       setVolume(0)
