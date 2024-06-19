@@ -30,7 +30,7 @@ export const Profile = () => {
           <Image
             src={avatarUrl}
             alt={name}
-            className="size-10 bg-zinc-900 rounded-full"
+            className="size-10 shrink-0 object-cover object-top bg-zinc-900 rounded-full"
             width={50}
             height={50}
           />

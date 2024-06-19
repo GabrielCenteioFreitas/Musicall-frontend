@@ -22,15 +22,18 @@ export const PlaylistInfo = ({ playlist }: PlaylistInfoProps) => {
       <h2 className="text-[2.5rem] leading-none font-semibold">{playlist.name}</h2>
 
       <div className="flex gap-2 items-center text-md text-zinc-400 leading-none">
-        <Link href={`/users/${playlist.user.id}`} className="flex items-center gap-2 hover:underline">
+        <Link
+          href={`/users/${playlist.user.id}`}
+          className="flex items-center gap-2 hover:underline"
+        >
           <Image
             src={playlist.user?.avatarUrl}
             alt={playlist.user?.name}
             width={28}
             height={28}
-            className="rounded-full"
+            className="size-8 flex-0 rounded-full object-cover object-top"
           />
-          {playlist.user?.name} 
+          {playlist.user?.name}
         </Link>
         •
         <span>

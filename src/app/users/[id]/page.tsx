@@ -17,11 +17,11 @@ const UserPage = async ({ params }: { params: { id: string } }) => {
     }
   )
   const data = await response.json()
-  const user: DBUser | undefined = data.user;
   
-  if (!user) {
+  if (!data || !data.user) {
     return redirect('/')
   }
+  const user: DBUser = data.user;
 
   const currentUser = getUserFromServer()
   const isUserTheCreator = user.id === currentUser?.sub
