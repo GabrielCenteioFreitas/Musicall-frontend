@@ -38,7 +38,7 @@ export type PlaylistSong = {
 export type PlayingSong = {
   id?: string;
   song: {
-    id: DBSong['id'];
+    id?: DBSong['id'];
     name: DBSong['name'];
     iTunesId: DBSong['iTunesId'];
     portrait: DBSong['portrait'];
