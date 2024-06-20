@@ -33,9 +33,9 @@ export const SongsSection = async ({
 
   return (
     <SectionsContainer className={cn("mb-4", className)}>
-      <h2 className="text-xl font-semibold">
+      <h3 className="text-xl font-semibold">
         {sectionTitle}
-      </h2>
+      </h3>
 
       <SectionsItemsContainer className="grid-cols-8">
         {convertedSongs.map((song) => {

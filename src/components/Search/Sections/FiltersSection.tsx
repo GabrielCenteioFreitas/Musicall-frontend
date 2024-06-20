@@ -12,7 +12,7 @@ type Filter = {
 
 interface FiltersSectionProps  {
   term: string;
-  entity: string;
+  entity: string | undefined;
 }
 
 export const FiltersSection = ({ term, entity }: FiltersSectionProps) => {

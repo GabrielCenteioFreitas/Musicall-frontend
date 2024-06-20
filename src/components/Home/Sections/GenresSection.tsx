@@ -12,7 +12,7 @@ export const GenresSection = ({ favorites }: GenresSectionProps) => {
   return (
     <SectionsContainer>
       <SectionsTitle
-        title={'Gêneros'}
+        title="Gêneros"
         dividerMargins="mt-2 mb-4"
       />
 

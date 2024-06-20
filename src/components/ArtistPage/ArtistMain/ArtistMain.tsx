@@ -50,7 +50,7 @@ export const ArtistMain = ({ artist, albums, previewPlaylists, favoriteArtists, 
     : albums
 
   return (
-    <div className="flex flex-col gap-7 w-full">
+    <section className="flex flex-col gap-7 w-full">
       <div className="flex justify-between">
         <div className="w-48 flex gap-2 justify-center items-center">
           <SmallFavoriteArtistButton
@@ -75,6 +75,6 @@ export const ArtistMain = ({ artist, albums, previewPlaylists, favoriteArtists, 
         favoriteAlbums={favoriteAlbums}
         previewPlaylists={previewPlaylists}
       />
-    </div>
+    </section>
   );
 }

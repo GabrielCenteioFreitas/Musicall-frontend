@@ -16,4 +16,8 @@
   .debug {
     @apply border border-red-500;
   }
+
+  .loading {
+    @apply bg-zinc-400 animate-pulse;
+  }
 }

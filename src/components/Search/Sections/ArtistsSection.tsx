@@ -10,7 +10,7 @@ import { ArtistCard } from "../../ArtistCard";
 
 interface ArtistsSectionProps {
   term: string;
-  entity: string | null;
+  entity: string | undefined;
 }
 
 export const ArtistsSection = async ({ term, entity }: ArtistsSectionProps) => {

@@ -1,15 +1,11 @@
-import { AlbumCard } from "@/components/AlbumCard";
-import { ArtistCard } from "@/components/ArtistCard";
 import { loginURL } from "@/components/DefaultLayout/Header/SignIn";
 import { AlbumsSection } from "@/components/Favorites/AlbumsSection";
 import { ArtistsSection } from "@/components/Favorites/ArtistsSection";
 import { SongsSection } from "@/components/Favorites/SongsSection";
-import { SectionsContainer } from "@/components/SectionsContainer";
-import { SectionsTitle } from "@/components/SectionsTitle";
-import { SongCard } from "@/components/SongCard";
 import { getFavorites } from "@/lib/getFavoritesData";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import Loading from "./loading";
 
 const FavoritesPage = async () => {
   const token = cookies().get('token')?.value

@@ -14,7 +14,7 @@ interface ArtistInfoProps {
 
 export const ArtistInfo = ({ artist, albums }: ArtistInfoProps) => {
   return (
-    <div className="flex items-center gap-4 w-full h-fit">
+    <section className="flex items-center gap-4 w-full h-fit">
       <ArtistPortrait
         name={artist.artistName}
         className="size-48 text-7xl"
@@ -43,6 +43,6 @@ export const ArtistInfo = ({ artist, albums }: ArtistInfoProps) => {
           )}
         </div>
       </div>
-    </div>
+    </section>
   );
 }

@@ -20,7 +20,7 @@ interface UserInfoProps {
 
 export const UserInfo = ({ user, predominantColor, id, isUserTheCreator }: UserInfoProps) => {
   return (
-    <div className="flex items-center gap-4 w-full h-fit">
+    <section className="flex items-center gap-4 w-full h-fit">
       <div className="size-56 rounded-xl shrink-0 relative group">
         <Image
           src={user.avatarUrl}
@@ -57,6 +57,6 @@ export const UserInfo = ({ user, predominantColor, id, isUserTheCreator }: UserI
           Conta criada em {dayjs(user.createdAt).format("D[ de ]MMMM[ de ]YYYY")}
         </p>
       </div>
-    </div>
+    </section>
   );
 }

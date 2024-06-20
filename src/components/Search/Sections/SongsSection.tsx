@@ -11,7 +11,7 @@ import { getFavorites } from "@/lib/getFavoritesData";
 
 interface SongsSectionProps {
   term: string;
-  entity: string | null;
+  entity: string | undefined;
 }
 
 export const SongsSection = async ({ term, entity }: SongsSectionProps) => {

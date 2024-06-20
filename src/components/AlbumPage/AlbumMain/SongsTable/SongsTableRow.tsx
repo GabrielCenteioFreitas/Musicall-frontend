@@ -72,11 +72,16 @@ const SongsTableRowComponent = ({
         </div>
       </TableCell>
 
-      <TableCell className="max-w-[360px] py-2.5 px-2 flex flex-col justify-center text-left overflow-hidden">
+      <TableCell className="max-w-full py-2.5 px-2 flex flex-col justify-center text-left overflow-hidden">
         <span className="text-base font-medium truncate ..." title={song.trackName}>
           {song.trackName}
         </span>
-        <Link href={`/artists/${song.artistId}`} className="w-fit">
+        
+        <Link
+          href={`/artists/${song.artistId}`}
+          className="w-fit"
+          onClick={(e) => e.stopPropagation()}
+        >
           <span className="text-sm hover:underline text-zinc-400 text-wrap truncate ..." title={song.artistName}>
             {song.artistName}
           </span>

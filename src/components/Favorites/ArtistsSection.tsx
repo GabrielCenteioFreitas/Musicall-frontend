@@ -8,7 +8,7 @@ interface ArtistsSectionProps {
 
 export const ArtistsSection = ({ favoriteArtists }: ArtistsSectionProps) => {
   return (
-    <div>
+    <section>
       <SectionsTitle title="Artistas favoritos" dividerMargins="my-2" />
 
       {favoriteArtists && favoriteArtists.length > 0 ? (
@@ -34,6 +34,6 @@ export const ArtistsSection = ({ favoriteArtists }: ArtistsSectionProps) => {
           Você não possui nenhum artista marcado como favorito.
         </span>
       )}
-    </div>
+    </section>
   );
 }

@@ -19,7 +19,7 @@ export const PlaylistInfo = ({ playlist }: PlaylistInfoProps) => {
   }, 0)
 
   return (
-    <div className="flex flex-col gap-3">
+    <section className="flex flex-col gap-3">
       <h2 className="text-[2.5rem] leading-none font-semibold">{playlist.name}</h2>
 
       <div className="flex gap-2 items-center text-md text-zinc-400 leading-none">
@@ -58,6 +58,6 @@ export const PlaylistInfo = ({ playlist }: PlaylistInfoProps) => {
           </>
         )}
       </div>
-    </div>
+    </section>
   );
 }

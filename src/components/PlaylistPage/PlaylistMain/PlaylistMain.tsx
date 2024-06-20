@@ -46,7 +46,7 @@ export const PlaylistMain = ({ playlist, previewPlaylists, favoriteSongs, isUser
     : playlist.songs
 
   return (
-    <div className="flex flex-col gap-7">
+    <section className="flex flex-col gap-7">
       <div className="flex justify-between">
         <div className="flex gap-3 items-center">
           <PlayButton playlist={playlist} />
@@ -71,6 +71,6 @@ export const PlaylistMain = ({ playlist, previewPlaylists, favoriteSongs, isUser
         isUserTheCreator={isUserTheCreator}
         predominantColor={predominantColor}
       />
-    </div>
+    </section>
   );
 }

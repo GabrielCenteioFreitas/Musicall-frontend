@@ -41,22 +41,20 @@ const PlaylistPage = async ({ params }: { params: { id: string } }) => {
         style={{ background: `radial-gradient(circle at top right, ${predominantColor}30, transparent 100%) fixed` }}
       />
 
-      <div className="flex-1">
-        <div className="flex flex-col gap-4">
-          <PlaylistInfo playlist={playlist} />
+      <div className="flex-1 flex flex-col gap-4">
+        <PlaylistInfo playlist={playlist} />
 
-          <PlaylistMain
-            playlist={playlist}
-            previewPlaylists={previewPlaylists}
-            favoriteSongs={favorites?.favoriteSongs || null}
-            isUserTheCreator={isUserTheCreator}
-            predominantColor={predominantColor}
-          />
+        <PlaylistMain
+          playlist={playlist}
+          previewPlaylists={previewPlaylists}
+          favoriteSongs={favorites?.favoriteSongs || null}
+          isUserTheCreator={isUserTheCreator}
+          predominantColor={predominantColor}
+        />
 
-          {isUserTheCreator && (
-            <MoreSongs />
-          )}
-        </div>
+        {isUserTheCreator && (
+          <MoreSongs />
+        )}
       </div>
 
       <PlaylistAside

@@ -8,7 +8,7 @@ interface AlbumsSectionProps {
 
 export const AlbumsSection = ({ favoriteAlbums }: AlbumsSectionProps) => {
   return (
-    <div>
+    <section>
       <SectionsTitle title="Álbuns favoritos" dividerMargins="my-2" />
 
       {favoriteAlbums && favoriteAlbums.length ? (
@@ -36,6 +36,6 @@ export const AlbumsSection = ({ favoriteAlbums }: AlbumsSectionProps) => {
           Você não possui nenhum álbum marcado como favorito.
         </span>
       )}
-    </div>
+    </section>
   );
 }

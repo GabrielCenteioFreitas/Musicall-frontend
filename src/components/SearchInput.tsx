@@ -1,22 +1,25 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, ComponentProps } from "react";
 import { IoSearch } from "react-icons/io5";
 import { Button } from "./ui/button";
+import { cn } from "@/lib/utils";
 
-interface SearchInputProps {
+interface SearchInputProps extends ComponentProps<"input"> {
   search: string;
   handleSearch: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const SearchInput = ({ search, handleSearch }: SearchInputProps) => {
+export const SearchInput = ({ search, handleSearch, ...rest }: SearchInputProps) => {
   return (
     <div className="flex gap-1 items-center max-w-50 group">
       <input
         type="text"
         value={search}
         onChange={handleSearch}
-        className="
+        className={cn(`
           bg-transparent focus:outline-0 w-full transition-colors
-          border-b border-b-zinc-600 group-focus-within:border-b-zinc-300"
+          border-b border-b-zinc-600 group-focus-within:border-b-zinc-300
+        `, rest.className)}
+        {...rest}
       />
       <Button
         variant="ghost"
