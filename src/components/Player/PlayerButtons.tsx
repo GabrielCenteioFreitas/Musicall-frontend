@@ -8,7 +8,6 @@ import { PlayerButton } from "./PlayerButton/index";
 export const PlayerButtons = () => {
   const {
     playingSong, currentSound,
-    nextSongs, setNextSongs,
     isPlaying, setIsPlaying,
     playNextSong, playPrevSong,
     isRandomModeEnabled, setIsRandomModeEnabled,

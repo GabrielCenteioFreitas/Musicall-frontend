@@ -1,16 +1,21 @@
 import { usePlayer } from "@/hooks/usePlayer";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useSound from 'use-sound';
 import { PlayerButtons } from "./PlayerButtons";
 import { SongInfo } from "./SongInfo";
+import { TimeBar } from "./TimeBar";
 import { VolumeSlider } from "./VolumeSlider";
+import { useTime } from "@/hooks/useTime";
 
 export const PlayerContent = () => {
   const { playingSong, currentSound, setCurrentSound, playNextSong, isLoopModeEnabled, volume } = usePlayer()
-  const [_, { sound }] = useSound(playingSong?.song.previewUrl || '', {
+  const { setCurrentTime } = useTime();
+  const [isSongLoaded, setIsSongLoaded] = useState(false)
+  const [_, { sound, duration }] = useSound(playingSong?.song.previewUrl || '', {
     volume,
-    onend: () => (isLoopModeEnabled ? {} : playNextSong()),
+    onend: () => (isLoopModeEnabled ? setCurrentTime(0) : playNextSong()),
     loop: isLoopModeEnabled,
+    onload: () => setIsSongLoaded(true),
   })
 
   useEffect(() => {
@@ -18,17 +23,21 @@ export const PlayerContent = () => {
     sound?.play();
     setCurrentSound(sound)
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  } , [sound, setCurrentSound])
+  } , [sound, setCurrentSound])  
 
   if (!playingSong) {
     return null
   }
 
   return (
-    <div className="w-full h-12 grid grid-cols-3 gap-4">
+    <div className="w-full grid grid-cols-3 gap-4">
       <SongInfo />
 
-      <PlayerButtons />
+      <div className="flex items-center flex-col gap-2">
+        <PlayerButtons />
+
+        <TimeBar duration={duration || 0} isSongLoaded={isSongLoaded} />
+      </div>
 
       <VolumeSlider />
     </div>

@@ -10,7 +10,7 @@ import { Playlist } from "@/types/playlist";
 import { PreviewPlaylist } from "@/types/previewPlaylist";
 import dayjs from 'dayjs';
 import ptBr from 'dayjs/locale/pt-br';
-import { memo } from "react";
+import { memo, useCallback, useMemo } from "react";
 import { IoPauseSharp, IoPlaySharp } from "react-icons/io5";
 import { RemoveFromPlaylist } from "../RemoveFromPlaylist";
 dayjs.locale(ptBr)
@@ -37,16 +37,16 @@ const SongsTableRowComponent = ({
   const minutes = Math.floor(currentSong.song.durationInSeconds / 60)
   const seconds = Math.ceil(currentSong.song.durationInSeconds - (minutes * 60))
 
-  const { playingSong, isPlaying, playSongInAGroup } = usePlayer()
-  const isSongPlaying = currentSong.id === playingSong?.id
+  const { playingSong, isPlaying, playSongInAGroup } = usePlayer();
+  const isSongPlaying = currentSong.id === playingSong?.id;
 
   const handleClick = () => {
     playSongInAGroup({
       group: playlist.songs,
       isSongPlaying,
       songIndex: playlist.songs.indexOf(currentSong),
-    })
-  }
+    });
+  };
 
   return (
     <TableRow

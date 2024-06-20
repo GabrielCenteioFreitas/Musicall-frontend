@@ -53,7 +53,7 @@ export function PlayerProvider({ children }: { children: ReactNode; }) {
   const [playingSong, setPlayingSong] = useState<PlayingSong | null>(null)
   const [playingGroup, setPlayingGroup] = useState<PlayingSong[] | null>(null)
   const [currentSound, setCurrentSound] = useState<Howl | null>(null)
-  const [volume, setVolume] = useState(0.25);
+  const [volume, setVolume] = useState(0.25)
   const [prevSongs, setPrevSongs] = useState<PlayingSong[] | null>(null)
   const [nextSongs, setNextSongs] = useState<PlayingSong[] | null>(null)
   const [isPlaying, setIsPlaying] = useState(false)

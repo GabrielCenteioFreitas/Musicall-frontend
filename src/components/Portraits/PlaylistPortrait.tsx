@@ -1,3 +1,4 @@
+import { shimmer, toBase64 } from "@/lib/shimmer";
 import { cn } from "@/lib/utils";
 import { Playlist } from "@/types/playlist";
 import { PreviewPlaylist } from "@/types/previewPlaylist";
@@ -29,6 +30,7 @@ export const PlaylistPortrait = ({ playlist, size=50, className, iconClassName, 
         width={size}
         height={size}
         priority
+        placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(size, size))}`}
       />
     )
   }

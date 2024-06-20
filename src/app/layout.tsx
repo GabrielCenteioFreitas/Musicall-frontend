@@ -6,6 +6,7 @@ import "./globals.css";
 import 'react-toastify/dist/ReactToastify.css';
 import { PlayerProvider } from "@/contexts/PlayerContext";
 import { Player } from "@/components/Player/Player";
+import { TimeProvider } from "@/contexts/TimeContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,11 +24,13 @@ export default function RootLayout({
     <html lang="pt-br">
       <body className={`${inter.className} dark bg-zinc-950 text-zinc-50 h-screen no-scrollbar`}>
         <PlayerProvider>
-          <DefaultLayout>
-            {children}
-          </DefaultLayout>
+          <TimeProvider>
+            <DefaultLayout>
+              {children}
+            </DefaultLayout>
 
-          <Player />
+            <Player />
+          </TimeProvider>
         </PlayerProvider>
 
         <ToastContainer

@@ -1,5 +1,6 @@
 import { usePlayer } from "@/hooks/usePlayer";
 import Image from "next/image";
+import Link from "next/link";
 
 export const SongInfo = () => {
   const { playingSong } = usePlayer()
@@ -13,19 +14,23 @@ export const SongInfo = () => {
       <Image
         src={playingSong.song.portrait}
         alt={playingSong.song.name}
-        width={48}
-        height={48}
-        className="rounded-md h-full aspect-square"
+        width={64}
+        height={64}
+        className="rounded-md size-16 aspect-square shrink-0 object-cover"
       />
 
       <div className="flex flex-col overflow-hidden">
-        <span className="text-md truncate ..." title={playingSong.song.name}>
+        <span className="text-lg truncate ..." title={playingSong.song.name}>
           {playingSong.song.name}
         </span>
 
-        <span className="text-xs text-zinc-400 truncate ..." title={playingSong.song.artist.name}>
+        <Link
+          href={`/artists/${playingSong.song.artist.iTunesId}`}
+          title={playingSong.song.artist.name}
+          className="text-xs text-zinc-400 truncate ... hover:underline"
+        >
           {playingSong.song.artist.name}
-        </span>
+        </Link>
       </div>
     </div>
   );
