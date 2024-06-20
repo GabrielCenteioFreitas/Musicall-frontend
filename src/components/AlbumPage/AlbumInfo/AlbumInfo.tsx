@@ -5,6 +5,7 @@ import { getTotalDuration } from "@/utils/getTotalDuration";
 import dayjs from "dayjs";
 import ptBr from 'dayjs/locale/pt-br';
 import Link from "next/link";
+import { toBase64, shimmer } from "@/lib/shimmer";
 dayjs.locale(ptBr)
 
 interface AlbumInfoProps {
@@ -31,6 +32,7 @@ export const AlbumInfo = ({ album, songs }: AlbumInfoProps) => {
         width={192}
         height={192}
         className="size-48 rounded-lg shrink-0"
+        placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(192, 192))}`}
       />
 
       <div className="flex flex-col gap-0 overflow-hidden py-1">

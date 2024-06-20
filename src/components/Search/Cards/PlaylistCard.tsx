@@ -1,5 +1,7 @@
 import { PlaylistPortrait } from "@/components/Portraits/PlaylistPortrait";
 import { Button } from "@/components/ui/button";
+import { getPredominantColor } from "@/lib/getPredominantColor";
+import { toBase64, shimmer } from "@/lib/shimmer";
 import { PreviewPlaylist } from "@/types/previewPlaylist";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,7 +11,14 @@ interface PlaylistCardProps {
   playlist: PreviewPlaylist;
 }
 
-const PlaylistCardComponent = ({ playlist }: PlaylistCardProps) => {
+const PlaylistCardComponent = async ({ playlist }: PlaylistCardProps) => {
+  let predominantColor: string = '';
+  if (playlist.portrait) {
+    predominantColor = await getPredominantColor(playlist.portrait) || "#52525B"
+  } else {
+    predominantColor = "#52525B"
+  }
+
   return (
     <Button
       variant="ghost"
@@ -22,6 +31,7 @@ const PlaylistCardComponent = ({ playlist }: PlaylistCardProps) => {
           iconClassName="size-32"
           className="rounded-md overflow-hidden"
           size={180}
+          predominantColor={predominantColor}
         />
 
         <div className="flex flex-col gap-2.5 self-start text-left w-full">
@@ -35,6 +45,7 @@ const PlaylistCardComponent = ({ playlist }: PlaylistCardProps) => {
               width={20}
               height={20}
               className="rounded-full"
+              placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(20, 20))}`}
             />
             <span className="text-xs text-zinc-400 leading-none truncate ...">
               {playlist.user.name}

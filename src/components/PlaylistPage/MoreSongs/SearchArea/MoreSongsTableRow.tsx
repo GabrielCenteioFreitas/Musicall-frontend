@@ -6,6 +6,7 @@ import { AddToPlaylist } from "./AddToPlaylist";
 import { usePlayer } from "@/hooks/usePlayer";
 import { IoPauseSharp, IoPlaySharp } from "react-icons/io5";
 import { iTunesToPlaying } from "@/lib/iTunesToPlaying";
+import { toBase64, shimmer } from "@/lib/shimmer";
 
 interface MoreSongsTableRowProps {
   song: ITunesSong;
@@ -53,6 +54,7 @@ export const MoreSongsTableRow = ({ song, moreSongs, i }: MoreSongsTableRowProps
             width={48}
             height={48}
             className="rounded-lg h-full aspect-square"
+            placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(48, 48))}`}
           />
 
           <div

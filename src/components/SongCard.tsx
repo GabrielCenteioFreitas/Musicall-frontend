@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { memo } from "react";
 import { SongCardPlayButton } from "./PlayButtons/SongCardPlayButton";
+import { shimmer, toBase64 } from "@/lib/shimmer";
 
 interface SongCardProps {
   song: PlayingSong;
@@ -29,6 +30,7 @@ const SongCardComponent = ({ song, songsGroup, isFavorited, className }: SongCar
             alt={song.song.name}
             width={100}
             height={100}
+            placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(100, 100))}`}
           />
 
           <div className="flex flex-col gap-1 self-start text-left max-w-full">

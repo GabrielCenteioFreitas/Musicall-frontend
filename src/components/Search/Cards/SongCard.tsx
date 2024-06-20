@@ -5,6 +5,7 @@ import { SmallFavoriteSongButton } from "@/components/FavoriteButtons/SmallFavor
 import { Button } from "@/components/ui/button";
 import { usePlayer } from "@/hooks/usePlayer";
 import { iTunesToPlaying } from "@/lib/iTunesToPlaying";
+import { toBase64, shimmer } from "@/lib/shimmer";
 import { PreviewPlaylist } from "@/types/previewPlaylist";
 import { ITunesSong } from "@/types/song";
 import Image from 'next/image';
@@ -56,6 +57,7 @@ const SongCardComponent = ({ previewPlaylists, song, songs, isFavorited }: SongC
             className="size-16 object-cover rounded-xl"
             width={100}
             height={100}
+            placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(64, 64))}`}
           />
 
           <div

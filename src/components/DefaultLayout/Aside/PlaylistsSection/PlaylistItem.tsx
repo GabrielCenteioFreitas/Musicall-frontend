@@ -4,12 +4,20 @@ import Link from "next/link";
 import { memo } from "react";
 import { PlaylistPortrait } from "../../../Portraits/PlaylistPortrait";
 import { FixPlaylistButton } from "./FixPlaylistButton";
+import { getPredominantColor } from "@/lib/getPredominantColor";
 
 interface PlaylistItemProps {
   playlist: PreviewPlaylist;
 }
 
-const PlaylistItemComponent = ({ playlist }: PlaylistItemProps) => {
+const PlaylistItemComponent = async ({ playlist }: PlaylistItemProps) => {
+  let predominantColor: string = '';
+  if (playlist.portrait) {
+    predominantColor = await getPredominantColor(playlist.portrait) || "#52525B"
+  } else {
+    predominantColor = "#52525B"
+  }
+
   return (
     <li className="w-full relative group">
       <Button
@@ -22,7 +30,11 @@ const PlaylistItemComponent = ({ playlist }: PlaylistItemProps) => {
       >
         <Link href={`/playlists/${playlist.id}`}>
           <div className="shrink-0 size-12 rounded-lg overflow-hidden">
-            <PlaylistPortrait playlist={playlist} size={100} />
+            <PlaylistPortrait
+              playlist={playlist}
+              size={100}
+              predominantColor={predominantColor}
+            />
           </div>
 
           <div className="flex-1 flex flex-col gap-1 text-left max-w-[155px]">

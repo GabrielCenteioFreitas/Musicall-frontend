@@ -7,6 +7,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { getUserFromServer } from "@/lib/getUserFromServer";
+import { toBase64, shimmer } from "@/lib/shimmer";
 import Image from "next/image";
 import Link from "next/link";
 import { GoPerson } from "react-icons/go";
@@ -33,6 +34,7 @@ export const Profile = () => {
             className="size-10 shrink-0 object-cover object-top bg-zinc-900 rounded-full"
             width={50}
             height={50}
+            placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(50, 50))}`}
           />
         </div>
       </DropdownMenuTrigger>

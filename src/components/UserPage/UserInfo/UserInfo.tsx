@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 import ptBr from 'dayjs/locale/pt-br';
 import { EditUserInfo } from "./EditUserInfo";
 import { MediaInput } from "./MediaInput";
+import { toBase64, shimmer } from "@/lib/shimmer";
 dayjs.locale(ptBr)
 
 interface UserInfoProps {
@@ -28,6 +29,7 @@ export const UserInfo = ({ user, predominantColor, id, isUserTheCreator }: UserI
           height={100}
           className="w-full aspect-square rounded-xl object-cover object-top"
           style={{ backgroundColor: predominantColor }}
+          placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(100, 100))}`}
         />
 
         {isUserTheCreator && (

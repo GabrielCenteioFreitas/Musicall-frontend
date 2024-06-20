@@ -1,5 +1,6 @@
 import { FavoriteAlbumButton } from "@/components/FavoriteButtons/FavoriteAlbumButton";
 import { Button } from "@/components/ui/button";
+import { toBase64, shimmer } from "@/lib/shimmer";
 import { cn } from "@/lib/utils";
 import { ITunesAlbum } from "@/types/album";
 import Image from "next/image";
@@ -33,6 +34,7 @@ const AlbumCardComponent = ({ album, isFavorited, className }: AlbumCardProps) =
             alt={album.collectionName}
             width={100}
             height={100}
+            placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(100, 100))}`}
           />
 
           <div className="flex flex-col gap-1 self-start text-left max-w-full">

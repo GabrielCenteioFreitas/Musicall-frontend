@@ -1,4 +1,5 @@
 import { usePlayer } from "@/hooks/usePlayer";
+import { toBase64, shimmer } from "@/lib/shimmer";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -17,6 +18,7 @@ export const SongInfo = () => {
         width={64}
         height={64}
         className="rounded-md size-16 aspect-square shrink-0 object-cover"
+        placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(64, 64))}`}
       />
 
       <div className="flex flex-col overflow-hidden">

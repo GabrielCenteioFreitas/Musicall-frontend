@@ -5,6 +5,7 @@ import { PreviewPlaylist } from "@/types/previewPlaylist";
 import Link from "next/link";
 import { memo } from "react";
 import { Button } from "./ui/button";
+import { getPredominantColor } from "@/lib/getPredominantColor";
 
 interface PlaylistCardProps {
   playlist: PreviewPlaylist;
@@ -12,7 +13,14 @@ interface PlaylistCardProps {
   section: 'home' | 'library' | 'profile';
 }
 
-const PlaylistCardComponent = ({ playlist, className, section }: PlaylistCardProps) => {
+const PlaylistCardComponent = async ({ playlist, className, section }: PlaylistCardProps) => {
+  let predominantColor: string = '';
+  if (playlist.portrait) {
+    predominantColor = await getPredominantColor(playlist.portrait) || "#52525B"
+  } else {
+    predominantColor = "#52525B"
+  }
+
   return (
     <div className="group relative">
       <Button
@@ -26,6 +34,7 @@ const PlaylistCardComponent = ({ playlist, className, section }: PlaylistCardPro
             iconClassName="size-32"
             className="rounded-md overflow-hidden"
             size={200}
+            predominantColor={predominantColor}
           />
 
           <div className="flex flex-col gap-2.5 self-start text-left max-w-full">

@@ -8,6 +8,7 @@ import { PreviewPlaylist } from "@/types/previewPlaylist";
 import { memo } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { toBase64, shimmer } from "@/lib/shimmer";
 
 interface AlbumsTableRowProps {
   album: ITunesAlbum;
@@ -40,6 +41,7 @@ const AlbumsTableRowComponent = ({
           width={48}
           height={48}
           className="rounded-lg h-full aspect-square"
+          placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(48, 48))}`}
         />
 
         <div className="flex flex-col justify-center text-left max-w-full overflow-hidden">

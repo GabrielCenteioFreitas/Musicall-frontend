@@ -13,6 +13,7 @@ import ptBr from 'dayjs/locale/pt-br';
 import { memo, useCallback, useMemo } from "react";
 import { IoPauseSharp, IoPlaySharp } from "react-icons/io5";
 import { RemoveFromPlaylist } from "../RemoveFromPlaylist";
+import { toBase64, shimmer } from "@/lib/shimmer";
 dayjs.locale(ptBr)
 
 interface SongsTableRowProps {
@@ -70,6 +71,7 @@ const SongsTableRowComponent = ({
             width={48}
             height={48}
             className="rounded-lg h-full aspect-square object-cover"
+            placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(48, 48))}`}
           />
 
           <div

@@ -1,3 +1,4 @@
+import { shimmer, toBase64 } from "@/lib/shimmer";
 import { Playlist } from "@/types/playlist";
 import { getTotalDuration } from "@/utils/getTotalDuration";
 import Image from "next/image";
@@ -29,9 +30,10 @@ export const PlaylistInfo = ({ playlist }: PlaylistInfoProps) => {
           <Image
             src={playlist.user?.avatarUrl}
             alt={playlist.user?.name}
-            width={28}
-            height={28}
+            width={32}
+            height={32}
             className="size-8 flex-0 rounded-full object-cover object-top"
+            placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(32, 32))}`}
           />
           {playlist.user?.name}
         </Link>
