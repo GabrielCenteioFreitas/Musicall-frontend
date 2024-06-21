@@ -25,6 +25,7 @@ export const DefaultLayout = ({ className, children }: DefaultLayoutProps) => {
             border border-b-0 border-neutral-800 rounded-t-xl`,
             className
           )}
+          tabIndex={0}
         >
           {children}
         </main>

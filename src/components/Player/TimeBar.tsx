@@ -57,12 +57,15 @@ export const TimeBar = ({ duration, isSongLoaded }: TimeBarProps) => {
             bg-zinc-50 group-hover:bg-zinc-300 transition-colors
           "/>
         </SliderPrimitive.Track>
-        <SliderPrimitive.Thumb className="
-          block size-3 rounded-full cursor-pointer
-          opacity-0 group-hover:opacity-100 bg-zinc-50
-        ring-offset-zinc-950 focus-visible:outline-none 
-          focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-zinc-300
-        "/>
+        <SliderPrimitive.Thumb
+          className="
+            block size-3 rounded-full cursor-pointer
+            opacity-0 group-hover:opacity-100 bg-zinc-50
+          ring-offset-zinc-950 focus-visible:outline-none 
+            focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-zinc-300
+          "
+          aria-label="Alterar momento da música"
+        />
       </SliderPrimitive.Root>
 
       <time className="text-sm text-zinc-400">

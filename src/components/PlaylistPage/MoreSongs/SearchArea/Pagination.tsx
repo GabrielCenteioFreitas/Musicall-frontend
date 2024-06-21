@@ -23,6 +23,7 @@ export const Pagination = ({ page, setPage, qntSongs }: PaginationProps) => {
             className={cn("size-10 !p-0",
               isCurrentPageActive && "dark:bg-zinc-700 dark:hover:bg-zinc-700"
             )}
+            aria-label={`Ir para a página ${i+1}`}
           >
             {i+1}
           </Button>

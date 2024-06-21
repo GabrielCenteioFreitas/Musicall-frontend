@@ -16,6 +16,7 @@ import { Button } from "../ui/button";
 
 interface SmallFavoriteAlbumButtonProps {
   album: {
+    collectionName: string;
     collectionId: number;
   }
   isFavorited: boolean;
@@ -176,10 +177,11 @@ export const SmallFavoriteAlbumButton = ({ album, isFavorited, className, size=2
 
   return (
     <Button
+      onClick={handleClick}
+      disabled={isLoading}
       variant="none"
       className={cn("size-fit p-0 text-gray-400", className)}
-      disabled={isLoading}
-      onClick={handleClick}
+      aria-label={`Marcar álbum "${album.collectionName}" como favorito`}
     >
       {!isLoading ? (
         <>

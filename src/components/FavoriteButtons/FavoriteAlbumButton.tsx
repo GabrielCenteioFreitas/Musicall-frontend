@@ -16,6 +16,7 @@ import { Button } from "../ui/button";
 
 interface FavoriteAlbumButtonProps {
   album: {
+    collectionName: string;
     collectionId: number;
   }
   isFavorited: boolean;
@@ -176,13 +177,14 @@ export const FavoriteAlbumButton = ({ album, isFavorited, className, size=20 }: 
 
   return (
     <Button
+      onClick={handleClick}
+      disabled={isLoading}
       variant="none"
       size="icon"
       className={cn(`
         text-gray-400 p-1.5 rounded-full hover:scale-110 hover:text-gray-50 transition-all
       `, className, isLoading && "!top-5 !opacity-100")}
-      disabled={isLoading}
-      onClick={handleClick}
+      aria-label={`Marcar álbum "${album.collectionName}" como favorito`}
     >
       {!isLoading ? (
         <>

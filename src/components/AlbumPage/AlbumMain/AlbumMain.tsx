@@ -86,6 +86,7 @@ export const AlbumMain = ({
 
             <ITunesURL
               url={album.collectionViewUrl}
+              ariaLabel={`Acessar página do álbum "${album.collectionName}" no site da Apple Music`}
             />
           </div>
         </div>

@@ -11,7 +11,7 @@ interface PlaylistAsideProps {
 
 export const PlaylistAside = ({ playlist, isUserTheCreator, predominantColor }: PlaylistAsideProps) => {
   return (
-    <aside className="w-80 flex flex-col items-center">
+    <aside className="w-80 flex flex-col items-center" aria-label="Foto, descrição e artistas da playlist">
       <PortraitAsideSection
         playlist={playlist}
         isUserTheCreator={isUserTheCreator}

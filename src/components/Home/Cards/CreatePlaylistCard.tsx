@@ -11,9 +11,10 @@ export const CreatePlaylistCard = ({ className }: CreatePlaylistCardProps) => {
   return (
     <CreatePlaylist>
       <Button
+        title="Crie sua primeira playlist!"
         variant="ghost"
         className={cn("h-fit p-3 pr-5 flex gap-3 items-center shrink-0 rounded-2xl transition-colors", className)}
-        title="Crie sua primeira playlist!"
+        aria-label="Criar playlist"
       >
         <div
           className={cn("shrink-0 size-32 aspect-square bg-zinc-600 grid place-content-center rounded-xl", className)}

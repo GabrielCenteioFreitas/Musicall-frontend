@@ -57,6 +57,7 @@ const AlbumsTableRowComponent = ({
             title={album.artistName}
             className="w-fit text-sm hover:underline text-zinc-400 text-wrap truncate ..."
             onClick={(e) => e.stopPropagation()}
+            aria-label={`Acessar página do álbum ${album.collectionName}`}
           >
             {album.artistName}
           </Link>

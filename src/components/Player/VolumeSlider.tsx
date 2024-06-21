@@ -12,21 +12,24 @@ export const VolumeSlider = () => {
   const { volume, setVolume } = usePlayer()
 
   const handleVolumeClick = () => {
-    if (volume > 0) {
-      setVolume(0)
-    } else {
-      setVolume(0.25)
-    }
+    volume > 0
+      ? setVolume(0)
+      : setVolume(0.25)
   }
 
   return (
     <div className="flex justify-end">
       <div className="flex items-center gap-1">
         <Button
+          onClick={handleVolumeClick}
           variant="none"
           size="none"
           className="size-fit"
-          onClick={handleVolumeClick}
+          aria-label={
+            volume > 0
+              ? "Desativar som"
+              : "Ativar som"
+          }
         >
           {volume > 0.66
             ? <IoVolumeHigh size={24} />
@@ -51,12 +54,15 @@ export const VolumeSlider = () => {
               bg-zinc-50 group-hover/volume:bg-zinc-300 transition-colors
             "/>
           </SliderPrimitive.Track>
-          <SliderPrimitive.Thumb className="
-            block size-3 rounded-full cursor-pointer
-            opacity-0 group-hover/volume:opacity-100 transition-all
-            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
-            bg-zinc-50 ring-offset-zinc-950 focus-visible:ring-zinc-300
-          "/>
+          <SliderPrimitive.Thumb
+            className="
+              block size-3 rounded-full cursor-pointer
+              opacity-0 group-hover/volume:opacity-100 transition-all
+              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
+              bg-zinc-50 ring-offset-zinc-950 focus-visible:ring-zinc-300
+            "
+            aria-label="Alterar volume da música"
+          />
         </SliderPrimitive.Root>
       </div>
       

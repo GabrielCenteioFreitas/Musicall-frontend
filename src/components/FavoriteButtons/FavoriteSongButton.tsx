@@ -17,6 +17,7 @@ import { toast } from "react-toastify";
 
 interface FavoriteSongButtonProps {
   song: {
+    trackName: string;
     trackId: number;
     collectionId: number;
     artistId: number;
@@ -173,13 +174,14 @@ export const FavoriteSongButton = ({ song, isFavorited, className, size=20 }: Fa
 
   return (
     <Button
+      onClick={handleClick}
+      disabled={isLoading}
       variant="none"
       size="icon"
       className={cn(`
         text-gray-400 p-1.5 rounded-full hover:scale-110 hover:text-gray-50 transition-all
       `, className, isLoading && "!top-5 !opacity-100")}
-      disabled={isLoading}
-      onClick={handleClick}
+      aria-label={`Marcar música "${song.trackName}" como favorita`}
     >
       {!isLoading ? (
         <>

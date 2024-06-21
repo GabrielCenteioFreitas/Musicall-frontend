@@ -19,7 +19,10 @@ const ArtistItemComponent = ({ artist }: ArtistItemProps) => {
         className="w-full h-fit p-2 !pr-4 flex items-center justify-start gap-3 rounded-2xl transition-colors group"
         asChild
       >
-        <Link href={`/artists/${artist.iTunesId}`}>
+        <Link
+          href={`/artists/${artist.iTunesId}`}
+          aria-label={`Acessar página do(a) artista ${artist.name}`}
+        >
           <ArtistPortrait name={artist.name} className="size-14 text-lg" />
 
           <div className="flex flex-col gap-0 justify-center text-left max-w-60">

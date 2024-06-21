@@ -14,8 +14,8 @@ export const Loading = () => {
               <div className="w-full aspect-square rounded-md loading" />
 
               <div className="flex flex-col gap-2.5">
-                <span className="w-full h-3 loading rounded-md" />
-                <span className="w-1/2 h-3 loading rounded-md" />
+                <div className="w-full h-3 loading rounded-md" />
+                <div className="w-1/2 h-3 loading rounded-md" />
               </div>
             </div>
           )}
@@ -27,7 +27,7 @@ export const Loading = () => {
 
         {Array.from({length: 2}).map((_, i) => 
           <SectionsContainer key={i} className="mb-4">
-            <h3 className="w-24 h-5 rounded-md loading" />
+            <div className="w-24 h-5 rounded-md loading" />
       
             <SectionsItemsContainer className="grid-cols-8">
               {Array.from({length: 8}).map((_, j) => 
@@ -35,8 +35,8 @@ export const Loading = () => {
                   <div className="w-full aspect-square rounded-md loading" />
 
                   <div className="flex flex-col gap-2">
-                    <span className="w-full h-3 loading rounded-md" />
-                    <span className="w-1/2 h-3 loading rounded-md" />
+                    <div className="w-full h-3 loading rounded-md" />
+                    <div className="w-1/2 h-3 loading rounded-md" />
                   </div>
                 </div>
               )}

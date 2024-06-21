@@ -21,8 +21,8 @@ export default function Loading() {
           <div className="size-48 loading rounded-lg" />
 
           <div className="flex flex-col gap-2">
-            <h2 className="w-56 h-10 loading rounded-lg" />
-            <span className="w-40 h-5 loading rounded-md" />
+            <div className="w-56 h-10 loading rounded-lg" />
+            <div className="w-40 h-5 loading rounded-md" />
           </div>
         </section>
 
@@ -56,14 +56,14 @@ export default function Loading() {
                   </TableCell>
             
                   <TableCell className="py-3 px-2 flex flex-col gap-2 justify-center">
-                    <span className="w-28 h-3.5 loading rounded-md" />
+                    <div className="w-28 h-3.5 loading rounded-md" />
           
-                    <span className="w-16 h-2.5 loading rounded-md" />
+                    <div className="w-16 h-2.5 loading rounded-md" />
                   </TableCell>
 
                   <TableCell>
                     <div className="flex">
-                      <span className="w-full h-3 loading rounded-md" />
+                      <div className="w-full h-3 loading rounded-md" />
                     </div>
                   </TableCell>
 

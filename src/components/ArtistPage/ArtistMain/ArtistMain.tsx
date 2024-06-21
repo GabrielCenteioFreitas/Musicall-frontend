@@ -64,6 +64,7 @@ export const ArtistMain = ({ artist, albums, previewPlaylists, favoriteArtists, 
 
           <ITunesURL
             url={artist.artistLinkUrl}
+            ariaLabel={`Acessar página do(a) artista "${artist.artistName}" no site da Apple Music`}
           />
         </div>
 

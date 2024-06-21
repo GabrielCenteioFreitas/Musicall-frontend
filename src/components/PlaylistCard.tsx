@@ -28,7 +28,10 @@ const PlaylistCardComponent = async ({ playlist, className, section }: PlaylistC
         className={cn("h-fit p-3 flex flex-col gap-3 shrink-0 rounded-md transition-colors", className)}
         asChild
       >
-        <Link href={`/playlists/${playlist.id}`}>
+        <Link
+          href={`/playlists/${playlist.id}`}
+          aria-label={`Acessar página da playlist "${playlist.name}"`}
+        >
           <PlaylistPortrait
             playlist={playlist}
             iconClassName="size-32"

@@ -127,6 +127,7 @@ export const EditPlaylistInfo = ({ playlist }: EditPlaylistInfoProps) => {
                   outline outline-1 outline-zinc-800 hover:outline-zinc-600
                   focus:outline-2 focus:outline-zinc-600
                 "
+                aria-label="Nome da playlist"
               />
               {error
                 ? <span className="text-xs text-red-400">
@@ -196,12 +197,23 @@ export const EditPlaylistInfo = ({ playlist }: EditPlaylistInfoProps) => {
         
           <DialogFooter className="">
             <DialogClose asChild>
-              <Button type="button" variant="outline" className="!w-32" disabled={isLoading}>
-                Cancelar
+              <Button
+                disabled={isLoading}
+                type="button"
+                variant="outline"
+                className="!w-32"
+                aria-label="Cancelar ação"
+              >
+               Cancelar
               </Button>
             </DialogClose>
 
-            <Button type="submit" className="!w-32" disabled={isLoading}>
+            <Button
+              type="submit"
+              className="!w-32"
+              disabled={isLoading}
+              aria-label="Salvar alterações feitas"
+            >
               {isLoading ? (
                 <div className="flex items-center gap-1.5">
                   <LoadingIcon size={16} />

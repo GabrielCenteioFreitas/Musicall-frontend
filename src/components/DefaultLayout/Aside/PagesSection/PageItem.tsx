@@ -24,7 +24,10 @@ const PageItemComponent = ({ name, href, active=false, className, children }: Pa
         title={name}
         asChild
       >
-        <Link href={href}>
+        <Link
+          href={href}
+          aria-label={`Acessar página "${name}"`}
+        >
           {children}
           {name}
         </Link>

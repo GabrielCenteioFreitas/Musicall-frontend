@@ -101,6 +101,7 @@ const SongsTableRowComponent = ({
             title={currentSong.song.artist.name}
             className="w-fit text-xs hover:underline text-zinc-400 line-clamp-2 text-wrap truncate ..."
             onClick={(e) => e.stopPropagation()}
+            aria-label={`Acessar página do(a) artista ${currentSong.song.artist.name}`}
           >
             {currentSong.song.artist.name}
           </Link>
@@ -112,6 +113,7 @@ const SongsTableRowComponent = ({
           href={`/albums/${currentSong.song.album.iTunesId}`}
           className="hover:underline"
           onClick={(e) => e.stopPropagation()}
+          aria-label={`Acessar página do álbum ${currentSong.song.album.name}`}
         >
           {currentSong.song.album.name}
         </Link>
@@ -140,6 +142,7 @@ const SongsTableRowComponent = ({
           <SmallFavoriteSongButton
             isFavorited={isFavorited}
             song={{
+              trackName: currentSong.song.name,
               trackId: currentSong.song.iTunesId,
               collectionId: currentSong.song.album.iTunesId,
               artistId: currentSong.song.artist.iTunesId,

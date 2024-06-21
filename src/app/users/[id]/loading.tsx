@@ -21,8 +21,8 @@ export default function Loading() {
           <div className="size-56 aspect-square rounded-xl loading"/>
 
           <div className="flex flex-col gap-3">
-            <h2 className="w-72 h-8 rounded-lg loading" />
-            <p className="w-64 h-4 rounded-md loading" />
+            <div className="w-72 h-9 rounded-lg loading" />
+            <div className="w-64 h-4 rounded-md loading" />
           </div>
         </section>
 
@@ -39,8 +39,8 @@ export default function Loading() {
                   `}/>
 
                   <div className="flex flex-col gap-2">
-                    <span className="w-full h-3 loading rounded-md" />
-                    <span className="w-1/2 h-3 loading rounded-md" />
+                    <div className="w-full h-3 loading rounded-md" />
+                    <div className="w-1/2 h-3 loading rounded-md" />
                   </div>
                 </div>
               )}

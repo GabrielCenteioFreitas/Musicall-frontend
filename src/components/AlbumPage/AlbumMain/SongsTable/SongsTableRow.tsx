@@ -79,8 +79,9 @@ const SongsTableRowComponent = ({
         
         <Link
           href={`/artists/${song.artistId}`}
-          className="w-fit"
           onClick={(e) => e.stopPropagation()}
+          className="w-fit"
+          aria-label={`Acessar página do(a) artista ${song.artistName}`}
         >
           <span className="text-sm hover:underline text-zinc-400 text-wrap truncate ..." title={song.artistName}>
             {song.artistName}

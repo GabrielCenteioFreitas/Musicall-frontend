@@ -23,7 +23,10 @@ const ArtistCardComponent = ({ artist, isFavorited, className }: ArtistCardProps
         className={cn("h-fit p-3 flex flex-col gap-3 shrink-0 rounded-2xl transition-colors group", className)}
         asChild
       >
-        <Link href={`/artists/${artist.artistId}`}>
+        <Link
+          href={`/artists/${artist.artistId}`}
+          aria-label={`Acessar página do artista "${artist.artistName}"`}
+        >
           <ArtistPortrait name={artist.artistName} className="w-full aspect-square text-5xl" />
 
           <div className="flex flex-col gap-2.5 self-start text-left max-w-full">

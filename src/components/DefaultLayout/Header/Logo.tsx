@@ -11,6 +11,7 @@ export const Logo = ({ className, ...rest }: LogoProps) => {
       <Link
         href="/"
         className={cn("w-60 flex items-center gap-2", className)}
+        aria-label="Acessar página principal"
         {...rest}
       >
         <ImHeadphones size={28} />

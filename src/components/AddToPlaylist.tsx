@@ -23,6 +23,7 @@ import { LuPlusCircle } from "react-icons/lu";
 import { toast } from 'react-toastify';
 import { loginURL } from "./DefaultLayout/Header/SignIn";
 import { LoadingIcon } from "./LoadingIcon";
+import { Button } from "./ui/button";
 
 interface AddToPlaylistProps {
   previewPlaylists: PreviewPlaylist[] | null;
@@ -152,10 +153,13 @@ export const AddToPlaylist = ({ previewPlaylists, song, className, size=20 }: Ad
         <div className="max-h-44 overflow-y-scroll no-scrollbar">
           {previewPlaylists?.map((previewPlaylist) => 
             <DropdownMenuItem key={previewPlaylist.id} asChild>
-              <button
+              <Button
+                variant="none"
+                size="none"
                 className="w-full max-w-36 flex gap-4 justify-between"
                 onClick={(e) => handleAddToPlaylistClick(e, previewPlaylist)}
                 disabled={selectedPlaylist !== null}
+                aria-label={`Adicionar à playlist "${previewPlaylist.name}"`}
               >
                 <span className="flex-1 text-left truncate">
                   {previewPlaylist.name}
@@ -166,7 +170,7 @@ export const AddToPlaylist = ({ previewPlaylists, song, className, size=20 }: Ad
                     : previewPlaylist.songs.some(curSong => curSong.song.iTunesId === song.trackId)
                       && <FaCheckCircle size={12} />
                 }
-              </button>
+              </Button>
             </DropdownMenuItem>
           )}
         </div>

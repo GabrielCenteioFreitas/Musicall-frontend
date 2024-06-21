@@ -47,6 +47,8 @@ export const FiltersSection = ({ term, entity }: FiltersSectionProps) => {
     <section className="flex gap-3">
       {filters.map((filter, i) => 
         <Button
+          onClick={() => handleChangeCurrentFilter(filter)}
+          disabled={filter.entity === currentFilter.entity}
           key={i}
           className={cn(`
             font-medium !rounded-lg !py-1.5 !px-5 !h-auto`,
@@ -54,8 +56,7 @@ export const FiltersSection = ({ term, entity }: FiltersSectionProps) => {
               ? 'dark:bg-zinc-50 dark:text-zinc-950 font-semibold disabled:opacity-100'
               : ''
           )}
-          disabled={filter.entity === currentFilter.entity}
-          onClick={() => handleChangeCurrentFilter(filter)}
+          aria-label={`Filtrar pesquisa por ${filter.display}`}
         >
           {filter.display}
         </Button>

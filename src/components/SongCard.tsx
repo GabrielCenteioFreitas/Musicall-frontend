@@ -41,6 +41,7 @@ const SongCardComponent = ({ song, songsGroup, isFavorited, className }: SongCar
               href={`/artists/${song.song.artist.iTunesId}`}
               title={song.song.artist.name}
               className="text-xs text-zinc-400 hover:underline leading-tight truncate ..."
+              aria-label={`Acessar página do(a) artista ${song.song.artist.name}`}
             >
               {song.song.artist.name}
             </Link>
@@ -54,7 +55,8 @@ const SongCardComponent = ({ song, songsGroup, isFavorited, className }: SongCar
           song={{
             artistId: song.song.artist.iTunesId,
             collectionId: song.song.album.iTunesId,
-            trackId: song.song.iTunesId
+            trackId: song.song.iTunesId,
+            trackName: song.song.name,
           }}
           className={cn("absolute left-4 bg-zinc-950 text-gray-50 transition-all duration-200",
             isFavorited ? "top-4" : "top-0 group-hover:top-4 opacity-0 group-hover:opacity-100"

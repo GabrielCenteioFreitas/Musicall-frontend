@@ -84,6 +84,7 @@ const SongCardComponent = ({ previewPlaylists, song, songs, isFavorited }: SongC
             title={song.artistName}
             className="text-sm text-zinc-400 leading-tight line-clamp-2 text-wrap truncate hover:underline"
             onClick={(e) => e.stopPropagation()}
+            aria-label={`Acessar página do(a) artista ${song.artistName}`}
           >
             {song.artistName}
           </Link>
@@ -95,7 +96,7 @@ const SongCardComponent = ({ previewPlaylists, song, songs, isFavorited }: SongC
           <SmallFavoriteSongButton song={song} isFavorited={isFavorited} className="text-gray-300" />
         </div>
 
-        <time className="font-medium text-sm text-zinc-600 ml-3">
+        <time className="text-sm text-zinc-400 ml-3">
           {durationInMinutes}:{durationInSeconds.toString().padStart(2, '0')}
         </time>
       </div>

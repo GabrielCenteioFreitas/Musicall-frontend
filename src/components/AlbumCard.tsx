@@ -27,7 +27,10 @@ const AlbumCardComponent = ({ album, isFavorited, className }: AlbumCardProps) =
         className={cn("h-fit p-3 flex flex-col gap-3 shrink-0 rounded-md transition-colors", className)}
         asChild
       >
-        <Link href={`/albums/${album.collectionId}`}>
+        <Link
+          href={`/albums/${album.collectionId}`}
+          aria-label={`Acessar página do álbum "${album.collectionName}"`}
+        >
           <Image
             className="size-full rounded-md"
             src={album.artworkUrl100}

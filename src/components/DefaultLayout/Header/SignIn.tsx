@@ -16,6 +16,7 @@ export const SignIn = () => {
   return (
     <a
       href={loginURL}
+      aria-label="Conectar-se"
       className="flex items-center gap-2"
     >
       <span className="max-w-32 text-sm text-right hover:text-gray-300">

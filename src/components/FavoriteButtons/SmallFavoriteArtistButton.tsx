@@ -17,6 +17,7 @@ import { ITunesArtist } from "@/types/artist";
 
 interface SmallFavoriteArtistButtonProps {
   artist: {
+    artistName: string;
     artistId: number;
   }
   isFavorited: boolean;
@@ -192,10 +193,11 @@ export const SmallFavoriteArtistButton = ({ artist, isFavorited, className, size
 
   return (
     <Button
+      onClick={handleClick}
+      disabled={isLoading}
       variant="none"
       className={cn("size-fit p-0 text-gray-400", className)}
-      disabled={isLoading}
-      onClick={handleClick}
+      aria-label={`Marcar artista "${artist.artistName}" como favorito`}
     >
       {!isLoading ? (
         <>

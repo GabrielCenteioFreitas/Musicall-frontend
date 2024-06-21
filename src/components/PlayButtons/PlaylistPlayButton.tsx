@@ -20,11 +20,16 @@ export const PlayButton = ({ playlist }: PlayButtonProps) => {
 
   return (
     <Button
+      onClick={handleClick}
+      title="Ouvir playlist"
       variant="secondary"
       size="none"
       className="rounded-full size-11 transition-colors"
-      title="Ouvir playlist"
-      onClick={handleClick}
+      aria-label={
+        (isPlaying && isPlayingSongInPlaylist)
+          ? "Pausar música"
+          : "Tocar playlist"
+      }
     >
       {isPlaying && isPlayingSongInPlaylist ? (
         <IoPauseSharp className="size-6"/>

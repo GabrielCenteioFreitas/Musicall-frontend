@@ -47,6 +47,7 @@ export const SearchInput = () => {
         size="icon"
         type="submit"
         className="!p-0 shrink-0 !size-5 hover:!bg-transparent"
+        aria-label="Pesquisar"
       >
         <IoSearch size={20} className="hover:scale-105 transition-all" />
       </Button>
@@ -58,6 +59,7 @@ export const SearchInput = () => {
         onChange={(e) => setSearch(e.target.value)}
         placeholder="Pesquisar"
         className="bg-transparent focus:outline-0 placeholder:text-zinc-600 w-full"
+        aria-label="Pesquisar"
       />
     </form>
   );

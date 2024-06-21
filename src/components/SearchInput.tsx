@@ -13,6 +13,7 @@ export const SearchInput = ({ search, handleSearch, ...rest }: SearchInputProps)
     <div className="flex gap-1 items-center max-w-50 group">
       <input
         type="text"
+        name="search"
         value={search}
         onChange={handleSearch}
         className={cn(`
@@ -20,17 +21,23 @@ export const SearchInput = ({ search, handleSearch, ...rest }: SearchInputProps)
           border-b border-b-zinc-600 group-focus-within:border-b-zinc-300
         `, rest.className)}
         {...rest}
+        aria-label="Pesquisar"
       />
+
       <Button
         variant="ghost"
         size="icon"
         type="submit"
         className="!p-0 shrink-0 !size-6 mb-px"
+        aria-label="Pesquisar"
+        asChild
       >
-        <IoSearch
-          size={32}
-          className="text-zinc-600 group-focus-within:text-zinc-300 transition-colors"
-        />
+        <label htmlFor="search">
+          <IoSearch
+            size={32}
+            className="text-zinc-600 group-focus-within:text-zinc-300 transition-colors"
+          />
+        </label>
       </Button>
     </div>
   );

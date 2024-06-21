@@ -26,16 +26,17 @@ export const PlaylistInfo = ({ playlist }: PlaylistInfoProps) => {
         <Link
           href={`/users/${playlist.user.id}`}
           className="flex items-center gap-2 hover:underline"
+          aria-label={`Acessar página de perfil do usuário ${playlist.user.name}`}
         >
           <Image
-            src={playlist.user?.avatarUrl}
-            alt={playlist.user?.name}
+            src={playlist.user.avatarUrl}
+            alt={playlist.user.name}
+            aria-hidden
             width={32}
             height={32}
             className="size-8 flex-0 rounded-full object-cover object-top"
-            placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(32, 32))}`}
           />
-          {playlist.user?.name}
+          {playlist.user.name}
         </Link>
         •
         <span>

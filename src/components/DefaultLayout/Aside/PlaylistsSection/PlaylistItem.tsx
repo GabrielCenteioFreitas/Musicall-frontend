@@ -28,7 +28,10 @@ const PlaylistItemComponent = async ({ playlist }: PlaylistItemProps) => {
         `}
         asChild
       >
-        <Link href={`/playlists/${playlist.id}`}>
+        <Link
+          href={`/playlists/${playlist.id}`}
+          aria-label={`Acessar página da playlist ${playlist.name}`}
+        >
           <div className="shrink-0 size-12 rounded-lg overflow-hidden">
             <PlaylistPortrait
               playlist={playlist}

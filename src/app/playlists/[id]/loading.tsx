@@ -19,7 +19,7 @@ export default function Loading() {
 
       <div className="flex-1 flex flex-col gap-4">
         <section className="flex flex-col gap-3">
-          <h2 className="w-48 h-11 loading rounded-lg" />
+          <div className="w-48 h-11 loading rounded-lg" />
 
           <div className="w-72 h-8 loading rounded-md" />
         </section>
@@ -54,27 +54,27 @@ export default function Loading() {
                     <div className="size-12 loading rounded-lg"/>
             
                     <div className="flex flex-col justify-center gap-2">
-                      <span className="w-36 h-3 loading rounded-md" />
+                      <div className="w-36 h-3 loading rounded-md" />
             
-                      <span className="w-20 h-2.5 loading rounded-md" />
+                      <div className="w-20 h-2.5 loading rounded-md" />
                     </div>
                   </TableCell>
             
                   <TableCell>
                     <div className="flex">
-                      <span className="w-44 h-3 loading rounded-md" />
+                      <div className="w-44 h-3 loading rounded-md" />
                     </div>
                   </TableCell>
             
                   <TableCell>
                     <div className="flex">
-                      <span className="w-full h-3 loading rounded-md" />
+                      <div className="w-full h-3 loading rounded-md" />
                     </div>
                   </TableCell>
             
                   <TableCell>
                     <div className="flex">
-                      <span className="w-36 h-3 loading rounded-md" />
+                      <div className="w-36 h-3 loading rounded-md" />
                     </div>
                   </TableCell>
             
@@ -97,7 +97,7 @@ export default function Loading() {
         <Divider className="my-3" />
 
         <div className="w-full flex flex-col gap-1">
-          <h3 className="w-1/2 h-5 rounded-md loading" />
+          <div className="w-1/2 h-5 rounded-md loading" />
 
           <ul className="w-full flex flex-col">
             {Array.from({length: 3}).map((_, i) => 
@@ -106,8 +106,8 @@ export default function Loading() {
                   <div className="size-14 rounded-full loading shrink-0" />
 
                   <div className="w-full flex flex-col gap-2 justify-center">
-                    <span className="w-3/4 h-3 rounded-md loading" />
-                    <span className="w-12 h-2 rounded-md loading" />
+                    <div className="w-3/4 h-3 rounded-md loading" />
+                    <div className="w-12 h-2 rounded-md loading" />
                   </div>
                 </div>
               </li>

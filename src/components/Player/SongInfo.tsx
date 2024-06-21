@@ -30,6 +30,7 @@ export const SongInfo = () => {
           href={`/artists/${playingSong.song.artist.iTunesId}`}
           title={playingSong.song.artist.name}
           className="text-xs text-zinc-400 truncate ... hover:underline"
+          aria-label={`Acessar página do(a) artista ${playingSong.song.artist.name}`}
         >
           {playingSong.song.artist.name}
         </Link>

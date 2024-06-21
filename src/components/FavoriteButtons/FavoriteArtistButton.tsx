@@ -17,6 +17,7 @@ import { ITunesArtist } from "@/types/artist";
 
 interface FavoriteArtistButtonProps {
   artist: {
+    artistName: string;
     artistId: number;
   }
   isFavorited: boolean;
@@ -192,13 +193,14 @@ export const FavoriteArtistButton = ({ artist, isFavorited, className, size=20 }
 
   return (
     <Button
+      onClick={handleClick}
+      disabled={isLoading}
       variant="none"
       size="icon"
       className={cn(`
         text-gray-400 p-1.5 rounded-full hover:scale-110 hover:text-gray-50 transition-all
       `, className, isLoading && "!top-5 !opacity-100")}
-      disabled={isLoading}
-      onClick={handleClick}
+      aria-label={`Marcar artista "${artist.artistName}" como favorito`}
     >
       {!isLoading ? (
         <>

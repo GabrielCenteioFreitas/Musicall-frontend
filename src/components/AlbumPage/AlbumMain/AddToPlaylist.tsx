@@ -1,5 +1,6 @@
 import { loginURL } from "@/components/DefaultLayout/Header/SignIn";
 import { LoadingIcon } from "@/components/LoadingIcon";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -197,10 +198,13 @@ export const AddToPlaylist = ({ previewPlaylists, album, songs, className, size=
         <div className="max-h-44 overflow-y-scroll no-scrollbar">
           {previewPlaylists?.map((previewPlaylist) => 
             <DropdownMenuItem key={previewPlaylist.id} asChild>
-              <button
-                className="w-full max-w-36 flex gap-4 justify-between"
-                onClick={(e) => handleAddToPlaylistClick(e, previewPlaylist)}
+              <Button
                 disabled={selectedPlaylist !== null}
+                onClick={(e) => handleAddToPlaylistClick(e, previewPlaylist)}
+                variant="none"
+                size="none"
+                className="w-full max-w-36 flex gap-4 justify-between"
+                aria-label={`Adicionar à playlist "${previewPlaylist.name}"`}
               >
                 <span className="flex-1 text-left truncate">
                   {previewPlaylist.name}
@@ -211,7 +215,7 @@ export const AddToPlaylist = ({ previewPlaylists, album, songs, className, size=
                     : doesPlaylistHaveAllSongs(previewPlaylist.songs, songsToBeAdded)
                       && <FaCheckCircle size={12} />
                 }
-              </button>
+              </Button>
             </DropdownMenuItem>
           )}
         </div>

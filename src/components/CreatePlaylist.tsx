@@ -119,6 +119,7 @@ export const CreatePlaylist = ({ children }: CreatePlaylistProps) => {
                   outline outline-1 outline-zinc-800 hover:outline-zinc-600
                   focus:outline-2 focus:outline-zinc-600
                 "
+                aria-label="Nome da playlist"
               />
               {error
                 ? <span className="text-xs text-red-400">
@@ -188,12 +189,23 @@ export const CreatePlaylist = ({ children }: CreatePlaylistProps) => {
         
           <DialogFooter className="">
             <DialogClose asChild>
-              <Button type="button" variant="outline" className="!w-32" disabled={isLoading}>
+              <Button
+                type="button"
+                disabled={isLoading}
+                variant="outline"
+                className="!w-32"
+                aria-label="Cancelar criação"
+              >
                 Cancelar
               </Button>
             </DialogClose>
 
-            <Button type="submit" className="!w-32" disabled={isLoading}>
+            <Button
+              type="submit"
+              disabled={isLoading}
+              className="!w-32"
+              aria-label="Criar playlist"
+            >
               {isLoading ? (
                 <div className="flex items-center gap-1.5">
                   <LoadingIcon size={16} />

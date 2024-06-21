@@ -42,7 +42,7 @@ export const SongsTable = ({ playlist, songs, favoriteSongs, previewPlaylists, i
           <TableHead className="w-9 pl-3">#</TableHead>
           <TableHead className="w-1/2">Título</TableHead>
           <TableHead className="w-1/2">Álbum</TableHead>
-          <TableHead className="w-16"><LuClock size={20} /></TableHead>
+          <TableHead className="w-16"><LuClock size={20} aria-label="Duração da música" /></TableHead>
           <TableHead className="w-44">Adicionada em</TableHead>
           <TableHead className="w-28"></TableHead>
         </TableRow>

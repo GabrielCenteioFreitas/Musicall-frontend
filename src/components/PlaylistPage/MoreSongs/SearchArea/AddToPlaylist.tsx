@@ -105,7 +105,11 @@ export const AddToPlaylist = ({ song, className, size=20 }: AddToPlaylistProps) 
   }
 
   return (
-    <Button variant="none" onClick={handleAddToPlaylistClick}>
+    <Button
+      variant="none"
+      onClick={handleAddToPlaylistClick}
+      aria-label="Adicionar à playist"
+    >
       {!isLoading ? (
         <LuPlusCircle
           title="Adicionar à playlist"

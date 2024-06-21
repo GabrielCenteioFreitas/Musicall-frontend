@@ -22,8 +22,8 @@ export default function Loading() {
                 `}/>
 
                 <div className="flex flex-col gap-2">
-                  <span className="w-full h-3 loading rounded-md" />
-                  <span className="w-1/2 h-3 loading rounded-md" />
+                  <div className="w-full h-3 loading rounded-md" />
+                  <div className="w-1/2 h-3 loading rounded-md" />
                 </div>
               </div>
             )}

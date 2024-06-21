@@ -7,12 +7,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { getUserFromServer } from "@/lib/getUserFromServer";
-import { toBase64, shimmer } from "@/lib/shimmer";
+import { shimmer, toBase64 } from "@/lib/shimmer";
 import Image from "next/image";
 import Link from "next/link";
 import { GoPerson } from "react-icons/go";
 import { LuLogOut } from "react-icons/lu";
-import { VscSymbolColor } from "react-icons/vsc";
 
 export const Profile = () => {
   const user = getUserFromServer()
@@ -47,18 +46,19 @@ export const Profile = () => {
         <DropdownMenuSeparator/>
 
         <DropdownMenuItem className="flex gap-1 cursor-pointer" asChild>
-          <Link href={`/users/${sub}`}>
-            <GoPerson size={16} /> Perfil
+          <Link
+            href={`/users/${sub}`}
+            aria-label="Acessar página de perfil"
+          >
+            <GoPerson size={16}/> Perfil
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem className="flex gap-1">
-          <VscSymbolColor size={16} /> Tema
-        </DropdownMenuItem>
-
-        <DropdownMenuSeparator/>
 
         <DropdownMenuItem className="flex gap-1 cursor-pointer" asChild>
-          <a href="/api/auth/logout">
+          <a
+            href="/api/auth/logout"
+            aria-hidden
+          >
             <LuLogOut size={16} /> Sair
           </a>
         </DropdownMenuItem>

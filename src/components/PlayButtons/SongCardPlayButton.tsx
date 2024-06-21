@@ -33,6 +33,8 @@ export const SongCardPlayButton = ({ song, songsGroup, songIndex, className }: S
 
   return (
     <Button
+      onClick={handleClick}
+      title="Ouvir música"
       variant="none"
       size="none"
       className={cn(`
@@ -40,8 +42,11 @@ export const SongCardPlayButton = ({ song, songsGroup, songIndex, className }: S
         size-11 bg-zinc-900 hover:bg-zinc-800 text-gray-50 rounded-full
       `, isSongPlaying ? playingPosition : defaultPosition,
       className)}
-      title="Ouvir música"
-      onClick={handleClick}
+      aria-label={
+        (isPlaying && isSongPlaying)
+          ? "Pausar música"
+          : "Tocar música"
+      }
     >
       {isPlaying && isSongPlaying ? (
         <IoPauseSharp className="size-6"/>

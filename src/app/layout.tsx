@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { PlayerProvider } from "@/contexts/PlayerContext";
 import { Player } from "@/components/Player/Player";
 import { TimeProvider } from "@/contexts/TimeContext";
+import { AxeAccessiblityReporter } from "@/components/AxeAccessiblityReporter";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,6 +38,8 @@ export default function RootLayout({
           theme="dark" 
           position= "bottom-right"
         />
+
+        <AxeAccessiblityReporter />
       </body>
     </html>
   );

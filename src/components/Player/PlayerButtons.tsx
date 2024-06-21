@@ -60,18 +60,23 @@ export const PlayerButtons = () => {
       </PlayerButton.Root>
 
       <PlayerButton.Root
-        title="Música anterior"
+        title="Voltar para a música anterior"
         onClick={handlePrevSongClick}
       >
         <PlayerButton.Icon icon={IoIosSkipBackward} />
       </PlayerButton.Root>
 
       <Button
+        onClick={handlePlayPauseClick}
+        title="Ouvir playlist"
         variant="secondary"
         size="none"
         className="rounded-full p-0 size-11 transition-colors"
-        title="Ouvir playlist"
-        onClick={handlePlayPauseClick}
+        aria-label={
+          isPlaying
+            ? "Pausar música"
+            : "Tocar música"
+        }
       >
         {isPlaying ? (
           <IoPauseSharp className="size-6 text-zinc-50" />
@@ -81,14 +86,14 @@ export const PlayerButtons = () => {
       </Button>
 
       <PlayerButton.Root
-        title="Próxima música"
+        title="Ir para a próxima música"
         onClick={handleNextSongClick}
       >
         <PlayerButton.Icon icon={IoIosSkipForward}/>
       </PlayerButton.Root>
 
       <PlayerButton.Root
-        title="Loop"
+        title={isLoopModeEnabled ? "Desativar modo em Loop" : "Ativar modo em Loop"}
         onClick={handleToggleLoopModeClick}
       >
         <PlayerButton.Icon

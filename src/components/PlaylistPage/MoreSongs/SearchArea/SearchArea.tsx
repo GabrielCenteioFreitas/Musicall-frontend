@@ -53,7 +53,7 @@ export const SearchArea = () => {
   
   return (
     <div className="flex flex-col gap-4">
-      <h6 className="text-2xl font-semibold">Deseja adicionar mais músicas?</h6>
+      <h3 className="text-2xl font-semibold">Deseja adicionar mais músicas?</h3>
 
       <SearchInput handleInputChange={handleInputChange} />
 

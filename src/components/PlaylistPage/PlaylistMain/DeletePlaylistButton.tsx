@@ -20,6 +20,7 @@ import { toast } from "react-toastify";
 
 interface DeletePlaylistButtonProps {
   playlist: {
+    name: string;
     id: string;
   }
 }
@@ -83,16 +84,23 @@ export const DeletePlaylistButton = ({ playlist }: DeletePlaylistButtonProps) =>
 
         <DialogFooter className="mt-6">
           <DialogClose asChild>
-            <Button type="button" variant="outline" className="!w-32" disabled={isLoading}>
+            <Button
+              disabled={isLoading}
+              type="button"
+              variant="outline"
+              className="!w-32"
+              aria-label="Cancelar ação"
+            >
               Cancelar
             </Button>
           </DialogClose>
 
           <Button
+            onClick={handleDeletePlaylistClick}
+            disabled={isLoading}
             variant="destructive"
             className="!w-32"
-            disabled={isLoading}
-            onClick={handleDeletePlaylistClick}
+            aria-label={`Deletar playlist ${playlist.name}`}
           >
             {isLoading ? (
               <div className="flex items-center gap-1.5">

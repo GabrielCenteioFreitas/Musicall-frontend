@@ -18,6 +18,7 @@ export const CreatePlaylistItem = ({ className }: CreatePlaylistItemProps) => {
             bg-transparent hover:!bg-zinc-900
           `}
           title="Criar nova playlist"
+          aria-label="Criar playlist"
         >
           <div className="shrink-0 size-12 rounded-lg overflow-hidden">
             <div

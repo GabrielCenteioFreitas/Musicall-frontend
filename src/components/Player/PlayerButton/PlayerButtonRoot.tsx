@@ -11,11 +11,12 @@ interface PlayerButtonRootProps {
 export const PlayerButtonRoot = ({ title, onClick, className, children }: PlayerButtonRootProps) => {
   return (
     <Button
+      onClick={onClick}
+      title={title}
       variant="none"
       size="none"
-      title={title}
-      onClick={onClick}
       className={className}
+      aria-label={title}
     >
       {children}
     </Button>

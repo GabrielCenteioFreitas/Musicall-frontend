@@ -1,6 +1,7 @@
 'use client'
 
 import { LoadingIcon } from "@/components/LoadingIcon";
+import { Button } from "@/components/ui/button";
 import { url } from "@/lib/api";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
@@ -70,13 +71,16 @@ export const RemoveFromPlaylist = ({ playlist, songId }: RemoveFromPlaylistProps
   }
 
   return (
-    <button
+    <Button
       onClick={handleRemoveFromPlaylistClick}
-      title="Remover música da playlist"
+      variant="none"
+      size="none"
+      aria-label="Remover música da playlist"
     >
       {!isLoading ? (
         <IoTrashOutline
           size={20}
+          title="Remover música da playlist"
           className="text-zinc-400 hover:scale-110 transition-all cursor-pointer"
         />
       ) : (
@@ -85,6 +89,6 @@ export const RemoveFromPlaylist = ({ playlist, songId }: RemoveFromPlaylistProps
           className="text-zinc-400"
         />
       )}
-    </button>
+    </Button>
   );
 }
