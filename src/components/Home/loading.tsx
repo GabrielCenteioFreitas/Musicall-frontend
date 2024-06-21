@@ -2,7 +2,7 @@ import { SectionsItemsContainer } from "@/components/Home/SectionsItemsContainer
 import { SectionsContainer } from "@/components/SectionsContainer";
 import { SectionsTitle } from "@/components/SectionsTitle";
 
-export default function Loading() {
+export const Loading = () => {
   return (
     <div className="flex flex-col gap-5 p-5 pb-20">
       <SectionsContainer>
