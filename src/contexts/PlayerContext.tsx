@@ -3,7 +3,6 @@
 import { PlayingSong } from "@/types/song";
 import { ReactNode, createContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import { useRouter } from "next/navigation";
 
 interface PlayAndSetGroupProps {
   group: PlayingSong[];
@@ -55,7 +54,7 @@ export function PlayerProvider({ children }: { children: ReactNode; }) {
   const [playingSong, setPlayingSong] = useState<PlayingSong | null>(null)
   const [playingGroup, setPlayingGroup] = useState<PlayingSong[] | null>(null)
   const [currentSound, setCurrentSound] = useState<Howl | null>(null)
-  const [volume, setVolume] = useState(0.25)
+  const [volume, setVolume] = useState(0)
   const [prevSongs, setPrevSongs] = useState<PlayingSong[] | null>(null)
   const [nextSongs, setNextSongs] = useState<PlayingSong[] | null>(null)
   const [isPlaying, setIsPlaying] = useState(false)
@@ -106,6 +105,9 @@ export function PlayerProvider({ children }: { children: ReactNode; }) {
       localStorage.removeItem('recentSongs')
       localStorage.removeItem('isRandomModeEnabled')
       localStorage.removeItem('isLoopModeEnabled')
+      localStorage.removeItem('volume')
+      setVolume(0.25)
+      return
     }
 
     const playingSongToSet = localStorage.getItem('playingSong')
@@ -114,6 +116,7 @@ export function PlayerProvider({ children }: { children: ReactNode; }) {
     const prevSongsToSet = localStorage.getItem('prevSongs')
     const isRandomModeEnabledToSet = localStorage.getItem('isRandomModeEnabled')
     const isLoopModeEnabledToSet = localStorage.getItem('isLoopModeEnabled')
+    const volumeToSet = localStorage.getItem('volume')
 
     playingSongToSet && setPlayingSong(JSON.parse(playingSongToSet))
     playingGroupToSet && setPlayingGroup(JSON.parse(playingGroupToSet))
@@ -121,6 +124,7 @@ export function PlayerProvider({ children }: { children: ReactNode; }) {
     prevSongsToSet && setPrevSongs(JSON.parse(prevSongsToSet))
     isRandomModeEnabledToSet && setIsRandomModeEnabled(JSON.parse(isRandomModeEnabledToSet))
     isLoopModeEnabledToSet && setIsLoopModeEnabled(JSON.parse(isLoopModeEnabledToSet))
+    volumeToSet && setVolume(JSON.parse(volumeToSet))
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -149,6 +153,10 @@ export function PlayerProvider({ children }: { children: ReactNode; }) {
       ? localStorage.setItem('nextSongs', JSON.stringify(nextSongs))
       : localStorage.removeItem('nextSongs')
 
+    volume > 0
+      ? localStorage.setItem('volume', JSON.stringify(volume))
+      : localStorage.removeItem('volume')
+
     if (prevSongs) {
       localStorage.setItem('prevSongs', JSON.stringify(prevSongs))
 
@@ -176,12 +184,17 @@ export function PlayerProvider({ children }: { children: ReactNode; }) {
       )
 
       localStorage.setItem('recentSongs', JSON.stringify(
-        newRecentSongs
+        newRecentSongs.slice(0, 8)
       ))
     } else {
       localStorage.removeItem('prevSongs')
     }
-  }, [playingSong, playingGroup, nextSongs, prevSongs, token, isRandomModeEnabled, isLoopModeEnabled]);
+  }, [
+    playingSong, playingGroup,
+    nextSongs, prevSongs,
+    isRandomModeEnabled, isLoopModeEnabled,
+    volume, token
+  ]);
 
   const addCurrentToPrev = () => {
     setPrevSongs(cur => {
@@ -204,6 +217,7 @@ export function PlayerProvider({ children }: { children: ReactNode; }) {
     addCurrentToPrev()
     setIsPlaying(true)
     setPlayingSong(group[songIndex])
+    volume === 0 && setVolume(0.25)
     setNextSongs([
       ...group.slice(songIndex+1, group.length),
       ...group.slice(0, songIndex)
@@ -247,6 +261,7 @@ export function PlayerProvider({ children }: { children: ReactNode; }) {
       } else {
         setIsPlaying(true)
         currentSound?.play()
+        volume === 0 && setVolume(0.25)
       }
     } else {
       playAndSetGroup({

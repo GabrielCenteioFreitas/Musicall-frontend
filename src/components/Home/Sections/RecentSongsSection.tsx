@@ -37,11 +37,11 @@ export const RecentSongsSection = ({ favorites, className, ...rest }: RecentSong
       />
 
       <SectionsItemsContainer className="grid-cols-8">
-        {recentSongs.slice(0, 8).map((recentSong, i) => 
+        {recentSongs.map((recentSong, i) => 
           <SongCard
             key={recentSong.song.iTunesId}
             song={recentSongs[i]}
-            songsGroup={recentSongs.slice(0, 8)}
+            songsGroup={recentSongs}
             isFavorited={favorites?.favoriteSongs?.some(
               favoritedSong => favoritedSong.song.iTunesId === recentSong.song.iTunesId
             ) || false}
