@@ -47,7 +47,7 @@ const PlaylistCardComponent = async ({ playlist }: PlaylistCardProps) => {
               alt={playlist.user?.name}
               width={20}
               height={20}
-              className="rounded-full"
+              className="size-5 rounded-full shrink-0 object-cover object-top"
               placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(20, 20))}`}
             />
             <span className="text-xs text-zinc-400 leading-none truncate ...">
