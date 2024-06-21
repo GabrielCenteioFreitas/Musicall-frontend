@@ -1,6 +1,6 @@
+import { cn } from "@/lib/utils";
 import { getRandomColor } from "@/utils/getRandomColor";
 import { Button } from "../../ui/button";
-import { cn } from "@/lib/utils";
 
 interface FakeSongCardProps {
   i: number;

@@ -17,7 +17,7 @@ export const SongInfo = () => {
         alt={playingSong.song.name}
         width={64}
         height={64}
-        className="rounded-md size-16 aspect-square shrink-0 object-cover"
+        className="rounded-md size-14 aspect-square shrink-0 object-cover"
         placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(64, 64))}`}
       />
 

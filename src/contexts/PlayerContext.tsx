@@ -2,6 +2,8 @@
 
 import { PlayingSong } from "@/types/song";
 import { ReactNode, createContext, useEffect, useState } from "react";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 interface PlayAndSetGroupProps {
   group: PlayingSong[];
@@ -59,6 +61,7 @@ export function PlayerProvider({ children }: { children: ReactNode; }) {
   const [isPlaying, setIsPlaying] = useState(false)
   const [isRandomModeEnabled, setIsRandomModeEnabled] = useState(false)
   const [isLoopModeEnabled, setIsLoopModeEnabled] = useState(false)
+  const token = Cookies.get('token')
 
   useEffect(() => {
     if (playingSong) {
@@ -94,6 +97,92 @@ export function PlayerProvider({ children }: { children: ReactNode; }) {
     }
   }, [isRandomModeEnabled, playingSong, playingGroup])
 
+  useEffect(() => {
+    if (!token) {
+      localStorage.removeItem('playingSong')
+      localStorage.removeItem('playingGroup')
+      localStorage.removeItem('nextSongs')
+      localStorage.removeItem('prevSongs')
+      localStorage.removeItem('recentSongs')
+      localStorage.removeItem('isRandomModeEnabled')
+      localStorage.removeItem('isLoopModeEnabled')
+    }
+
+    const playingSongToSet = localStorage.getItem('playingSong')
+    const playingGroupToSet = localStorage.getItem('playingGroup')
+    const nextSongsToSet = localStorage.getItem('nextSongs')
+    const prevSongsToSet = localStorage.getItem('prevSongs')
+    const isRandomModeEnabledToSet = localStorage.getItem('isRandomModeEnabled')
+    const isLoopModeEnabledToSet = localStorage.getItem('isLoopModeEnabled')
+
+    playingSongToSet && setPlayingSong(JSON.parse(playingSongToSet))
+    playingGroupToSet && setPlayingGroup(JSON.parse(playingGroupToSet))
+    nextSongsToSet && setNextSongs(JSON.parse(nextSongsToSet))
+    prevSongsToSet && setPrevSongs(JSON.parse(prevSongsToSet))
+    isRandomModeEnabledToSet && setIsRandomModeEnabled(JSON.parse(isRandomModeEnabledToSet))
+    isLoopModeEnabledToSet && setIsLoopModeEnabled(JSON.parse(isLoopModeEnabledToSet))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
+    if (!token) {
+      return
+    }
+
+    isRandomModeEnabled
+      ? localStorage.setItem('isRandomModeEnabled', JSON.stringify(isRandomModeEnabled))
+      : localStorage.removeItem('isRandomModeEnabled')
+
+    isLoopModeEnabled
+    ? localStorage.setItem('isLoopModeEnabled', JSON.stringify(isLoopModeEnabled))
+    : localStorage.removeItem('isLoopModeEnabled')
+
+    playingSong
+      ? localStorage.setItem('playingSong', JSON.stringify(playingSong))
+      : localStorage.removeItem('playingSong')
+
+    playingGroup
+      ? localStorage.setItem('playingGroup', JSON.stringify(playingGroup))
+      : localStorage.removeItem('playingGroup')
+
+    nextSongs
+      ? localStorage.setItem('nextSongs', JSON.stringify(nextSongs))
+      : localStorage.removeItem('nextSongs')
+
+    if (prevSongs) {
+      localStorage.setItem('prevSongs', JSON.stringify(prevSongs))
+
+      const recentSongs = localStorage.getItem('recentSongs')
+
+      const addSongToRecent = (recentSongs: PlayingSong[], prevSongs: PlayingSong[]): PlayingSong[] => {
+        prevSongs.forEach(prevSong => {
+          const index = recentSongs.findIndex(
+            recentSong => recentSong.song.iTunesId === prevSong.song.iTunesId
+          );
+
+          if (index !== -1) {
+            recentSongs = recentSongs.filter((_, i) => i !== index);
+          }
+
+          recentSongs.unshift(prevSong);
+      });
+
+      return recentSongs;
+      }
+
+      const newRecentSongs = addSongToRecent(
+        JSON.parse(recentSongs || "[]"),
+        prevSongs || []
+      )
+
+      localStorage.setItem('recentSongs', JSON.stringify(
+        newRecentSongs
+      ))
+    } else {
+      localStorage.removeItem('prevSongs')
+    }
+  }, [playingSong, playingGroup, nextSongs, prevSongs, token, isRandomModeEnabled, isLoopModeEnabled]);
+
   const addCurrentToPrev = () => {
     setPrevSongs(cur => {
       if (cur) {
@@ -113,12 +202,12 @@ export function PlayerProvider({ children }: { children: ReactNode; }) {
   }: PlayAndSetGroupProps) => {  
     currentSound?.stop()
     addCurrentToPrev()
+    setIsPlaying(true)
     setPlayingSong(group[songIndex])
     setNextSongs([
       ...group.slice(songIndex+1, group.length),
       ...group.slice(0, songIndex)
     ])
-    setIsPlaying(true)
     setPlayingGroup(group)
   }
 
@@ -137,8 +226,8 @@ export function PlayerProvider({ children }: { children: ReactNode; }) {
       }
     } else {
       if (playingSong && isPlayingSongInGroup) {
-        currentSound?.play()
         setIsPlaying(true)
+        currentSound?.play()
       } else {
         playAndSetGroup({
           group,
@@ -171,8 +260,8 @@ export function PlayerProvider({ children }: { children: ReactNode; }) {
     addCurrentToPrev()
 
     if (nextSongs?.[0]) {
-      setPlayingSong(nextSongs[0])
       setIsPlaying(true)
+      setPlayingSong(nextSongs[0])
       setNextSongs(cur => cur?.slice(1, cur.length) || null)
     } else {
       currentSound?.stop()
@@ -192,8 +281,8 @@ export function PlayerProvider({ children }: { children: ReactNode; }) {
     )
 
     if (prevSongs && prevSongs.length > 0) {
-      setPlayingSong(prevSongs[prevSongsLength-1])
       setIsPlaying(true)
+      setPlayingSong(prevSongs[prevSongsLength-1])
       setPrevSongs(cur => 
         cur?.slice(0, prevSongsLength-1) || null
       )

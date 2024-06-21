@@ -19,8 +19,8 @@ export const PlayerButtons = () => {
       currentSound?.pause()
       setIsPlaying(false)
     } else {
-      currentSound?.play()
       setIsPlaying(true)
+      currentSound?.play()
     }
   }
 

@@ -8,22 +8,27 @@ import { VolumeSlider } from "./VolumeSlider";
 import { useTime } from "@/hooks/useTime";
 
 export const PlayerContent = () => {
-  const { playingSong, currentSound, setCurrentSound, playNextSong, isLoopModeEnabled, volume } = usePlayer()
+  const { playingSong, currentSound, setCurrentSound, isPlaying, playNextSong, isLoopModeEnabled, volume } = usePlayer()
   const { setCurrentTime } = useTime();
   const [isSongLoaded, setIsSongLoaded] = useState(false)
   const [_, { sound, duration }] = useSound(playingSong?.song.previewUrl || '', {
     volume,
-    onend: () => (isLoopModeEnabled ? setCurrentTime(0) : playNextSong()),
     loop: isLoopModeEnabled,
+    autoplay: false,
+    onend: () => (isLoopModeEnabled ? setCurrentTime(0) : playNextSong()),
     onload: () => setIsSongLoaded(true),
   })
 
   useEffect(() => {
+    if (!isPlaying) {
+      setCurrentSound(sound)
+      return
+    }
     currentSound?.stop();
     sound?.play();
     setCurrentSound(sound)
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  } , [sound, setCurrentSound])  
+  } , [sound, setCurrentSound])
 
   if (!playingSong) {
     return null
