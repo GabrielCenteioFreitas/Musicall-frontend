@@ -15,7 +15,10 @@ interface SongCardPlayButtonProps {
 
 export const SongCardPlayButton = ({ song, songsGroup, songIndex, className }: SongCardPlayButtonProps) => {
   const { playingSong, isPlaying, playSongInAGroup } = usePlayer()
-  const isSongPlaying = song.song.id === playingSong?.song.id
+  const isSongPlaying = 
+    playingSong?.song.id
+      ? song.song.id === playingSong?.song.id
+      : song.song.iTunesId === playingSong?.song.iTunesId
 
   const handleClick = () => {
     playSongInAGroup({
