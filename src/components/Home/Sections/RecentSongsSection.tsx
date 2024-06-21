@@ -10,7 +10,7 @@ import { SectionsTitle } from "../../SectionsTitle";
 import { SectionsItemsContainer } from "../SectionsItemsContainer";
 
 interface RecentSongsSectionProps {
-  favorites: Favorites;
+  favorites: Favorites | null;
   className?: string;
 }
 
@@ -42,7 +42,7 @@ export const RecentSongsSection = ({ favorites, className, ...rest }: RecentSong
             key={recentSong.song.iTunesId}
             song={recentSongs[i]}
             songsGroup={recentSongs.slice(0, 8)}
-            isFavorited={favorites.favoriteSongs?.some(
+            isFavorited={favorites?.favoriteSongs?.some(
               favoritedSong => favoritedSong.song.iTunesId === recentSong.song.iTunesId
             ) || false}
           />
