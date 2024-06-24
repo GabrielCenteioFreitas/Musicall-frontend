@@ -102,7 +102,7 @@ export const MoreSongsTableRow = ({ song, moreSongs, i }: MoreSongsTableRowProps
         {minutes}:{seconds.toString().padStart(2, '0')}
       </TableCell>
 
-      <TableCell className="pr-3">
+      <TableCell className="pr-3" onClick={(e) => e.stopPropagation()}>
         <AddToPlaylist song={song} />
       </TableCell>
     </TableRow>

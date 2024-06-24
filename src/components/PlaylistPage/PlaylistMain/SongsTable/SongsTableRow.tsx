@@ -127,7 +127,7 @@ const SongsTableRowComponent = ({
         {dayjs(currentSong.addedAt).format("D[ de ]MMM[. de ]YYYY")}
       </TableCell>
 
-      <TableCell className="pr-3">
+      <TableCell className="pr-3" onClick={(e) => e.stopPropagation()}>
         <div className="flex gap-1.5">
           <AddToPlaylist
             previewPlaylists={previewPlaylists}
