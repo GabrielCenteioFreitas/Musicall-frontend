@@ -1,36 +1,105 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 align="center">Musicall</h1>
 
-## Getting Started
+<p align="center">
+  <h3 align="left">Front-end</h3>
+  <p>
+    <a alt="ReactJS">
+      <img src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" />
+    </a>
+    <a alt="NextJS">
+      <img src="https://img.shields.io/badge/Next.js-000000.svg?style=for-the-badge&logo=nextdotjs&logoColor=white" />
+    </a>
+    <a alt="TypeScript">
+      <img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" />
+    </a>
+    <a alt="TailwindCSS">
+      <img src="https://img.shields.io/badge/TAILWINDCSS-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white" />
+    </a>
+    <a alt="Shadcn UI">
+      <img src="https://img.shields.io/badge/shadcn/ui-000000.svg?style=for-the-badge&logo=shadcn/ui&logoColor=white" />
+    </a>
+  </p>
+  
+  <h3 align="left">Back-end</h3>
+  <p>
+    <a alt="NodeJS">
+      <img src="https://img.shields.io/badge/Node.js-5FA04E.svg?style=for-the-badge&logo=nodedotjs&logoColor=white" />
+    </a>
+    <a alt="Fastify">
+      <img src="https://img.shields.io/badge/Fastify-000000.svg?style=for-the-badge&logo=Fastify&logoColor=white" />
+    </a>
+    <a alt="TypeScript">
+      <img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" />
+    </a>
+    <a alt="Prisma">
+      <img src="https://img.shields.io/badge/Prisma-2D3748.svg?style=for-the-badge&logo=Prisma&logoColor=white" />
+    </a>
+    <a alt="Zod">
+      <img src="https://img.shields.io/badge/Zod-3E67B1.svg?style=for-the-badge&logo=Zod&logoColor=white" />
+    </a>
+    <a alt="PostgreSQL">
+      <img src="https://img.shields.io/badge/PostgreSQL-4169E1.svg?style=for-the-badge&logo=PostgreSQL&logoColor=white" />
+    </a>
+  </p>
+</p>
 
-First, run the development server:
+<br>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+<div align="center">
+  
+  [<img alt="Preview do projeto." src=".github/preview.gif" width="100%">](https://musicall-project.vercel.app/)
+</div>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<h4 align="center">
+  
+  [Ver projeto](https://musicall-project.vercel.app/)
+</h4>
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+<br>
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+<p align="center">
+  <a href="#projeto">Sobre o projeto</a> •
+  <a href="#tecnologias">Tecnologias</a>
+</p>
 
-## Learn More
+## 💻 Sobre o projeto<a id="projeto"></a>
 
-To learn more about Next.js, take a look at the following resources:
+Esse é o repositório do front-end de um projeto pessoal Full-stack. Para acessar o repositório do back-end, clique [aqui](https://github.com/GabrielCenteioFreitas/Musicall-backend).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+O projeto é um site inspirado no Spotify, com diversas funcionalidades, como:
+- Login com o Google
+- Edição de perfil
+- Reprodução de músicas em modo sequencial, aleatório ou em loop
+- Criação de playlists
+- Edição de título, descrição e privacidade das playlists
+- Adição de foto personalizada nas playlists
+- Adição de músicas nas playlists
+- Marcação de músicas, álbuns ou artistas como favoritos
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Caso queira ver o projeto, clique [aqui](https://musicall-project.vercel.app/).
 
-## Deploy on Vercel
+## 🚀 Tecnologias
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+O front-end desse projeto foi desenvolvido com as seguintes tecnologias:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- ReactJS
+- NextJS
+- Typescript
+- TailwindCSS
+- Shadcn/ui
+- iTunes API
+
+## 🤝 Contribuições
+
+Issues e pull requests são muito bem-vindos!
+
+## 👨🏻‍💻 Autor: Gabriel Centeio Freitas 
+
+<p align="left">
+  <a alt="Github" href="https://github.com/GabrielCenteioFreitas/">
+    <img src="https://img.shields.io/badge/GITHUB-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" />
+  </a>
+  <a alt="Linkedin" href="https://www.linkedin.com/in/gabrielcenteiofreitas/">
+    <img src="https://img.shields.io/badge/LINKEDIN-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white" />
+  </a>
+</p>
