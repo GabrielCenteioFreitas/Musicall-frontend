@@ -8,6 +8,7 @@ import { MoreSongsTable } from "./MoreSongsTable"
 import { Pagination } from "./Pagination"
 import { SearchInput } from "./SearchInput"
 import { LoadingIcon } from "@/components/LoadingIcon"
+import { Loading } from "../Loading"
 
 export const SearchArea = () => {
   const [songs, setSongs] = useState<ITunesSong[] | null>(null)
@@ -17,9 +18,9 @@ export const SearchArea = () => {
 
   const handleInputChange = useDebouncedCallback(async (e: ChangeEvent<HTMLInputElement>) => {
     const termValue = e.target.value
+    setSongs(null)
 
     if (!termValue) {
-      setSongs(null)
       setTerm('')
       return
     }
@@ -64,6 +65,8 @@ export const SearchArea = () => {
 
       <SearchInput handleInputChange={handleInputChange} />
 
+      {/* <Loading /> */}
+
       {term !== '' ? (
         songs && songs?.length > 0 ? (
           <>
@@ -72,7 +75,7 @@ export const SearchArea = () => {
             <Pagination page={page} setPage={setPage} qntSongs={songs.length} />
           </>
         ) : isLoading ? (
-          <LoadingIcon />
+          <Loading />
         ) : (
           <span>Não foram encontradas músicas relacionadas a sua pesquisa</span>
         )
