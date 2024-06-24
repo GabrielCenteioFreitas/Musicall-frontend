@@ -39,73 +39,78 @@ export const FavoriteSongButton = ({ song, isFavorited, className, size=20 }: Fa
     }
     setIsLoading(true)
 
-    const { trackId, collectionId, artistId } = song
-    
-    const { results: songResults } = await getDataFromLookup({ id: trackId })
-    const songData: ITunesSong = songResults[0]
-    const { results: artistResults } = await getDataFromLookup({ id: artistId })
-    const artistData: ITunesArtist = artistResults[0]
-    const { results: albumResults } = await getDataFromLookup({ id: collectionId })
-    const albumData: ITunesAlbum = albumResults[0]
-
-    const requestBody = {
-      songToBeFavorited: {
-        name: songData.trackName,
-        portrait: songData.artworkUrl100,
-        iTunesId: songData.trackId,
-        iTunesViewUrl: songData.trackViewUrl,
-        previewUrl: songData.previewUrl,
-        releaseDate: songData.releaseDate,
-        durationInSeconds: songData.trackTimeMillis / 1000,
-        genre: songData.primaryGenreName,
-        artist: {
-          name: artistData.artistName,
-          iTunesId: artistData.artistId,
-          iTunesViewUrl: artistData.artistLinkUrl,
-          genre: artistData.primaryGenreName,
-        },
-        album: {
-          name: albumData.collectionName,
-          portrait: albumData.artworkUrl100,
-          iTunesId: albumData.collectionId,
-          iTunesViewUrl: albumData.collectionViewUrl,
-          releaseDate: albumData.releaseDate,
-          genre: albumData.primaryGenreName,
-        },
-      }
-    };
-
     try {
-      const response = await fetch(
-        url(`/favorites/song`),
-        {
-          method: 'POST',
-          body: JSON.stringify(requestBody),
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`
-          }
+      const { trackId, collectionId, artistId } = song
+      
+      const { results: songResults } = await getDataFromLookup({ id: trackId })
+      const songData: ITunesSong = songResults[0]
+      const { results: artistResults } = await getDataFromLookup({ id: artistId })
+      const artistData: ITunesArtist = artistResults[0]
+      const { results: albumResults } = await getDataFromLookup({ id: collectionId })
+      const albumData: ITunesAlbum = albumResults[0]
+  
+      const requestBody = {
+        songToBeFavorited: {
+          name: songData.trackName,
+          portrait: songData.artworkUrl100,
+          iTunesId: songData.trackId,
+          iTunesViewUrl: songData.trackViewUrl,
+          previewUrl: songData.previewUrl,
+          releaseDate: songData.releaseDate,
+          durationInSeconds: songData.trackTimeMillis / 1000,
+          genre: songData.primaryGenreName,
+          artist: {
+            name: artistData.artistName,
+            iTunesId: artistData.artistId,
+            iTunesViewUrl: artistData.artistLinkUrl,
+            genre: artistData.primaryGenreName,
+          },
+          album: {
+            name: albumData.collectionName,
+            portrait: albumData.artworkUrl100,
+            iTunesId: albumData.collectionId,
+            iTunesViewUrl: albumData.collectionViewUrl,
+            releaseDate: albumData.releaseDate,
+            genre: albumData.primaryGenreName,
+          },
         }
-      )
-      const data = await response.json()
-
-      if (!data.favoritedSong) {
-        throw new Error()
-      } else {
-        toast.success(
-          (
-            <span>
-              Música adicionada aos favoritos<br/>com sucesso!
-            </span>
-          ),
+      };
+  
+      try {
+        const response = await fetch(
+          url(`/favorites/song`),
           {
-            autoClose: 2500,
+            method: 'POST',
+            body: JSON.stringify(requestBody),
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`
+            }
           }
-        ) 
-
-        router.refresh()
-      }
-    } catch(error) {
+        )
+        const data = await response.json()
+  
+        if (!data.favoritedSong) {
+          throw new Error()
+        } else {
+          toast.success(
+            (
+              <span>
+                Música adicionada aos favoritos<br/>com sucesso!
+              </span>
+            ),
+            {
+              autoClose: 2500,
+            }
+          ) 
+  
+          router.refresh()
+        }
+      } catch(error) {
+        console.error(error)
+        toast.error("Ocorreu um erro!")
+      } 
+    } catch (error) {
       console.error(error)
       toast.error("Ocorreu um erro!")
     } finally {

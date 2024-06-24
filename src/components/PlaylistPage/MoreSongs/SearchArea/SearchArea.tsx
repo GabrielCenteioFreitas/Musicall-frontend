@@ -4,11 +4,11 @@ import { getDataFromSearch } from "@/lib/getITunesData"
 import { ITunesSong } from "@/types/song"
 import { ChangeEvent, useEffect, useState } from "react"
 import { useDebouncedCallback } from "use-debounce"
+import { Loading } from "../Loading"
 import { MoreSongsTable } from "./MoreSongsTable"
 import { Pagination } from "./Pagination"
 import { SearchInput } from "./SearchInput"
-import { LoadingIcon } from "@/components/LoadingIcon"
-import { Loading } from "../Loading"
+import { toast } from "react-toastify"
 
 export const SearchArea = () => {
   const [songs, setSongs] = useState<ITunesSong[] | null>(null)
@@ -28,6 +28,7 @@ export const SearchArea = () => {
     setIsLoading(true)
     setTerm(termValue)
     setPage(1)
+
     await getDataFromSearch({
       term: termValue,
       entity: 'song',
@@ -35,37 +36,17 @@ export const SearchArea = () => {
     }).then(data => {
       setSongs(data.results)
       setIsLoading(false)
+    }).catch(error => {
+      console.error(error)
+      toast.error('Ocorreu um erro!')
     })
   }, 500)
-
-  useEffect(() => {
-    if (!term) {
-      setSongs(null)
-      setTerm('')
-      return
-    }
-
-    async function fetchData() {
-      const { results } = await getDataFromSearch({
-        term,
-        entity: 'song',
-        limit: 50,
-      })
-  
-      setSongs(results)
-    }
-
-    fetchData()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page])
   
   return (
     <div className="flex flex-col gap-4">
       <h3 className="text-2xl font-semibold">Deseja adicionar mais músicas?</h3>
 
       <SearchInput handleInputChange={handleInputChange} />
-
-      {/* <Loading /> */}
 
       {term !== '' ? (
         songs && songs?.length > 0 ? (

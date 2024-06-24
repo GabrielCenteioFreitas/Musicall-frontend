@@ -55,74 +55,80 @@ export const AddToPlaylist = ({ previewPlaylists, song, className, size=20 }: Ad
   const handleAddToPlaylistClick = async (e: MouseEvent<HTMLButtonElement>, previewPlaylist: PreviewPlaylist) => {
     e.preventDefault()
     setSelectedPlaylist(previewPlaylist)
-    const { trackId, collectionId, artistId } = song
-
-    const { results: songResults } = await getDataFromLookup({ id: trackId })
-    const songData: ITunesSong = songResults[0]
-    const { results: artistResults } = await getDataFromLookup({ id: artistId })
-    const artistData: ITunesArtist = artistResults[0]
-    const { results: albumResults } = await getDataFromLookup({ id: collectionId })
-    const albumData: ITunesAlbum = albumResults[0]
-
-    const requestBody = {
-      newSong: {
-        name: songData.trackName,
-        portrait: songData.artworkUrl100,
-        iTunesId: songData.trackId,
-        iTunesViewUrl: songData.trackViewUrl,
-        artist: {
-          name: artistData.artistName,
-          iTunesId: artistData.artistId,
-          iTunesViewUrl: artistData.artistLinkUrl,
-          genre: artistData.primaryGenreName,
-        },
-        album: {
-          name: albumData.collectionName,
-          portrait: albumData.artworkUrl100,
-          iTunesId: albumData.collectionId,
-          iTunesViewUrl: albumData.collectionViewUrl,
-          releaseDate: albumData.releaseDate,
-          genre: albumData.primaryGenreName,
-        },
-        previewUrl: songData.previewUrl,
-        releaseDate: songData.releaseDate,
-        durationInSeconds: songData.trackTimeMillis / 1000,
-        genre: songData.primaryGenreName
-      }
-    };
-
+    
     try {
-      const response = await fetch(
-        url(`/playlists/${previewPlaylist?.id}/songs`),
-        {
-          method: 'POST',
-          body: JSON.stringify(requestBody),
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`
-          }
+      const { trackId, collectionId, artistId } = song
+
+      const { results: songResults } = await getDataFromLookup({ id: trackId })
+      const songData: ITunesSong = songResults[0]
+      const { results: artistResults } = await getDataFromLookup({ id: artistId })
+      const artistData: ITunesArtist = artistResults[0]
+      const { results: albumResults } = await getDataFromLookup({ id: collectionId })
+      const albumData: ITunesAlbum = albumResults[0]
+
+      const requestBody = {
+        newSong: {
+          name: songData.trackName,
+          portrait: songData.artworkUrl100,
+          iTunesId: songData.trackId,
+          iTunesViewUrl: songData.trackViewUrl,
+          artist: {
+            name: artistData.artistName,
+            iTunesId: artistData.artistId,
+            iTunesViewUrl: artistData.artistLinkUrl,
+            genre: artistData.primaryGenreName,
+          },
+          album: {
+            name: albumData.collectionName,
+            portrait: albumData.artworkUrl100,
+            iTunesId: albumData.collectionId,
+            iTunesViewUrl: albumData.collectionViewUrl,
+            releaseDate: albumData.releaseDate,
+            genre: albumData.primaryGenreName,
+          },
+          previewUrl: songData.previewUrl,
+          releaseDate: songData.releaseDate,
+          durationInSeconds: songData.trackTimeMillis / 1000,
+          genre: songData.primaryGenreName
         }
-      )
-      const data = await response.json()
+      };
 
-      if (!data.addedSong) {
-        throw new Error()
-      } else {
-        toast.success(
-          (
-            <div className="max-w-full relative">
-              Música adicionada à playlist<br/>
-              <span className="font-bold truncate ...">
-                {previewPlaylist?.name}
-              </span>
-            </div>
-          ),
+      try {
+        const response = await fetch(
+          url(`/playlists/${previewPlaylist?.id}/songs`),
           {
-            autoClose: 2500,
+            method: 'POST',
+            body: JSON.stringify(requestBody),
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`
+            }
           }
-        ) 
+        )
+        const data = await response.json()
 
-        router.refresh()
+        if (!data.addedSong) {
+          throw new Error()
+        } else {
+          toast.success(
+            (
+              <div className="max-w-full relative">
+                Música adicionada à playlist<br/>
+                <span className="font-bold truncate ...">
+                  {previewPlaylist?.name}
+                </span>
+              </div>
+            ),
+            {
+              autoClose: 2500,
+            }
+          ) 
+
+          router.refresh()
+        }
+      } catch(error) {
+        console.error(error)
+        toast.error("Ocorreu um erro!")
       }
     } catch(error) {
       console.error(error)

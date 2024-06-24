@@ -37,97 +37,102 @@ export const SmallFavoriteArtistButton = ({ artist, isFavorited, className, size
     }
     setIsLoading(true)
 
-    const { artistId } = artist
-    
-    const { results: artistResults } = await getDataFromLookup({
-      id: artistId
-    })
-    const artistData: ITunesArtist = artistResults[0]
-
-    const { results: albumResults, resultCount: albumCount } = await getDataFromLookup({
-      amgArtistId: artistData.amgArtistId,
-      entity: 'album',
-      limit: 201,
-    })
-    const albumData: ITunesAlbum[] = albumResults.slice(1, albumCount)
-
-    const { results: songResults, resultCount: songCount } = await getDataFromLookup({
-      amgArtistId: artistData.amgArtistId,
-      entity: 'song',
-      limit: 201,
-    })
-    const songData: ITunesSong[] = songResults.slice(1, songCount)
-
-    const requestBody = {
-      artistToBeFavorited: {
-        name: artistData.artistName,
-        iTunesId: artistData.artistId,
-        iTunesViewUrl: artistData.artistLinkUrl,
-        genre: artistData.primaryGenreName,
-        albums: albumData.map((album) => {
-          return {
-            name: album.collectionName,
-            portrait: album.artworkUrl100,
-            iTunesId: album.collectionId,
-            iTunesViewUrl: album.collectionViewUrl,
-            releaseDate: album.releaseDate,
-            genre: album.primaryGenreName,
-          }
-        }),
-        songs: songData.map((song) => {
-          return {
-            name: song.trackName,
-            portrait: song.artworkUrl100,
-            iTunesId: song.trackId,
-            iTunesViewUrl: song.trackViewUrl,
-            previewUrl: song.previewUrl,
-            releaseDate: song.releaseDate,
-            durationInSeconds: song.trackTimeMillis / 1000,
-            genre: song.primaryGenreName,
-            album: {
-              name: song.collectionName,
-              portrait: song.artworkUrl100,
-              iTunesId: song.collectionId,
-              iTunesViewUrl: song.collectionViewUrl,
-              releaseDate: song.releaseDate,
-              genre: song.primaryGenreName,
-            },
-          }
-        })
-      }
-    };
-
     try {
-      const response = await fetch(
-        url(`/favorites/artist`),
-        {
-          method: 'POST',
-          body: JSON.stringify(requestBody),
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`
-          }
+      const { artistId } = artist
+      
+      const { results: artistResults } = await getDataFromLookup({
+        id: artistId
+      })
+      const artistData: ITunesArtist = artistResults[0]
+
+      const { results: albumResults, resultCount: albumCount } = await getDataFromLookup({
+        amgArtistId: artistData.amgArtistId,
+        entity: 'album',
+        limit: 201,
+      })
+      const albumData: ITunesAlbum[] = albumResults.slice(1, albumCount)
+
+      const { results: songResults, resultCount: songCount } = await getDataFromLookup({
+        amgArtistId: artistData.amgArtistId,
+        entity: 'song',
+        limit: 201,
+      })
+      const songData: ITunesSong[] = songResults.slice(1, songCount)
+
+      const requestBody = {
+        artistToBeFavorited: {
+          name: artistData.artistName,
+          iTunesId: artistData.artistId,
+          iTunesViewUrl: artistData.artistLinkUrl,
+          genre: artistData.primaryGenreName,
+          albums: albumData.map((album) => {
+            return {
+              name: album.collectionName,
+              portrait: album.artworkUrl100,
+              iTunesId: album.collectionId,
+              iTunesViewUrl: album.collectionViewUrl,
+              releaseDate: album.releaseDate,
+              genre: album.primaryGenreName,
+            }
+          }),
+          songs: songData.map((song) => {
+            return {
+              name: song.trackName,
+              portrait: song.artworkUrl100,
+              iTunesId: song.trackId,
+              iTunesViewUrl: song.trackViewUrl,
+              previewUrl: song.previewUrl,
+              releaseDate: song.releaseDate,
+              durationInSeconds: song.trackTimeMillis / 1000,
+              genre: song.primaryGenreName,
+              album: {
+                name: song.collectionName,
+                portrait: song.artworkUrl100,
+                iTunesId: song.collectionId,
+                iTunesViewUrl: song.collectionViewUrl,
+                releaseDate: song.releaseDate,
+                genre: song.primaryGenreName,
+              },
+            }
+          })
         }
-      )
-      const data = await response.json()
+      };
 
-      if (!data.favoritedArtist) {
-        throw new Error()
-      } else {
-        toast.success(
-          (
-            <span>
-              Artista adicionado aos favoritos<br/>com sucesso!
-            </span>
-          ),
+      try {
+        const response = await fetch(
+          url(`/favorites/artist`),
           {
-            autoClose: 2500,
+            method: 'POST',
+            body: JSON.stringify(requestBody),
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`
+            }
           }
-        ) 
+        )
+        const data = await response.json()
 
-        router.refresh()
+        if (!data.favoritedArtist) {
+          throw new Error()
+        } else {
+          toast.success(
+            (
+              <span>
+                Artista adicionado aos favoritos<br/>com sucesso!
+              </span>
+            ),
+            {
+              autoClose: 2500,
+            }
+          ) 
+
+          router.refresh()
+        }
+      } catch(error) {
+        console.error(error)
+        toast.error("Ocorreu um erro!")
       }
-    } catch(error) {
+    } catch (error) {
       console.error(error)
       toast.error("Ocorreu um erro!")
     } finally {
