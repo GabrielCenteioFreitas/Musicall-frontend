@@ -1,3 +1,4 @@
+import { CreatePlaylistCard } from "@/components/Home/Cards/CreatePlaylistCard";
 import { SectionsItemsContainer } from "@/components/Home/SectionsItemsContainer";
 import { PlaylistCard } from "@/components/PlaylistCard";
 import { SectionsTitle } from "@/components/SectionsTitle";
@@ -12,19 +13,21 @@ const Library = async () => {
     <div className="flex flex-col p-5 pb-20">
       <SectionsTitle title="Biblioteca" dividerMargins="my-2" />
 
-      {previewPlaylists && previewPlaylists.length > 0 ? (
-        <SectionsItemsContainer>
-          {previewPlaylists?.map((previewPlaylist) => 
-            <PlaylistCard
-              key={previewPlaylist.id}
-              playlist={previewPlaylist}
-              section="library"
-            />
-          )}
-        </SectionsItemsContainer>
-      ) : (
-        <p>Você não possui nenhuma playlist.</p>
+      {previewPlaylists?.length === 0 && (
+        <div className="-ml-3">
+          <CreatePlaylistCard />
+        </div>
       )}
+
+      <SectionsItemsContainer>
+        {previewPlaylists?.map((previewPlaylist) => 
+          <PlaylistCard
+            key={previewPlaylist.id}
+            playlist={previewPlaylist}
+            section="library"
+          />
+        )}
+      </SectionsItemsContainer>
     </div>
   );
 }
