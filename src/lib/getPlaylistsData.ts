@@ -4,6 +4,8 @@ import { PreviewPlaylist } from "@/types/previewPlaylist";
 import { cache } from "react";
 
 export const getPreviewPlaylists = cache(async (token: string | null): Promise<PreviewPlaylist[] | null> => {
+  if (!token) return null;
+
   try {
     const response = await fetch(
       url('/playlists/user'),
@@ -29,6 +31,8 @@ export const getPreviewPlaylists = cache(async (token: string | null): Promise<P
 })
 
 export const getPlaylist = cache(async (id: string, token: string | null): Promise<Playlist | null> => {
+  if (!token) return null;
+
   try {
     const response = await fetch(
       url(`/playlists/${id}`),

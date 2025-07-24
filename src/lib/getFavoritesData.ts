@@ -5,6 +5,8 @@ import { Favorites } from "@/types/favorites";
 export const getFavorites = cache(async (
   token: string | null
 ): Promise<Favorites | null> => {
+  if (!token) return null;
+
   try {
     const response = await fetch(
       url(`/favorites`),
