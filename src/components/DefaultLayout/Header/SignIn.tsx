@@ -9,7 +9,7 @@ export const loginURL =
   'https://accounts.google.com/o/oauth2/v2/auth'
   + `?client_id=${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}`
   + `&redirect_uri=${redirectURI}`
-  + '&scope=profile'
+  + '&scope=openid email profile'
   + '&response_type=code'
 
 export const SignIn = () => {

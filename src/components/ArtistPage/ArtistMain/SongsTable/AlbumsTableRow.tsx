@@ -53,6 +53,7 @@ const AlbumsTableRowComponent = ({
           </span>
 
           <Link
+            prefetch={false}
             href={`/artists/${album.artistId}`}
             title={album.artistName}
             className="w-fit text-sm hover:underline text-zinc-400 text-wrap truncate ..."

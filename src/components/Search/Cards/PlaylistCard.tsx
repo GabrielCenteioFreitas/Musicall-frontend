@@ -26,6 +26,7 @@ const PlaylistCardComponent = async ({ playlist }: PlaylistCardProps) => {
       asChild
     >
       <Link 
+        prefetch={false}
         href={`/playlists/${playlist.id}`}
         aria-label={`Acessar página da playlist "${playlist.name}"`}
       >

@@ -28,6 +28,7 @@ const AlbumCardComponent = ({ album, isFavorited, className }: AlbumCardProps) =
         asChild
       >
         <Link
+          prefetch={false}
           href={`/albums/${album.collectionId}`}
           aria-label={`Acessar página do álbum "${album.collectionName}"`}
         >

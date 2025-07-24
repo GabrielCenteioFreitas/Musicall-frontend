@@ -38,6 +38,7 @@ const SongCardComponent = ({ song, songsGroup, isFavorited, className }: SongCar
               {song.song.name}
             </span>
             <Link
+              prefetch={false}
               href={`/artists/${song.song.artist.iTunesId}`}
               title={song.song.artist.name}
               className="text-xs text-zinc-400 hover:underline leading-tight truncate ..."

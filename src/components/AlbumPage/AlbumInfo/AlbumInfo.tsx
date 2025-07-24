@@ -42,6 +42,7 @@ export const AlbumInfo = ({ album, songs }: AlbumInfoProps) => {
 
         <div className="flex gap-2 items-center text-md text-zinc-400 leading-none">
           <Link
+            prefetch={false}
             href={`/artists/${album.artistId}`}
             className="hover:underline"
             aria-label={`Acessar página do álbum ${album.collectionName}`}

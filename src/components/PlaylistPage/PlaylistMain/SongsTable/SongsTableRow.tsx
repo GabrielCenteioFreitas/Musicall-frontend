@@ -97,6 +97,7 @@ const SongsTableRowComponent = ({
             {currentSong.song.name}
           </span>
           <Link
+            prefetch={false}
             href={`/artists/${currentSong.song.artist.iTunesId}`}
             title={currentSong.song.artist.name}
             className="w-fit text-xs hover:underline text-zinc-400 line-clamp-2 text-wrap truncate ..."
@@ -110,6 +111,7 @@ const SongsTableRowComponent = ({
 
       <TableCell className="text-sm text-zinc-400 truncate ... overflow-hidden" title={currentSong.song.album.name}>
         <Link
+          prefetch={false}
           href={`/albums/${currentSong.song.album.iTunesId}`}
           className="hover:underline"
           onClick={(e) => e.stopPropagation()}

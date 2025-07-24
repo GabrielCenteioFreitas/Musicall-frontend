@@ -20,6 +20,7 @@ const ArtistItemComponent = ({ artist }: ArtistItemProps) => {
         asChild
       >
         <Link
+          prefetch={false}
           href={`/artists/${artist.iTunesId}`}
           aria-label={`Acessar página do(a) artista ${artist.name}`}
         >

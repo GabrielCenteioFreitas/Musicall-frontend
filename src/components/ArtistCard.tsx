@@ -24,6 +24,7 @@ const ArtistCardComponent = ({ artist, isFavorited, className }: ArtistCardProps
         asChild
       >
         <Link
+          prefetch={false}
           href={`/artists/${artist.artistId}`}
           aria-label={`Acessar página do artista "${artist.artistName}"`}
         >

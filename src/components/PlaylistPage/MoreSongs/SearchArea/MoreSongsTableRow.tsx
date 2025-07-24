@@ -77,6 +77,7 @@ export const MoreSongsTableRow = ({ song, moreSongs, i }: MoreSongsTableRowProps
             {song.trackName}
           </span>
           <Link
+            prefetch={false}
             href={`/artists/${song.artistId}`}
             className="w-fit"
             aria-label={`Acessar página do(a) artista ${song.artistName}`}
@@ -90,6 +91,7 @@ export const MoreSongsTableRow = ({ song, moreSongs, i }: MoreSongsTableRowProps
 
       <TableCell className="text-sm text-zinc-400 truncate ..." title={song.collectionName}>
         <Link
+          prefetch={false}
           href={`/albums/${song.collectionId}`}
           className="hover:underline"
           aria-label={`Acessar página do álbum ${song.collectionName}`}

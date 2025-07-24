@@ -47,6 +47,7 @@ export const Profile = () => {
 
         <DropdownMenuItem className="flex gap-1 cursor-pointer" asChild>
           <Link
+            prefetch={false}
             href={`/users/${sub}`}
             aria-label="Acessar página de perfil"
           >

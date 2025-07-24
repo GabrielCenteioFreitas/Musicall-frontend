@@ -80,6 +80,7 @@ const SongCardComponent = ({ previewPlaylists, song, songs, isFavorited }: SongC
             {song.trackName}
           </span>
           <Link
+            prefetch={false}
             href={`/artists/${song.artistId}`}
             title={song.artistName}
             className="text-sm text-zinc-400 leading-tight line-clamp-2 text-wrap truncate hover:underline"

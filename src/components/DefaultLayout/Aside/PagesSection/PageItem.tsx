@@ -25,6 +25,7 @@ const PageItemComponent = ({ name, href, active=false, className, children }: Pa
         asChild
       >
         <Link
+          prefetch={false}
           href={href}
           aria-label={`Acessar página "${name}"`}
         >

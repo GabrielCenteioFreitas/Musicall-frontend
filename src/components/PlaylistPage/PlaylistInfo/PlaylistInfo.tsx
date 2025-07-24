@@ -24,6 +24,7 @@ export const PlaylistInfo = ({ playlist }: PlaylistInfoProps) => {
 
       <div className="flex gap-2 items-center text-md text-zinc-400 leading-none">
         <Link
+          prefetch={false}
           href={`/users/${playlist.user.id}`}
           className="flex items-center gap-2 hover:underline"
           aria-label={`Acessar página de perfil do usuário ${playlist.user.name}`}

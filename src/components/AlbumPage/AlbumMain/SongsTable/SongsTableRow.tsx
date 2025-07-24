@@ -78,6 +78,7 @@ const SongsTableRowComponent = ({
         </span>
         
         <Link
+          prefetch={false}
           href={`/artists/${song.artistId}`}
           onClick={(e) => e.stopPropagation()}
           className="w-fit"

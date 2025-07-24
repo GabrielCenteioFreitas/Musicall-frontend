@@ -27,6 +27,7 @@ export const SongInfo = () => {
         </span>
 
         <Link
+          prefetch={false}
           href={`/artists/${playingSong.song.artist.iTunesId}`}
           title={playingSong.song.artist.name}
           className="text-xs text-zinc-400 truncate ... hover:underline"
