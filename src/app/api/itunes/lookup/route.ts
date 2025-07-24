@@ -22,12 +22,17 @@ export async function GET(request: NextRequest) {
           method: 'GET',
         }
       );
+      
+      if (!response.ok) {
+        return NextResponse.json({ error: 'Failed to fetch iTunes data' }, { status: response.status });
+      }
+      
       const data = await response.json();
 
       return NextResponse.json(data);
   } catch (error) {
       console.error('Erro ao buscar dados no iTunes:', error);
 
-      return NextResponse.error()
+      return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

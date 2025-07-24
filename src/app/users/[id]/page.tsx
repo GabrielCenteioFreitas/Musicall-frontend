@@ -9,16 +9,27 @@ import { redirect } from "next/navigation";
 const UserPage = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
 
-  const response = await fetch(
-    url(`/users/${id}`),
-    {
-      method: 'GET',
-      cache: 'no-store',
+  let data;
+  try {
+    const response = await fetch(
+      url(`/users/${id}`),
+      {
+        method: 'GET',
+        cache: 'no-store',
+      }
+    )
+    
+    if (!response.ok) {
+      return redirect('/')
     }
-  )
-  const data = await response.json()
-  
-  if (!data || !data.user) {
+    
+    data = await response.json()
+    
+    if (!data || !data.user) {
+      return redirect('/')
+    }
+  } catch (error) {
+    console.error('Error fetching user data:', error)
     return redirect('/')
   }
   const user: DBUser = data.user;

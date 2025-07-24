@@ -13,19 +13,32 @@ export async function GET(request: NextRequest) {
 
   const redirectTo = request.cookies.get('redirectTo')?.value
 
-  const registerResponse = await fetch(
-    url('/register'),
-    {
-      method: 'POST',
-      body: JSON.stringify({
-        code,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
+  let data;
+  try {
+    const registerResponse = await fetch(
+      url('/register'),
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          code,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        }
       }
+    )
+    
+    if (!registerResponse.ok) {
+      const redirectURL = new URL('/', request.url)
+      return NextResponse.redirect(redirectURL)
     }
-  )
-  const data = await registerResponse.json()
+    
+    data = await registerResponse.json()
+  } catch (error) {
+    console.error('Error in auth callback:', error)
+    const redirectURL = new URL('/', request.url)
+    return NextResponse.redirect(redirectURL)
+  }
   
   const { token } = data
 
