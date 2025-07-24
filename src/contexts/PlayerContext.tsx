@@ -118,13 +118,17 @@ export function PlayerProvider({ children }: { children: ReactNode; }) {
     const isLoopModeEnabledToSet = localStorage.getItem('isLoopModeEnabled')
     const volumeToSet = localStorage.getItem('volume')
 
-    playingSongToSet && setPlayingSong(JSON.parse(playingSongToSet))
-    playingGroupToSet && setPlayingGroup(JSON.parse(playingGroupToSet))
-    nextSongsToSet && setNextSongs(JSON.parse(nextSongsToSet))
-    prevSongsToSet && setPrevSongs(JSON.parse(prevSongsToSet))
-    isRandomModeEnabledToSet && setIsRandomModeEnabled(JSON.parse(isRandomModeEnabledToSet))
-    isLoopModeEnabledToSet && setIsLoopModeEnabled(JSON.parse(isLoopModeEnabledToSet))
-    volumeToSet && setVolume(JSON.parse(volumeToSet))
+    try {
+      playingSongToSet && setPlayingSong(JSON.parse(playingSongToSet))
+      playingGroupToSet && setPlayingGroup(JSON.parse(playingGroupToSet))
+      nextSongsToSet && setNextSongs(JSON.parse(nextSongsToSet))
+      prevSongsToSet && setPrevSongs(JSON.parse(prevSongsToSet))
+      isRandomModeEnabledToSet && setIsRandomModeEnabled(JSON.parse(isRandomModeEnabledToSet))
+      isLoopModeEnabledToSet && setIsLoopModeEnabled(JSON.parse(isLoopModeEnabledToSet))
+      volumeToSet && setVolume(JSON.parse(volumeToSet))
+    } catch (error) {
+      console.error('Error parsing localStorage data:', error)
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -178,8 +182,15 @@ export function PlayerProvider({ children }: { children: ReactNode; }) {
       return recentSongs;
       }
 
+      let parsedRecentSongs: PlayingSong[] = [];
+      try {
+        parsedRecentSongs = JSON.parse(recentSongs || "[]");
+      } catch (error) {
+        console.error('Error parsing recentSongs from localStorage:', error);
+      }
+
       const newRecentSongs = addSongToRecent(
-        JSON.parse(recentSongs || "[]"),
+        parsedRecentSongs,
         prevSongs || []
       )
 
