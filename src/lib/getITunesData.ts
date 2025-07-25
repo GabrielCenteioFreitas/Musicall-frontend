@@ -28,16 +28,16 @@ export const getDataFromSearch = cache(async ({
   
   try {
     const response = await fetch(
-      url(`/api/itunes/search?${params}`),
-      {
-        method: 'GET',
-      }
+    url(`/api/itunes/search?${params}`),
+    {
+    method: 'GET',
+    }
     )
     const data = await response.json()
-  
+
     return data
-  } catch (error) {
-    console.error(error)
+} catch (error) {
+    console.error('Error fetching iTunes search data:', error)
     return {
       resultCount: 0,
       results: []
@@ -68,16 +68,16 @@ export const getDataFromLookup = cache(async ({
     
   try {
     const response = await fetch(
-      url(`/api/itunes/lookup?${params}`),
-      {
-        method: 'GET',
-      }
+    url(`/api/itunes/lookup?${params}`),
+    {
+    method: 'GET',
+    }
     )
     const data = await response.json()
-  
+
     return data
-  } catch (error) {
-    console.error(error)
+} catch (error) {
+    console.error('Error fetching iTunes lookup data:', error)
     return {
       resultCount: 0,
       results: []

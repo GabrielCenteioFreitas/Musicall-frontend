@@ -107,11 +107,11 @@ export const FavoriteSongButton = ({ song, isFavorited, className, size=20 }: Fa
           router.refresh()
         }
       } catch(error) {
-        console.error(error)
+        console.error("Error adding song to favorites:", error)
         toast.error("Ocorreu um erro!")
       } 
     } catch (error) {
-      console.error(error)
+      console.error("Error checking song favorite status:", error)
       toast.error("Ocorreu um erro!")
     } finally {
       setIsLoading(false)
@@ -162,7 +162,7 @@ export const FavoriteSongButton = ({ song, isFavorited, className, size=20 }: Fa
         router.refresh()
       }
     } catch(error) {
-      console.error(error)
+      console.error("Error removing song from favorites:", error)
       toast.error("Ocorreu um erro!")
     } finally {
       setIsLoading(false)

@@ -127,11 +127,11 @@ export const AddToPlaylist = ({ previewPlaylists, song, className, size=20 }: Ad
           router.refresh()
         }
       } catch(error) {
-        console.error(error)
+        console.error('Error adding song to playlist:', error)
         toast.error("Ocorreu um erro!")
       }
     } catch(error) {
-      console.error(error)
+      console.error('Error fetching iTunes data for playlist:', error)
       toast.error("Ocorreu um erro!")
     } finally {
       setIsOpen(false)

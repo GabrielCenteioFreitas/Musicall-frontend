@@ -58,7 +58,7 @@ export const FixPlaylistButton = ({ playlist, className }: FixPlaylistButtonProp
         ) 
       }
     } catch (error) {
-      console.error(error)
+      console.error('Error fixing playlist:', error)
       toast.error('Ocorreu um erro!')
     }
   }

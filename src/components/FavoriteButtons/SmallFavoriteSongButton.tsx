@@ -107,11 +107,11 @@ export const SmallFavoriteSongButton = ({ song, isFavorited, className, size=20 
           router.refresh()
         }
       } catch(error) {
-        console.error(error)
+        console.error("Error adding song to favorites:", error)
         toast.error("Ocorreu um erro!")
       }
     } catch (error) {
-      console.error(error)
+      console.error("Error fetching iTunes data for song favorites:", error)
       toast.error("Ocorreu um erro!")
     } finally {
       setIsLoading(false)
@@ -162,7 +162,7 @@ export const SmallFavoriteSongButton = ({ song, isFavorited, className, size=20 
         router.refresh()
       }
     } catch(error) {
-      console.error(error)
+      console.error("Error removing song from favorites:", error)
       toast.error("Ocorreu um erro!")
     } finally {
       setIsLoading(false)

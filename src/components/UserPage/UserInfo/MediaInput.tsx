@@ -78,7 +78,7 @@ export const MediaInput = ({ user }: MediaInputProps) => {
         }, 2500)
       }
     } catch (error) {
-      console.error(error)
+      console.error('Error updating user avatar:', error)
       toast.error('Ocorreu um erro!')
     } finally {
       setIsLoading(false)

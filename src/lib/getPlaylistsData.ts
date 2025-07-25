@@ -25,7 +25,7 @@ export const getPreviewPlaylists = cache(async (token: string | null): Promise<P
     const previewPlaylists = data.playlists
     return previewPlaylists;
   } catch (error) {
-    console.error('Ocorreu um erro:', error);
+    console.error('Error fetching preview playlists:', error);
     return null;
   }
 })
@@ -47,7 +47,7 @@ export const getPlaylist = cache(async (id: string, token: string | null): Promi
 
     return data;
   } catch (error) {
-    console.error('Ocorreu um erro:', error);
+    console.error('Error fetching playlist data:', error);
     return null;
   }
 })
@@ -70,7 +70,7 @@ export const getPlaylists = async (): Promise<PreviewPlaylist[] | null> => {
     const { playlists } = data
     return playlists;
   } catch (error) {
-    console.error('Ocorreu um erro:', error);
+    console.error('Error fetching public playlists:', error);
     return null;
   }
 }

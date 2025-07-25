@@ -63,7 +63,7 @@ export const RemoveFromPlaylist = ({ playlist, songId }: RemoveFromPlaylistProps
         router.refresh()
       }
     } catch(error) {
-      console.error(error)
+      console.error('Error removing song from playlist:', error)
       toast.error("Ocorreu um erro!")
     } finally {
       setIsLoading(false)

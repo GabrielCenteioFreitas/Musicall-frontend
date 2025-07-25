@@ -108,7 +108,7 @@ export const AddToPlaylist = ({ previewPlaylists, album, songs, className, size=
         }
       }
     } catch (error) {
-      console.error(error)
+      console.error('Error in AlbumPage AddToPlaylist:', error)
       toast.error("Ocorreu um erro!")
       setIsOpen(false)
       setSelectedPlaylist(null)

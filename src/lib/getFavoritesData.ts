@@ -21,7 +21,7 @@ export const getFavorites = cache(async (
 
     return data;
   } catch (error) {
-    console.error('Ocorreu um erro:', error);
+    console.error('Error fetching favorites data:', error);
     return null;
   }
 })

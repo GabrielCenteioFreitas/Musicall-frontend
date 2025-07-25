@@ -59,7 +59,7 @@ export const DeletePlaylistButton = ({ playlist }: DeletePlaylistButtonProps) =>
         router.refresh()
       }
     } catch(error) {
-      console.error(error)
+      console.error('Error deleting playlist:', error)
       toast.error("Ocorreu um erro!")
     } finally {
       setIsOpen(false)

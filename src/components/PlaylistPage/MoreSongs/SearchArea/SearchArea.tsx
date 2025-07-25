@@ -37,7 +37,7 @@ export const SearchArea = () => {
       setSongs(data.results)
       setIsLoading(false)
     }).catch(error => {
-      console.error(error)
+      console.error('Error searching iTunes:', error)
       toast.error('Ocorreu um erro!')
     })
   }, 500)

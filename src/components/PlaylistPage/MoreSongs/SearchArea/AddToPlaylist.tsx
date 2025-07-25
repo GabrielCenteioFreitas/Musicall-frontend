@@ -98,11 +98,11 @@ export const AddToPlaylist = ({ song, className, size=20 }: AddToPlaylistProps) 
           router.refresh()
         }
       } catch(error) {
-        console.error(error)
+        console.error('Error adding song to playlist from search:', error)
         toast.error("Ocorreu um erro!")
       }
     } catch (error) {
-      console.error(error)
+      console.error('Error fetching iTunes data for search playlist:', error)
       toast.error("Ocorreu um erro!")
     } finally {
       setIsLoading(false)

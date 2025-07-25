@@ -110,11 +110,11 @@ export const SmallFavoriteAlbumButton = ({ album, isFavorited, className, size=2
           router.refresh()
         }
       } catch(error) {
-        console.error(error)
+        console.error("Error adding album to favorites:", error)
         toast.error("Ocorreu um erro!")
       }
     } catch (error) {
-      console.error(error)
+      console.error("Error fetching iTunes data for album favorites:", error)
       toast.error("Ocorreu um erro!")
     } finally {
       setIsLoading(false)
@@ -165,7 +165,7 @@ export const SmallFavoriteAlbumButton = ({ album, isFavorited, className, size=2
         router.refresh()
       }
     } catch(error) {
-      console.error(error)
+      console.error("Error removing album from favorites:", error)
       toast.error("Ocorreu um erro!")
     } finally {
       setIsLoading(false)

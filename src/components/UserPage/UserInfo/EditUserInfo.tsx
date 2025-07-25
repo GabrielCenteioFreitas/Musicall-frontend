@@ -75,7 +75,7 @@ export const EditUserInfo = ({ user, id, className, size=22 }: EditUserInfoProps
         router.refresh()
       }
     } catch (error) {
-      console.error(error)
+      console.error('Error editing user info:', error)
       toast.error('Ocorreu um erro!')
     } finally {
       setIsLoading(false)

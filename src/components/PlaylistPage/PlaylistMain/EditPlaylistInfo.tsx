@@ -78,7 +78,7 @@ export const EditPlaylistInfo = ({ playlist }: EditPlaylistInfoProps) => {
         router.refresh()
       }
     } catch (error) {
-      console.error(error)
+      console.error('Error editing playlist info:', error)
       toast.error('Ocorreu um erro!')
     } finally {
       setIsLoading(false)

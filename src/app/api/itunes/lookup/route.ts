@@ -31,7 +31,7 @@ export async function GET(request: NextRequest) {
 
       return NextResponse.json(data);
   } catch (error) {
-      console.error('Erro ao buscar dados no iTunes:', error);
+      console.error('Error fetching iTunes lookup data:', error);
 
       return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }

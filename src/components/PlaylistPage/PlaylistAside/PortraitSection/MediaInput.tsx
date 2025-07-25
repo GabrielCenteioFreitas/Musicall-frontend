@@ -77,7 +77,7 @@ export const MediaInput = ({ playlist }: MediaInputProps) => {
         }, 2500)
       }
     } catch (error) {
-      console.error(error)
+      console.error('Error updating playlist image:', error)
       toast.error('Ocorreu um erro!')
     } finally {
       setIsLoading(false)
